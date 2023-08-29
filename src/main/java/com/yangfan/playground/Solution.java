@@ -25,6 +25,7 @@ public class Solution {
     public static void main(String[] args) {
         int [] nx = {11, 2, 7, 15};
         int [] result = twoSum(nx,9);
+        assert result != null;
         for(int i:result)
              System.out.println(i);
         Set<Integer> resultSet = new TreeSet<>();
