@@ -1,4 +1,4 @@
-package com.yangfan.playground.xjb.repository.list;
+package com.yangfan.playground.xjb.list;
 /************************************************
     * Description: 
     *        因为是有序的链表

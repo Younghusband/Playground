@@ -1,4 +1,4 @@
-package com.yangfan.playground.xjb.repository.list;
+package com.yangfan.playground.xjb.list;
 /************************************************
     * Description: 
     *      insertFirst insertLast deleteFirst  *deleteLast  display 

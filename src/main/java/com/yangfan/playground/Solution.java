@@ -26,13 +26,12 @@ public class Solution {
         int [] nx = {11, 2, 7, 15};
         int [] result = twoSum(nx,9);
         assert result != null;
-        for(int i:result)
-             System.out.println(i);
-        Set<Integer> resultSet = new TreeSet<>();
-        for(int i=0; i < 64; i ++) {
-            resultSet.add(String.valueOf(i).hashCode());
-        }
-        System.out.println(resultSet);
+
+
+        // 声明一个数组，用于冒泡排序
+        int [] arr = {1, 3, 2, 5, 4, 6, 7, 9, 8};
+
+
     }
 
     public static void bubbleSort(int [] arr) {

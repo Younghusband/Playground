@@ -11,6 +11,9 @@ package com.yangfan.playground.xjb.thread;
 
 public class ThreadLocalDemo {
 	public ThreadLocal<String> th = new ThreadLocal<>();
+
+	// 使用 ThreadLocal 来保存每个线程的计数器
+	private static ThreadLocal<Integer> threadCounter = ThreadLocal.withInitial(() -> 0);
 	public void set(String str){  
 		th.set(str);
 	}
@@ -52,7 +55,51 @@ public class ThreadLocalDemo {
 		
 		t1.start();
 		t2.start();
-		
+
+		testThreadLocal();
+	}
+
+
+	public static void testThreadLocal() {
+		Thread t1 = new Thread(() -> {
+            int count = threadCounter.get();
+            System.out.println("Thread 1 - Initial Counter: " + count);
+			for(int i = 0; i < 5; i++) {
+				count++;
+				threadCounter.set(count);
+				System.out.println("Thread 1 - Counter: " + count);
+			}
+            System.out.println("Thread 1 - final Counter: " + threadCounter.get());
+			// remove current thread local variable
+			threadCounter.remove();
+			System.out.println("Thread 1 - Counter after remove: " + threadCounter.get());
+        });
+
+
+
+		Thread t2 = new Thread(() -> {
+            int count = threadCounter.get();
+			System.out.println("Thread 2 - Initial Counter: " + count);
+			for(int i = 0; i < 5; i++) {
+				count++;
+				threadCounter.set(count);
+				System.out.println("Thread 2 - Counter: " + count);
+			}
+			System.out.println("Thread 2 - final Counter: " + threadCounter.get());
+			// remove current thread local variable
+			threadCounter.remove();
+			System.out.println("Thread 2 - Counter after remove: " + threadCounter.get());
+        });
+		t1.start();
+		t2.start();
+
+		try {
+			t1.join();
+			t2.join();
+		} catch(InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Main Thread - Counter: " + threadCounter.get());
 	}
 	
 }
