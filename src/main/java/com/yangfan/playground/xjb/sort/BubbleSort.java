@@ -1,5 +1,6 @@
 package com.yangfan.playground.xjb.sort;
 
+import com.yangfan.playground.util.ArrayUtil;
 import com.yangfan.playground.util.StringUtil;
 
 /*********************************************
@@ -31,9 +32,7 @@ import com.yangfan.playground.util.StringUtil;
 public class BubbleSort {
 	
 	public static void main(String[] args) {
-//		int [] arr = {4,3,2,1,5,6,8,7};
-        int [] arr = {3,4,1,2,5,8,7,6};
-
+        int [] arr = ArrayUtil.createRandomArray(10, 50, 0.01);
         BubbleSort.bubble(arr);
         StringUtil.printDigitArray(", ", arr);
 	}
@@ -42,11 +41,9 @@ public class BubbleSort {
         for (int i = 0; i < arr.length - 1; i++) {
             boolean hasSwitch = false;
             for (int j = 0; j < arr.length - 1 - i; j++) {
-                if (arr[j] > arr[j + 1]) { //由于j和j+1不相等，这是两个元素 所以放心大胆使用异或交换
+                if (arr[j] > arr[j + 1]) {
                     hasSwitch = true;
-                    arr[j] = arr[j] ^ arr[j + 1];
-                    arr[j + 1] = arr[j] ^ arr[j + 1];
-                    arr[j] = arr[j] ^ arr[j + 1];
+                    ArrayUtil.swap(arr, j, j + 1);
                 }
             }
             if (!hasSwitch)

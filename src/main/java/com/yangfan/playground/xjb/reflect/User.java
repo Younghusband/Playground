@@ -2,6 +2,10 @@ package com.yangfan.playground.xjb.reflect;
 
 import java.io.Serializable;
 
+/**
+ * Description:
+ * 用于测试反射，克隆，序列化，Object类基本方法的类
+ */
 public class User implements Cloneable, Serializable {
 
     private int id;
@@ -46,14 +50,16 @@ public class User implements Cloneable, Serializable {
     @Override
     public User clone() {
         try {
-            User clone = (User) super.clone();
             // TODO: copy mutable state here, so the clone can't change the internals of the original
-            return clone;
+            return (User) super.clone();
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();
         }
     }
 
+    /**
+     * 不可靠，建议使用try-with-resources
+     */
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
