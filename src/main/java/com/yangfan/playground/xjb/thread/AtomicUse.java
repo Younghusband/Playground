@@ -11,12 +11,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 
  * Atomic的用法。
  * Atomic能保证单次操作的原子性，但多次操作并不具有原子性。 仍需要synchronized
- * 
- * 思考这种多线程的程序如何计时的问题。（毕竟如果主线程计时的话，不能保证头尾）
  */
 
 public class AtomicUse {
 	private static AtomicInteger count = new AtomicInteger(0);
+
+	private static int countOfCount = 0;
 	
 	
 	/* synchronized */
@@ -34,16 +34,21 @@ public class AtomicUse {
 	}
 	
 	public static void main(String[] args) {
-		final AtomicUse au = new AtomicUse();
+		AtomicUse au = new AtomicUse();
 		List<Thread> threadlist = new ArrayList<>();
-		for(int i=0;i<100;i++){
-			threadlist.add(new Thread(() -> System.out.println(au.multiAdd()),"t"));
+
+		// 亲测10以上会出现不是10的整数倍的情况
+		for(int i=0; i<11; i++){
+			Thread t = new Thread(() -> {
+                int v = au.multiAdd();
+                System.out.println("第"+ ++countOfCount+"次累加后的值为" + v);
+            });
+
+			threadlist.add(t);
 		}
 		for(Thread t:threadlist){
 			t.start();
 		}
-		
-		String xxx = "";
 		
 	}
 	

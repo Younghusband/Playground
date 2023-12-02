@@ -12,12 +12,9 @@ package com.yangfan.playground.xjb.sort;
 public class Merge2SortedArray {
 	
 	public static void main(String[] args) {
-	    
 	    Merge2SortedArray service = new Merge2SortedArray();
-		
-		int [] arr1 = {3,6,7,9,10,15};
-		int [] arr2 = {1,4,8,11,12};
-		
+		int [] arr1 = {3, 6, 7, 9, 10, 15};
+		int [] arr2 = {1, 4, 8, 11, 12};
 		for(int i : service.sortArr(arr1, arr2))
 			System.out.print(i+"->");
 	}

@@ -5,14 +5,10 @@ package com.yangfan.playground.xjb.thread.lock;
  * @version 2018年2月25日 下午6:13:04
  * 
  * 测试加锁的几种方式
- * 
- * 见main方法
- * 结论:
+ *
  * 1. 对整个方法上synchronized相当于对当前对象加锁
- * 2. 类锁和对象锁互相不影响，可以同时执行
- * 3. 同一个对象两个线程调用类锁互斥
- * 
- * 既然可以利用join控制线程执行顺序
+ * 2. 类锁只和同一个类的锁互斥
+ * 3. 对象锁只和同一个对象的锁互斥
  */
 
 public class ObjectLock {
@@ -60,11 +56,19 @@ public class ObjectLock {
 				e.printStackTrace();
 			}
 	}
+
+	public static synchronized void method5() {
+		try {
+			System.out.println(Thread.currentThread().getName()+" do method5..");
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	public static void main(String[] args) {
 		ObjectLock obj = new ObjectLock();
-		
 		Thread t1 = new Thread(new Runnable(){
 			public void run(){
 				obj.method1();  //当前对象锁
@@ -78,14 +82,15 @@ public class ObjectLock {
 			public void run(){
 //				obj.method1();  //当前对象锁
 //				obj.method2();  //类锁
-				obj.method3();  //外部对象锁
+//				obj.method3();  //外部对象锁
 //				obj.method4();  // 对整个方法加锁  相当于当前对象锁
+				ObjectLock.method5();  // 类锁
 			}
 		},"T2");
 		
 		t1.start();
 		t2.start();
-		
+
 		try {
 			t1.join();
 			t2.join();
@@ -95,9 +100,7 @@ public class ObjectLock {
 		}
 		
 		//通过两个join保证了 t1 t2的先后执行的同时确保了main线程最后执行
-		System.out.println(Thread.currentThread().getName()+"-------END-------"); 
-		
-		
+		System.out.println(Thread.currentThread().getName()+"-------END-------");
 		
 	}
 	
