@@ -1,4 +1,4 @@
-package com.yangfan.playground.xjb.concurrent;
+package com.yangfan.playground.xjb.thread;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -8,13 +8,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author mr_yo
  * playground
  */
-public class ConcurrentTest {
+public class ConcurrentHashMapTest {
 
     public static ConcurrentHashMap<String, AtomicInteger> concurrents = new ConcurrentHashMap<>();
 
     public static void main(String[] args) {
 
-        ConcurrentTest main = new ConcurrentTest();
+        ConcurrentHashMapTest main = new ConcurrentHashMapTest();
 
         new Thread(
                 () -> {

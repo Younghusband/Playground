@@ -15,7 +15,10 @@ package com.yangfan.playground.xjb.designpattern.singleton;
    其实不然，静态内部类也有着一个致命的缺点，就是传参的问题。
    由于是静态内部类的形式去创建单例的，故外部无法传递参数进去。
    例如Context这种参数，所以，我们创建单例时，可以在静态内部类与懒汉DCL模式里自己斟酌。
- * 
+ *
+ * Updated 2023.12.02
+ * 静态内部类还有个问题是无法防止反射构建
+ *
  */
 
 public class SingletonInnerClass {

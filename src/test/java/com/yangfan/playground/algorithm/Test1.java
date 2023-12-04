@@ -5,6 +5,14 @@ import org.junit.jupiter.api.Test;
 
 public class Test1 {
 
+
+
+    @Test
+    void test2(){
+
+
+    }
+
     @Test
     void test1() {
         int N = 8;
