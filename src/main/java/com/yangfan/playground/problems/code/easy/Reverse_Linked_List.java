@@ -1,6 +1,6 @@
 package com.yangfan.playground.problems.code.easy;
 
-import com.yangfan.playground.xjb.linkedlist.ListNode;
+import com.yangfan.playground.xjb.list.ListNode;
 
 public class Reverse_Linked_List {
     

@@ -26,10 +26,12 @@ public class AtomicUse {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		count.addAndGet(1);
-		count.addAndGet(2);
-		count.addAndGet(3);
-		count.addAndGet(4);    //如果原子性不被打破的话，结果必然都是10的整数倍
+//		synchronized (this) {
+			count.addAndGet(1);
+			count.addAndGet(2);
+			count.addAndGet(3);
+			count.addAndGet(4);    //如果原子性不被打破的话，结果必然都是10的整数倍
+//		}
 		return count.get();
 	}
 	
@@ -38,7 +40,7 @@ public class AtomicUse {
 		List<Thread> threadlist = new ArrayList<>();
 
 		// 亲测10以上会出现不是10的整数倍的情况
-		for(int i=0; i<11; i++){
+		for(int i = 0; i < 20; i++){
 			Thread t = new Thread(() -> {
                 int v = au.multiAdd();
                 System.out.println("第"+ ++countOfCount+"次累加后的值为" + v);

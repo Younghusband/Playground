@@ -5,13 +5,17 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * @program: LeetCode
- * @description: no
- * @author: Vermouth
- * @create: 2019-06-01 14:28
- **/
-
-
+ *
+ * 100个线程，每个线程做i++和使用atomic实现的cas计数器各一万次，最后打印出来的结果是多少
+ *
+ * 预期结果
+ * 前者: <1000000
+ * 后者：1000000
+ *
+ * 代码是演示cas的使用，实际上atomic已经帮我们实现了一个线程安全的计数器
+ * 比如incrementAndGet()方法，内部就是使用了cas
+ *
+ */
 
 public class CasTest {
 
@@ -56,6 +60,7 @@ public class CasTest {
      */
 
     private void safeCount() {
+        // 无限自旋
         for (; ; ) {
             int i = atomicI.get();
             boolean suc = atomicI.compareAndSet(i, ++i);
@@ -63,6 +68,7 @@ public class CasTest {
                 break;
             }
         }
+//        atomicI.incrementAndGet();  // 等同于上面那段
     }
 
     /**
