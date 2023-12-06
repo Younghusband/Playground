@@ -1,4 +1,4 @@
-package com.yangfan.playground.xjb;
+package com.yangfan.playground.xjb.basic;
 
 /**
  * Java是值传递还是引用传递

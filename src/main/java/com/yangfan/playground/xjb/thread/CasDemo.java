@@ -17,12 +17,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  */
 
-public class CasTest {
+public class CasDemo {
 
     private AtomicInteger atomicI = new AtomicInteger(0);
     private int i = 0;
     public static void main(String[] args) {
-        final CasTest cas = new CasTest();
+        final CasDemo cas = new CasDemo();
         List<Thread> ts = new ArrayList<Thread>(600);
         long start = System.currentTimeMillis();
         for (int j = 0; j < 100; j++) {

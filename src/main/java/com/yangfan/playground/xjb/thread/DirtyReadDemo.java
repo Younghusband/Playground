@@ -8,7 +8,7 @@ package com.yangfan.playground.xjb.thread;
  *   
  */
 
-public class DirtyRead {
+public class DirtyReadDemo {
 	
 	private String user = "root";
 	private String password = "12345";
@@ -42,7 +42,7 @@ public class DirtyRead {
 	}
 	
 	public static void main(String []args) throws InterruptedException {
-		final DirtyRead dirty = new DirtyRead();
+		final DirtyReadDemo dirty = new DirtyReadDemo();
 		Thread t1 = new Thread(new Runnable(){
 			public void run(){
 				dirty.setValue("yf", "fuckyou");
