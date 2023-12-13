@@ -14,14 +14,11 @@ public class Shehui implements God {
 
 	@Override
 	public People zaoRen(String type) {
-		switch(type){
-		case WORKER:
-			return new Worker();
-		case PROGRAMMER:
-			return new Programmer();
-		default:
-			return null;
-		}
+        return switch (type) {
+            case WORKER -> new Worker();
+            case PROGRAMMER -> new Programmer();
+            default -> null;
+        };
 	}
 
 }

@@ -19,7 +19,6 @@ package com.yangfan.playground.xjb.designpattern.singleton;
 
 public class SingletonHungry {
 	private static SingletonHungry instance = new SingletonHungry();
-	//或者下面这种写法，感觉没有区别
 	/***
 	private static SingletonHungry instance = null;
 	static{

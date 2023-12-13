@@ -9,6 +9,6 @@ package com.yangfan.playground.xjb.designpattern.factory.staticfac;
 
 public interface Noodle {
     
-	public void eated();
+	void eated();
 	
 }

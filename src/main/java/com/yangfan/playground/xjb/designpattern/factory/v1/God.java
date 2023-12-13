@@ -6,5 +6,5 @@ package com.yangfan.playground.xjb.designpattern.factory.v1;
  */
 
 public interface God {
-     public People zaoRen(String type);   //对 god就是要造人
+     People zaoRen(String type);   //对 god就是要造人
 }

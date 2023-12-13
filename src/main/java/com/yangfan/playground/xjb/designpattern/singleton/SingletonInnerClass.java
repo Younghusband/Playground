@@ -17,17 +17,17 @@ package com.yangfan.playground.xjb.designpattern.singleton;
    例如Context这种参数，所以，我们创建单例时，可以在静态内部类与懒汉DCL模式里自己斟酌。
  *
  * Updated 2023.12.02
- * 静态内部类还有个问题是无法防止反射构建
+ * 静态内部类还有个问题是无法防止反射构建，详见@com.yangfan.playground.xjb.designpattern.singleton.SingletonBreakDemo
  *
  */
 
 public class SingletonInnerClass {
 	private static class SingletonHolder {
-		private static SingletonInnerClass Instance = new SingletonInnerClass();
+		private static final SingletonInnerClass INSTANCE = new SingletonInnerClass();
 	}
 	private SingletonInnerClass() {}
 	public static SingletonInnerClass getInstance() { //这个方法是不需要final的 因为实际上也不能被继承
-		return SingletonHolder.Instance;
+		return SingletonHolder.INSTANCE;
 	}
 }
 
