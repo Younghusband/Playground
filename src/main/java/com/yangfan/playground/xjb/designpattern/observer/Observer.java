@@ -1,7 +1,8 @@
 package com.yangfan.playground.xjb.designpattern.observer;
 
-
-public abstract class Observer {
-    protected BeWatched sb;
-    abstract void update(); // when some events are observed
+/**
+ * 自定义观察者
+ */
+public interface Observer {
+    void update(String updateMessage);
 }
