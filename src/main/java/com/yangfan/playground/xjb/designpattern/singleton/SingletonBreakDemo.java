@@ -1,5 +1,6 @@
 package com.yangfan.playground.xjb.designpattern.singleton;
 
+import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -88,8 +89,23 @@ public class SingletonBreakDemo {
 
 
         // 用序列化和反序列化的方式进行破坏
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("singleton.ser"))) {
+            out.writeObject(instance3);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-
+        SingletonLazy instanceByIO = null;
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("singleton.ser"))) {
+            instanceByIO = (SingletonLazy) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        if(instanceByIO == instance3) {
+            System.out.println("通过反射破坏单例模式，失败!");
+        } else {
+            System.out.println("通过反射破坏单例模式，成功!");
+        }
     }
 
 

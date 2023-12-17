@@ -1,4 +1,7 @@
 package com.yangfan.playground.xjb.designpattern.singleton;
+
+import java.io.Serializable;
+
 /**
  * @description 
  * @author vermouth.Mac
@@ -27,16 +30,12 @@ package com.yangfan.playground.xjb.designpattern.singleton;
  *  使用 volatile 的主要原因是其另一个特性：禁止指令重排序优化
  */
 
-public class SingletonLazy {
+public class SingletonLazy implements Serializable {
 	private volatile static SingletonLazy instance;
 	private SingletonLazy() {
 		if(instance != null) {
 			throw new RuntimeException("禁止通过反射实例化对象");
 		}
-	}
-
-	private Object readResolve() {
-		return instance;
 	}
 
 	public static SingletonLazy getInstance() {
@@ -48,6 +47,11 @@ public class SingletonLazy {
 			}
 		}
 		return instance;
+	}
+
+	private Object readResolve() {
+		System.out.println("尝试通过反序列化创建？达咩！");
+		return getInstance();
 	}
 
 }
