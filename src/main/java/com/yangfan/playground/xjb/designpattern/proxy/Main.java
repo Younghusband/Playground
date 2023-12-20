@@ -1,5 +1,7 @@
 package com.yangfan.playground.xjb.designpattern.proxy;
 
+import com.yangfan.playground.xjb.designpattern.proxy.dynamic.DynamicImageProxy;
+
 import java.lang.reflect.Proxy;
 
 public class Main {

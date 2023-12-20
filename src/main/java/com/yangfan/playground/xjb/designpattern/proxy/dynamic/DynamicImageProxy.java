@@ -1,8 +1,12 @@
-package com.yangfan.playground.xjb.designpattern.proxy;
+package com.yangfan.playground.xjb.designpattern.proxy.dynamic;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
+
+/**
+ * jdk动态代理方式
+ */
 public class DynamicImageProxy implements InvocationHandler {
     private Object realObject;
 
