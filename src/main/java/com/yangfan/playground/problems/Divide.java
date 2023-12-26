@@ -9,11 +9,9 @@ package com.yangfan.playground.problems;
 
 public class Divide {
 
-
     public static void main(String[] args) {
         System.out.println(divide(5,4));
     }
-
 
     public static int divide(int big, int small) {
         int shang = 0;

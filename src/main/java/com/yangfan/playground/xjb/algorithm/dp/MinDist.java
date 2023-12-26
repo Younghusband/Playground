@@ -8,7 +8,7 @@ package com.yangfan.playground.xjb.algorithm.dp;
 
 public class MinDist {
 
-    private static int[][] MATRIX = {{1,3,5,9}, {2,1,3,4},{5,2,6,7},{6,8,4,3}};
+    private static final int[][] MATRIX = {{1,3,5,9}, {2,1,3,4},{5,2,6,7},{6,8,4,3}};
     private static int N = 4;
     private static int[][] MEM = new int[4][4];
 

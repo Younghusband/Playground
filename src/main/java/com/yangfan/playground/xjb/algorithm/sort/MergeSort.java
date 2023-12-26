@@ -1,4 +1,7 @@
 package com.yangfan.playground.xjb.algorithm.sort;
+
+import com.yangfan.playground.util.ArrayUtil;
+
 /**
  * @description 
  * @author vermouth.Mac
@@ -18,35 +21,33 @@ public class MergeSort {
 //		  int[] array = {
 //	                9, 1, 5, 3, 4, 2, 6, 8, 7
 //	        };
-	      int[] array = {6, 1, 2, 7, 9, 3, 4, 5, 10, 8};
-		  MergeSort x = new MergeSort();
-		  System.out.print("排序前:\t");
-		  x.print(array);
-		  x.mergeSort(array);
-		  System.out.print("排序后:\t");
-		  x.print(array);
-		  
+		int[] array = {6, 1, 2, 7, 9, 3, 4, 5, 10, 8};
+		MergeSort x = new MergeSort();
+		System.out.print("排序前:\t");
+		ArrayUtil.printArray(array);
+		x.mergeSort(array);
+		System.out.print("排序后:\t");
+		ArrayUtil.printArray(array);
 	}
 	
 	
 	
 	//总方法
-	public void mergeSort(int[] arr){
+	public void mergeSort(int[] arr) {
 		for (int gap = 1; gap < arr.length; gap = gap * 2) {  //粒度从1开始合并
 			mergeArrays(arr, gap, arr.length);
 			System.out.print("gap=" + gap + ":\t");
-			print(arr);
+			ArrayUtil.printArray(arr);
 		}
 	}
 
 
 	//不断的合并所有子数组的方法
-	public void mergeArrays(int [] arr,int gap,int length){
-		int i = 0;   //整个方法共享
+	public void mergeArrays(int [] arr, int gap, int length) {
+		int i;
 		for (i = 0; i + 2 * gap - 1 < length; i = i + 2 * gap) {
 			merge(arr, i, i + gap - 1, i + 2 * gap - 1);   //把相邻两段长度均为gap的排序好的数组合并
 		}
-
 		//如果剩下一个数组不够gap
 		if (i + gap - 1 < length) {
 			merge(arr, i, i + gap - 1, length - 1);
@@ -60,7 +61,6 @@ public class MergeSort {
 		int j = mid + 1;    //第二段数组下标
 		int k = 0;        //临时数组下标
 		int[] arrayTemp = new int[hi - lo + 1];  //临时数组的长度
-
 		while (i <= mid && j <= hi) {
 			arrayTemp[k++] = arr[i] < arr[j] ? arr[i++] : arr[j++];
 		}
@@ -77,14 +77,5 @@ public class MergeSort {
 			arr[lo++] = arrayTemp[k++];
 		}
 	}
-	
-	
-	public  void print(int[] list){
-		for(int i: list){
-			System.out.print(i+"\t");
-		}
-		System.out.println();
-	}
-	
 
 }

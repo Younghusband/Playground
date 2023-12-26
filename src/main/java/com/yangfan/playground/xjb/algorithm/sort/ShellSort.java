@@ -1,5 +1,7 @@
 package com.yangfan.playground.xjb.algorithm.sort;
 
+import com.yangfan.playground.util.ArrayUtil;
+
 import java.util.Random;
 
 /**
@@ -10,16 +12,9 @@ import java.util.Random;
 public class ShellSort {
     
     public static void main(String[] args) {
-        ShellSort shell = new ShellSort();
         int [] arr= {9,3,2,1,5,6,8,7,4};
-        shell.ShellSort(arr);
-        for(int item : arr) {
-            System.out.print(item+"->");
-        }
-        
-        Random ran = new Random();
-        ran.nextInt(500);
-        
+        shellSort(arr);
+        ArrayUtil.printArray(arr);
     }
     
     
@@ -28,7 +23,7 @@ public class ShellSort {
      * @param arr
      * @return
      */
-    public int[] ShellSort(int[] arr) {
+    public static void shellSort(int[] arr) {
         int len = arr.length;
         int temp, gap = len / 2;
         while(gap > 0) {
@@ -43,7 +38,6 @@ public class ShellSort {
             }
             gap /= 2;
         }
-        return arr;
     }
     
 
