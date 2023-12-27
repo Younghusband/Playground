@@ -13,10 +13,10 @@ import java.util.Arrays;
  * 用递归来实现归并
  */
 
-public class MergePro {
+public class MergeSortRecur {
 	
 	public static void main(String[] args) {
-		MergePro  user = new MergePro();
+		MergeSortRecur user = new MergeSortRecur();
         int [] a = ArrayUtil.createRandomArray(10, 50, 0.01);
 		user.mergeSort(a, 0, a.length - 1);
         System.out.println("排序结果：" + Arrays.toString(a));
