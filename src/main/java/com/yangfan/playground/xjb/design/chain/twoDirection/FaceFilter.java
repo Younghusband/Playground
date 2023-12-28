@@ -8,11 +8,9 @@ package com.yangfan.playground.xjb.design.chain.twoDirection;
 public class FaceFilter implements Filter {
 
 	@Override
-	public void doFilter(Request request, Response response,FilterChain fc) {
+	public void doFilter(Request request, Response response, FilterChain fc) {
 		 request.requestStr = request.getRequestStr().replace(":)", "^_^");
-		 
 		 fc.doFilter(request, response, fc);
-		 
 		 response.responseStr += "FaceFilter---->";
 	}
 
