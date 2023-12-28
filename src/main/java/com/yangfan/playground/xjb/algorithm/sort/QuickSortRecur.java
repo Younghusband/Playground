@@ -8,10 +8,10 @@ import com.yangfan.playground.util.ArrayUtil;
  * @description: lueluelue
  **/
 
-public class QuickSort1 {
+public class QuickSortRecur {
 
     public static void main(String[] args) {
-        QuickSort1 sort = new QuickSort1();
+        QuickSortRecur sort = new QuickSortRecur();
         int[] arr = {6, 1, 2, 7, 9, 3, 4, 5, 10, 8};
         sort.recurseSort(arr, 0, arr.length - 1);
         System.out.println("\n>>>>>>>>>>>>>>>>>排序后的数组>>>>>>>>>>>>>>>>>");
@@ -43,9 +43,4 @@ public class QuickSort1 {
         return hi;
     }
 
-    public static void print(int [] arr){
-        for(int i: arr)
-            System.out.print(i+"->");
-        System.out.print("\n");
-    }
 }

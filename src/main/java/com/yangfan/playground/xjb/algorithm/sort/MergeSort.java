@@ -29,9 +29,7 @@ public class MergeSort {
 		System.out.print("排序后:\t");
 		ArrayUtil.printArray(array);
 	}
-	
-	
-	
+
 	//总方法
 	public void mergeSort(int[] arr) {
 		for (int gap = 1; gap < arr.length; gap = gap * 2) {  //粒度从1开始合并
@@ -40,7 +38,6 @@ public class MergeSort {
 			ArrayUtil.printArray(arr);
 		}
 	}
-
 
 	//不断的合并所有子数组的方法
 	public void mergeArrays(int [] arr, int gap, int length) {
@@ -77,5 +74,4 @@ public class MergeSort {
 			arr[lo++] = arrayTemp[k++];
 		}
 	}
-
 }

@@ -39,14 +39,14 @@ public class BubbleSort {
 	
     public static void bubble(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
-            boolean hasSwitch = false;
+            boolean hasSwap = false;
             for (int j = 0; j < arr.length - 1 - i; j++) {
                 if (arr[j] > arr[j + 1]) {
-                    hasSwitch = true;
+                    hasSwap = true;
                     ArrayUtil.swap(arr, j, j + 1);
                 }
             }
-            if (!hasSwitch)
+            if (!hasSwap)
                 break;  // 某轮冒泡没有元素交换，终止冒泡排序流程
         }
     }
