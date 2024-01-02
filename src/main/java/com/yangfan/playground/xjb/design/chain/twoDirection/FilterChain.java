@@ -49,11 +49,9 @@ public class FilterChain implements Filter{
 	 **/
 	@Override
 	public void doFilter(Request request, Response response, FilterChain fc) {
-		if(index==chain.size())  //当return的时候后面的操作我就不懂了
+		if(index == chain.size())  //当return的时候后面的操作我就不懂了
 			return;
-		
 		Filter f = chain.get(index++);
-			
 		f.doFilter(request, response, fc);
 	}
 	
