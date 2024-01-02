@@ -11,8 +11,8 @@ import java.util.Stack;
  * 最核心的地方在于压栈的时候，等于stackMin的栈顶值时也要压栈。
  */
 public class GetMinStack {
-    private Stack<Integer> stackData = new Stack<>();
-    private Stack<Integer> stackMin = new Stack<>();
+    private final Stack<Integer> stackData = new Stack<>();
+    private final Stack<Integer> stackMin = new Stack<>();
 
     public void push(int newNum) {
         if(this.stackMin.empty()) {
@@ -40,5 +40,28 @@ public class GetMinStack {
         }
         return this.stackMin.peek();
     }
+
+    public static void main(String[] args) {
+        GetMinStack getMinStack = new GetMinStack();
+        // 随机push几条数据
+        getMinStack.push(3);
+        getMinStack.push(4);
+        getMinStack.push(5);
+        getMinStack.push(1);
+        getMinStack.push(2);
+        getMinStack.push(1);
+        getMinStack.push(0);
+        getMinStack.push(6);
+        getMinStack.push(7);
+        getMinStack.push(8);
+        getMinStack.push(9);
+
+        System.out.println(getMinStack.getMin());
+        System.out.println(getMinStack.pop());
+        System.out.println(getMinStack.getMin());
+
+
+    }
+
 
 }

@@ -1,11 +1,41 @@
 package com.yangfan.playground.util;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
 public class ArrayUtil {
 
+
+    public static boolean isEqual(int [] arr1, int [] arr2) {
+        return Arrays.equals(arr1, arr2);
+    }
+
+    public static void sort(int[] arr) {
+        Arrays.sort(arr);
+    }
+
+    public static int[] copyArray(int[] arr) {
+        if(arr == null) return null;
+        int [] res = new int[arr.length];
+        System.arraycopy(arr,0, res, 0, arr.length);
+        return res;
+    }
+
+    private static int randomInt(int limit) {
+        return (int)((limit + 1) * Math.random());
+    }
+
+    public static int[] generateRandomArray(int maxSize, int maxValue) {
+        // Math.random() -> [0,1) 所有的小树，等概率返回一个
+        // (int)(Math.random() * N) -> [0, N-1] 所有的整数，等概率返回一个
+        int [] arr = new int[randomInt(maxSize)];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = randomInt(maxSize + 1) - randomInt(maxSize);
+        }
+        return arr;
+    }
 
     /**
      * 重写该方法，默认重复因子为0

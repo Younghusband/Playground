@@ -3,75 +3,88 @@ package com.yangfan.playground.xjb.algorithm.sort;
 import com.yangfan.playground.util.ArrayUtil;
 
 /**
- * @description 
- * @author vermouth.Mac
- * @version 2018年1月24日 下午9:03:54
- * 
- * 
  * 归并排序
- * 
- * 分而治之
- * 
+ * 递归实现 与 非递归实现
+ * 优点: 稳定排序
+ * 缺点: 外部排序，需要一个O(n)的辅助空间
+ *
+ * 延伸一下，归并之所以难不在于排序本身，
+ * 而在于归并的思路可以用来出很多道题，比如求小和，比如逆序对
  */
 
 public class MergeSort {
 	
 	public static void main(String[] args) {
-		
-//		  int[] array = {
-//	                9, 1, 5, 3, 4, 2, 6, 8, 7
-//	        };
-		int[] array = {6, 1, 2, 7, 9, 3, 4, 5, 10, 8};
-		MergeSort x = new MergeSort();
+		int[] array = ArrayUtil.createRandomArray(10, 50, 0.01);
 		System.out.print("排序前:\t");
 		ArrayUtil.printArray(array);
-		x.mergeSort(array);
+		sort(array);
+//		sortRecursive(array);
 		System.out.print("排序后:\t");
 		ArrayUtil.printArray(array);
 	}
 
+	/**
+	 * 递归方式
+	 */
+	public static void sortRecursive(int [] arr) {
+		process(arr, 0, arr.length - 1);
+	}
+
+
+
+	public static void process(int[] arr, int L, int R) {
+		int M = (L + R) >>> 1;
+		if (L < R) {
+			// 左边
+			process(arr, L, M);
+			// 右边
+			process(arr, M + 1, R);  //先排左侧还是先排右侧并无影响
+			// 左右归并
+			MergeSort.merge(arr, L, M, R);
+		}
+	}
+
+
+
 	//总方法
-	public void mergeSort(int[] arr) {
-		for (int gap = 1; gap < arr.length; gap = gap * 2) {  //粒度从1开始合并
-			mergeArrays(arr, gap, arr.length);
-			System.out.print("gap=" + gap + ":\t");
-			ArrayUtil.printArray(arr);
+	public static void sort(int[] arr) {
+		int arrLength = arr.length;
+		// 从最小粒度到最大粒度合并
+		for (int size = 1; size < arrLength; size = size * 2) {
+			int left;
+			for (left = 0; left + 2 * size - 1 < arrLength; left += 2 * size) {
+				merge(arr, left, left + size - 1, left + 2 * size - 1);   //把相邻两段长度均为size的排序好的数组合并
+			}
+			//如果剩下一个数组不够gap
+			if (left + size - 1 < arrLength) {
+				merge(arr, left, left + size - 1, arrLength - 1);
+			}
 		}
 	}
 
-	//不断的合并所有子数组的方法
-	public void mergeArrays(int [] arr, int gap, int length) {
-		int i;
-		for (i = 0; i + 2 * gap - 1 < length; i = i + 2 * gap) {
-			merge(arr, i, i + gap - 1, i + 2 * gap - 1);   //把相邻两段长度均为gap的排序好的数组合并
+	/**
+	 * 公用的，相邻数组合并方法
+	 */
+	//将L~M  M+1~R 这两段排序 然后重新赋值进arr
+	public static void merge(int [] arr, int L, int M, int R) {
+		int p1 = L;       // 第一段数组下标
+		int p2 = M + 1;   // 第二段数组下标
+		int i = 0;        // 临时数组下标
+		int[] help = new int[R - L + 1];  // 临时数组的长度
+		while (p1 <= M && p2 <= R) {
+			help[i++] = arr[p1] < arr[p2] ? arr[p1++] : arr[p2++];
 		}
-		//如果剩下一个数组不够gap
-		if (i + gap - 1 < length) {
-			merge(arr, i, i + gap - 1, length - 1);
+		// 下面两个while只有可能进入一个
+		while (p1 <= M) {  // 后半段用完的情况
+			help[i++] = arr[p1++];
 		}
-
-	}
-	
-	//将lo~mid  mid+1~hi 这两段排序 然后重新赋值进arr
-	public void merge(int [] arr, int lo, int mid, int hi){
-		int i = lo;       //第一段数组下标
-		int j = mid + 1;    //第二段数组下标
-		int k = 0;        //临时数组下标
-		int[] arrayTemp = new int[hi - lo + 1];  //临时数组的长度
-		while (i <= mid && j <= hi) {
-			arrayTemp[k++] = arr[i] < arr[j] ? arr[i++] : arr[j++];
+		while (p2 <= R) {   // 前半段用完的情况
+			help[i++] = arr[p2++];
 		}
-		//下面两个while只有可能进入一个
-		while (i <= mid) {  //后半段用完的情况
-			arrayTemp[k++] = arr[i++];
-		}
-		while (j <= hi) {   //前半段用完的情况
-			arrayTemp[k++] = arr[j++];
-		}
-		//!!!!! 最后要把这个临时数组的值复制到数组中
-		k = 0;
-		while (lo<=hi) {
-			arr[lo++] = arrayTemp[k++];
+		// !!!!! 最后要把这个临时数组的值复制到数组中
+		for(i = 0; i < help.length; i++) {
+			arr[L + i] = help[i];
 		}
 	}
 }
