@@ -17,7 +17,7 @@ public class SortTester {
 //        testWithSpecificAlgorithm(InsertionSort::insertSort);
 //        testWithSpecificAlgorithm(BubbleSort::bubble);
         testWithSpecificAlgorithm(MergeSort::sortRecursive);
-        testWithSpecificAlgorithm(QuickSort::sort);
+        testWithSpecificAlgorithm(QuickSort::quickSort);
     }
 
     public static void testWithSpecificAlgorithm(SortAlgorithm sortAlgorithm) {
