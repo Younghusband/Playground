@@ -1,11 +1,9 @@
 package com.yangfan.playground;
 
-import com.yangfan.playground.xjb.design.proxy.RealImage;
-import com.yangfan.playground.xjb.design.proxy.aop.MyService;
+import com.yangfan.playground.design.proxy.aop.MyService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication
 public class PlaygroundApplication {
