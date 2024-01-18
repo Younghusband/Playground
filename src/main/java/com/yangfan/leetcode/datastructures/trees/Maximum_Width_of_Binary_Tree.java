@@ -20,15 +20,45 @@ import java.util.*;
  *  7 n n 8   n 9
  *
  *  最大宽度为8 [7nn8nnn9]
+ *
+ *  这题用BFS的方式更好理解一些
+ *
  */
 public class Maximum_Width_of_Binary_Tree {
-
-
 
     public static void main(String[] args) {
         Integer[] arr = {3,9,20,null,null,15,7};
         TreeNode tree = BinaryTreeUtil.createBinaryTree(arr);
 
+    }
+
+    /**
+     * 这个方法更妙
+     *
+     * 队列中的TreeNode不再保存以前树各个节点的值，
+     * 而是利用其存储位置信息
+     */
+    public int widthOfBinaryTreePro(TreeNode root) {
+        int max = 0;
+        Queue<TreeNode> helper = new LinkedList<>();
+        helper.add(new TreeNode(0, root.left, root.right));
+        while(!helper.isEmpty()) {
+            int currentLayerSize = helper.size();
+            int start = helper.peek().val, end = -1;
+            for(int i = 1; i <= currentLayerSize; i++) {
+                TreeNode cur = helper.poll(); // 并非原始node，只保留了原始node之间的关系
+                int position = cur.val;
+                if(i == currentLayerSize) end = position;
+                if(cur.left != null) {
+                    helper.add(new TreeNode(2 * position + 1, cur.left.left, cur.left.right));
+                }
+                if(cur.right != null) {
+                    helper.add(new TreeNode(2 * position + 2, cur.right.left, cur.right.right));
+                }
+            }
+            max = Math.max(max, end - start + 1);
+        }
+        return max;
     }
 
     /**
@@ -76,44 +106,24 @@ public class Maximum_Width_of_Binary_Tree {
         return max;
     }
 
-
     /**
-     * 这个方法更妙
-     *
-     * 队列中的TreeNode不再保存以前树各个节点的值，
-     * 而是利用其存储位置信息
+     * 深度优先方式
+     * 了解一下思路即可， 毕竟比广度要慢很多
      */
-    public int widthOfBinaryTreePro(TreeNode root) {
-        int max = 0;
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(new TreeNode(0, root.left, root.right));
-        while(!queue.isEmpty()) {
-            int currentLayerSize = queue.size();
-            int start = queue.peek().val, end = -1;
-            for(int i = 1; i <= currentLayerSize; i++) {
-                TreeNode cur = queue.poll(); // 并非原始node，只保留了原始node之间的关系
-                int position = cur.val;
-                if(i == currentLayerSize) end = position;
-                if(cur.left != null) {
-                    queue.add(new TreeNode(2 * position + 1, cur.left.left, cur.left.right));
-                }
-                if(cur.right != null) {
-                    queue.add(new TreeNode(2 * position + 2, cur.right.left, cur.right.right));
-                }
-            }
-            max = Math.max(max, end - start + 1);
-        }
-        return max;
+    int result = 0;
+    Map<Integer, Integer> minValue = new HashMap();
+    public int widthOfBinaryTreeRecur(TreeNode root) {
+        depth(root, 0, 1); //
+        return result;
     }
 
-
-
-
-
-
-
-
-
+    public void depth(TreeNode node, int nodeIndex, int level) {
+        if(node == null) return;
+        minValue.putIfAbsent(level, nodeIndex);
+        result = Math.max(result, nodeIndex - minValue.get(level) + 1);
+        depth(node.left, 2 * nodeIndex + 1, level + 1);
+        depth(node.right, 2 * nodeIndex + 2, level + 1);
+    }
 
 
 }

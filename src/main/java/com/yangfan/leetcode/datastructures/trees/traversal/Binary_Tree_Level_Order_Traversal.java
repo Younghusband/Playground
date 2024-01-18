@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.datastructures.trees;
+package com.yangfan.leetcode.datastructures.trees.traversal;
 
 
 import com.yangfan.dataobject.TreeNode;
@@ -38,20 +38,19 @@ public class Binary_Tree_Level_Order_Traversal {
     public static List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) return result;
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-
-        while (!queue.isEmpty()) {
-            int levelSize = queue.size();
-            List<Integer> currentLvNodes = new ArrayList<>();
+        Queue<TreeNode> helper = new LinkedList<>();
+        helper.add(root);
+        while (!helper.isEmpty()) {
+            int levelSize = helper.size();
+            List<Integer> currentLvData = new ArrayList<>();
             for (int i = 0; i < levelSize; i++) {
-                TreeNode cur = queue.poll();
-                currentLvNodes.add(cur.val);
+                TreeNode cur = helper.poll();
+                currentLvData.add(cur.val);
                 // 遍历只会弹出前levelSize个元素，新添加的left或者right不会在此轮被弹出
-                if (cur.left != null) queue.add(cur.left);
-                if (cur.right != null) queue.add(cur.right);
+                if (cur.left != null) helper.add(cur.left);
+                if (cur.right != null) helper.add(cur.right);
             }
-            result.add(currentLvNodes);
+            result.add(currentLvData);
         }
         return result;
     }
@@ -89,11 +88,11 @@ public class Binary_Tree_Level_Order_Traversal {
             }
             if(cur.left != null) {
                 queue.add(cur.left);
-                nodeLvMap.put(cur.left, curLevel+1);
+                nodeLvMap.put(cur.left, curLevel + 1);
             }
             if(cur.right != null) {
                 queue.add(cur.right);
-                nodeLvMap.put(cur.right, curLevel+1);
+                nodeLvMap.put(cur.right, curLevel + 1);
             }
         }
         return result;

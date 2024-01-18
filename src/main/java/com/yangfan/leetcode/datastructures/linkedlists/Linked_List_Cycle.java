@@ -9,8 +9,10 @@ import com.yangfan.dataobject.ListNode;
  * 141. Linked List Cycle
  * 判断链表中是否包含环，如果包含环返回true，否则false
  * 
- * 收获: 
- * 进入环这个是很容易catch的，问题就在于如果不是环的情况不出错
+ * 收获:
+ * 1. 快慢指针思想
+ * 2. 空指针的甄别和处理
+ *
  */
 public class Linked_List_Cycle {
 

@@ -96,6 +96,7 @@ public class Intersection_of_Two_Linked_Lists {
             n--;
             longHead = longHead.next;
         }
+        // 这里如果用 longHead!=null 来作为循环条件会出错，想想为什么
         while(longHead != shortHead) {
             longHead = longHead.next;
             shortHead = shortHead.next;
@@ -110,17 +111,17 @@ public class Intersection_of_Two_Linked_Lists {
      */
     public ListNode getIntersectionNode1(ListNode headA, ListNode headB) {
         Set<ListNode> helper = new HashSet<>();
-        ListNode cur1 = headA;
-        ListNode cur2 = headB;
-        while(cur1 != null) {
-            helper.add(cur1);
-            cur1 = cur1.next;
+        ListNode cur = headA;
+        while(cur != null) {
+            helper.add(cur);
+            cur = cur.next;
         }
-        while(cur2 != null) {
-            if(helper.contains(cur2)) {
-                return cur2;
+        cur = headB;
+        while(cur != null) {
+            if(helper.contains(cur)) {
+                return cur;
             }
-            cur2 = cur2.next;
+            cur = cur.next;
         }
         return null;
     }
