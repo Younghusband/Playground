@@ -12,7 +12,28 @@ import com.yangfan.dataobject.TreeNode;
  */
 public class Balanced_Binary_Tree {
 
+
     /**
+     * 更完美的方法，没引入新的变量
+     * 将高度-1与否作为isBalanced的替代
+     */
+    public boolean isBalancedPro(TreeNode root) {
+        return height(root) != -1;
+    }
+
+    public int height(TreeNode root) {
+        if(root == null) return 0;
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+        if(leftHeight == -1 || rightHeight == -1 || Math.abs(leftHeight - rightHeight) > 1)
+            return -1;
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+
+
+    /**
+     *  引入一个新的对象用来存储每个节点的高度和是否平衡
      *  分别判断左右子树是否平衡
      *  然后在左右子树都平衡的情况下 再比较二者高度差
      */

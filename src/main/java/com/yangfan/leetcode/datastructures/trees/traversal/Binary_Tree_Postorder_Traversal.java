@@ -50,9 +50,6 @@ public class Binary_Tree_Postorder_Traversal {
         return result;
     }
 
-
-
-
     /**
      * 递归方式
      */
@@ -62,13 +59,15 @@ public class Binary_Tree_Postorder_Traversal {
         return result;
     }
 
+    /**
+     * 传统的后序遍历递归写法
+     */
     public void postOrder(List<Integer> data, TreeNode root) {
         if(root == null) return;
         postOrder(data, root.left);
         postOrder(data, root.right);
         data.add(root.val);
     }
-
 
 
 }

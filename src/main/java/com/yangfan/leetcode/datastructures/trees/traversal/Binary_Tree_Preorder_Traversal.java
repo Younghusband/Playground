@@ -26,14 +26,34 @@ public class Binary_Tree_Preorder_Traversal {
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         pre(result, root);
+//        // 也可以这样写
+//        dfs(result, root);
         return result;
     }
 
-    void pre(List<Integer> list, TreeNode root) {
+    /**
+     * 传统的前序遍历递归写法
+     */
+    void pre(List<Integer> data, TreeNode root) {
         if(root == null) return;
-        list.add(root.val);
-        pre(list, root.left);
-        pre(list, root.right);
+        data.add(root.val);
+        pre(data, root.left);
+        pre(data, root.right);
+    }
+
+    /**
+     * 另一种递归写法
+     * （其实没必要，只是为了加深理解）
+     */
+    void dfs(List<Integer> data, TreeNode root) {
+        if(root == null) return;
+        data.add(root.val);
+        if(root.left != null) {
+            dfs(data, root.left);
+        }
+        if(root.right != null) {
+            dfs(data, root.right);
+        }
     }
 
     /**
@@ -58,9 +78,5 @@ public class Binary_Tree_Preorder_Traversal {
         }
         return result;
     }
-
-
-
-
 
 }
