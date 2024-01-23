@@ -1,5 +1,7 @@
 package com.yangfan.playground.thread.juc;
 
+import com.yangfan.playground.util.StringUtil;
+
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -63,9 +65,9 @@ class PutPeople implements Runnable {
 			try {
 				Thread.sleep(r.nextInt(1000));
 				int id = count.decrementAndGet();
-				SemaphoreTest.print("生产了 "+"A-" + id);
+				StringUtil.printTimeAndThreadInfo("生产了 "+"A-" + id);
 				if (!queue.offer("A-" + id, 2, TimeUnit.SECONDS)) {
-					SemaphoreTest.print(" 放入缓冲区失败！！！");
+					StringUtil.printTimeAndThreadInfo(" 放入缓冲区失败！！！");
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -88,11 +90,12 @@ class TakePeople implements Runnable {
 			try {
 				String data = queue.take();
 				Thread.sleep(1000+r.nextInt(1000));
-				SemaphoreTest.print(" 消费了 "+data);
+				StringUtil.printTimeAndThreadInfo(" 消费了 "+data);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			
 		}
 	}
+
 }

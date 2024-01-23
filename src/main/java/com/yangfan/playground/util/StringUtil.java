@@ -1,6 +1,8 @@
 package com.yangfan.playground.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.stream.Collectors;
@@ -37,6 +39,11 @@ public class StringUtil {
             s -> sj.add(s+"")
         );
         System.out.println(sj.toString());
+    }
+
+    public static void printTimeAndThreadInfo(String str){
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        System.out.println("["+format.format(new Date())+"]  "+Thread.currentThread().getName()+" "+str);
     }
     
 }

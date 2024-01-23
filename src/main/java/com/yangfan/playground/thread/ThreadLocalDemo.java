@@ -1,16 +1,14 @@
 package com.yangfan.playground.thread;
 /**
- * @description 
- * @author vermouth.Mac
- * @version 2018年2月6日 下午7:46:49
  * 
  * 不使用ThreadLocal的话，各线程仍能获取到同一个对象的变量
- * 
- * ThreadLocal是怎样的一个数据结构
+ *
+ * 线程生命周期结束的时候，相对应的ThreadLocal会进行GC。
+ * 长期存在的线程有内存泄露的风险，所以不管是什么线程，建议使用完ThreadLocal之后都手动调用remove()方法。
  */
 
 public class ThreadLocalDemo {
-	public ThreadLocal<String> th = new ThreadLocal<>();
+	public static ThreadLocal<String> th = new ThreadLocal<>();
 
 	// 使用 ThreadLocal 来保存每个线程的计数器
 	private static ThreadLocal<Integer> threadCounter = ThreadLocal.withInitial(() -> 0);
@@ -55,8 +53,11 @@ public class ThreadLocalDemo {
 		
 		t1.start();
 		t2.start();
+		System.out.println(" - ThreadLocal String before remove: " + th.get());
 
-		testThreadLocal();
+//		testThreadLocal();
+
+
 	}
 
 

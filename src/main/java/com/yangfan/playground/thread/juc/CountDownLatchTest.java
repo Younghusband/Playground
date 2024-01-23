@@ -8,20 +8,25 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @description 
- * @author vermouth.Mac
- * @version 2018年3月18日 下午2:01:17
+ *
+ * 1. 在每个执行的线程中进行countDown()操作
+ * 2. 在外部需要等待的地方进行await()操作
+ *
+ * 上述操作都是指CountDownLatch对象的方法。
+ *
+ * 每个执行的线程并不会阻塞，阻塞的是外部调用await()的地方。
+ *
  */
 
 
 class TestTask implements Runnable{
     
 	private CountDownLatch latch;
-	private int sleeptime;
+	private int sleepTime;
 	
-	public TestTask(CountDownLatch latch, int sleeptime){
+	public TestTask(CountDownLatch latch, int sleepTime){
 		this.latch = latch;
-		this.sleeptime = sleeptime;
+		this.sleepTime = sleepTime;
 	}
 	
 	
@@ -29,7 +34,7 @@ class TestTask implements Runnable{
 	public void run() {
 		try {
 			CountDownLatchTest.print("entering...");  //10个线程是乱序打印这句
-			TimeUnit.SECONDS.sleep(sleeptime);
+			TimeUnit.SECONDS.sleep(sleepTime);
 			CountDownLatchTest.print("finished!!!!!");    //10个线程依次打印这句
 			TimeUnit.SECONDS.sleep(1);  //每个线程延迟一秒countDown
 			latch.countDown();
@@ -40,8 +45,6 @@ class TestTask implements Runnable{
 	
 	
 }
-
-
 
 
 
@@ -57,11 +60,13 @@ public class CountDownLatchTest {
 		}
 		
 		try {
-			latch.await(); // 10个线程执行完毕后悔调用下面
+			latch.await(); // 10个线程会直到计数器到0才会往下走
 			CountDownLatchTest.print(">>>>>Continued...");
-		} catch (InterruptedException e) {
+		}
+		catch (InterruptedException e) {
 			e.printStackTrace();
-		}finally{
+		}
+		finally {
 			cachePool.shutdown();
 		}
 		

@@ -1,7 +1,7 @@
 package com.yangfan.playground.thread.juc;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.yangfan.playground.util.StringUtil;
+
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -9,17 +9,13 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @description 
- * @author vermouth.Mac
- * @version 2018年3月18日 下午5:11:57
  * 
- * 测试Semaphore的用法
+ * Semaphore 正如字面意思信号量
+ * 设置一个阈值，比如3。然后有n个线程争抢这3个信号量，同时执行的线程最多只能有3个。
  * 
  * 举个例子，如下代码，十个线程竞争三个资源，一开始有三个线程可以直接运行，剩下的七个线程只能阻塞等到其它线程使用资源完毕才能执行
  * 
- * 这就是Semaphore的威力
- * 
- * 这里的例子:   厕所一共3个坑位，10个人上厕所
+ * 这里的例子:  厕所一共3个坑位，10个人上厕所
  */
 
 public class SemaphoreTest {
@@ -53,10 +49,7 @@ public class SemaphoreTest {
 	}
 	
 	
-	public static void print(String str){
-		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-		System.out.println("["+format.format(new Date())+"]  "+Thread.currentThread().getName()+" "+str);
-	}
+
 
 }
 
@@ -71,17 +64,21 @@ class SourceThread implements Runnable{
 	
 	@Override
 	public void run() {
-	    SemaphoreTest.print(" 排队蹲坑。。。");
+		print(" 排队蹲坑。。。");
 	    try {
 			s.acquire();
 			//下面3行为实际你要处理的业务，这里用蹲坑模拟
-			SemaphoreTest.print(" 占领坑位！！！！");
+			print(" 占领坑位！！！！");
 			TimeUnit.SECONDS.sleep(r.nextInt(10));
-			SemaphoreTest.print(" 拉完屎出坑。");
+			print(" 拉完屎出坑。");
 			s.release();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void print(String xxx) {
+		StringUtil.printTimeAndThreadInfo(xxx);
 	}
 	
 	
