@@ -3,25 +3,65 @@ package com.yangfan.leetcode.datastructures.linkedlists;
 import com.yangfan.dataobject.ListNode;
 
 /************************************************
-    * 21. Merge Two Sorted Lists
-    * 
-    * Merge two sorted linked lists and return it as a new list. 
-    * The new list should be made by splicing together the nodes of the first two lists.
-    * 
-    * 1. 递归方式
-    * 2. 利用哑节点头
+* 21. Merge Two Sorted Lists
+
+     Merge two sorted linked lists and return it as a new list.
+     The new list should be made by splicing together the nodes of the first two lists.
+
+   1. 递归方式
+   2. 利用哑节点头
+
+ 合并两个有序链表。
+
+ 核心代码是:
+ ListNode dummy = new ListNode(-1);
+ ListNode cur = dummy;
+
+
 **************************************************/
 
 public class Merge_Two_Sorted_Lists {
 
+
+    public static void main(String[] args) {
+        ListNode dummy = new ListNode(-1);
+        ListNode cur = dummy;
+        ListNode fuck = cur;
+
+        ListNode head = new ListNode(1);
+        ListNode node1 = new ListNode(3);
+        ListNode node2 = new ListNode(5);
+        ListNode node3 = new ListNode(7);
+        ListNode node4 = new ListNode(9);
+        head.next = node1;
+        node1.next = node2;
+        node2.next = node3;
+        node3.next = node4;
+        node4.next = null;
+
+//        cur = new ListNode(-10);  // 如果cur重新赋值，就会和dummy断开关系
+//        cur = cur.next;
+        cur.next = head;
+        fuck.next = head.next;
+
+        ListNode t = dummy.next;
+        while(t != null) {
+            System.out.print(t.val + "->");
+            t = t.next;
+        }
+    }
+
+
     /**
      * 常规遍历
      * 然后哑结点返回
+     *
+     * 最让我费解的就是 cur = dummy
+     * 然后cur不断的往后移动，最后返回dummy.next
      */
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode dummy = new ListNode(-1);
         ListNode cur = dummy; // 当前遍历节点的位置
-        ListNode tmp; // 用于保存未合并完 剩余的节点（要么全在l1, 要么全部在l2）
         while(l1 != null && l2 != null) {
             if(l1.val < l2.val) {
                 cur.next = l1;
@@ -32,8 +72,7 @@ public class Merge_Two_Sorted_Lists {
             }
             cur = cur.next; // 记得将指针递进
         }
-        tmp = l1 != null ? l1 : l2;
-        cur.next = tmp;
+        cur.next = l1 != null ? l1 : l2;
         return dummy.next;
     }
 

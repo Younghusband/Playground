@@ -10,6 +10,11 @@ import com.yangfan.dataobject.ListNode;
  * reverse the list, and return the reversed list.
  *
  * 反转链表
+ *
+ * 核心思想:
+ * head.next.next = head;
+ * head.next = null;
+ *
  */
 public class Reverse_Linked_List {
     

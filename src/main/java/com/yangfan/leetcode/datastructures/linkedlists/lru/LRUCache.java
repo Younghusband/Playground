@@ -91,7 +91,7 @@ public class LRUCache {
             ++size;
             if (size > capacity) {
                 // 如果超出容量，删除双向链表的尾部节点
-                DLinkedNode tail = removeTail();
+                DLinkedNode tail = removeLast();
                 // 删除哈希表中对应的项
                 cache.remove(tail.key);
                 --size;
@@ -121,7 +121,7 @@ public class LRUCache {
         addToHead(node);
     }
 
-    private DLinkedNode removeTail() {
+    private DLinkedNode removeLast() {
         DLinkedNode res = tail.prev;
         removeNode(res);
         return res;
