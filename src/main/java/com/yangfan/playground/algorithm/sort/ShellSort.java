@@ -14,9 +14,7 @@ public class ShellSort {
         shellSort(arr);
         ArrayUtil.printArray(arr);
     }
-    
-    
-    
+
     /**
      * @param arr
      * @return

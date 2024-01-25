@@ -42,6 +42,9 @@ import java.util.Map;
  * 2. 移除尾结点
  * 3. 移除中间节点
  *
+ * 删除的时候一定不要忘记map同样要同样删除，
+ * 否则在put或者get操作的时候会将新节点误判为已有节点
+ *
  */
 
 public class LRUCache {

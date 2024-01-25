@@ -86,7 +86,7 @@ public class Merge_Two_Sorted_Lists {
         if(l1.val < l2.val){
         	l1.next = mergeTwo(l1.next, l2);
         	return l1;
-        }else{
+        } else {
         	l2.next = mergeTwo(l1, l2.next);
         	return l2;
         }

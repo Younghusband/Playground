@@ -18,9 +18,31 @@ import java.util.Stack;
  * 注意数据范围:
  *  The number of nodes in the tree is in the range [1, 104].
  * -2^31 <= Node.val <= 2^31 - 1
+ *
+ * 二叉搜索树需要严格递增，前驱or后驱节点等于是不行的。
  */
 public class Validate_Binary_Search_Tree {
 
+
+    /**
+     * Integer.MIN_VALUE踩在数据限制范围内
+     * 直接减1则会越界，直接用long又太浪费
+     */
+    long preValue = (long)Integer.MIN_VALUE - 1; // 对比(long)(Integer.MIN_VALUE - 1) 这个则毫无效果
+
+    /**
+     * 1. 先检查左子树，左子树不符合直接return false
+     * 2. 检查左子树最大(右)值 和 当前节点值大小，
+     */
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+        if(!isValidBST(root.left)) return false;
+        if(root.val <= preValue)
+            return false;
+        else
+            preValue = root.val;
+        return isValidBST(root.right);
+    }
 
     /**
      * 我的改良版
@@ -57,6 +79,10 @@ public class Validate_Binary_Search_Tree {
      *
      * 1. 传统方式非递归二叉树中序遍历
      * 2. 将记录下来的数组遍历查看是否递增
+     *
+     * 蠢的点在于，
+     * 是不是严格递增其实在添加过程中就已经可以判断和中断了
+     *
      */
     public boolean my(TreeNode root) {
         List<Integer> data = new ArrayList();
@@ -85,39 +111,6 @@ public class Validate_Binary_Search_Tree {
         }
         return true;
     }
-
-
-
-    /**
-     * Integer.MIN_VALUE踩在数据限制范围内
-     * 直接减1则会越界，直接用long又太浪费
-     */
-    long preValue = (long)Integer.MIN_VALUE - 1; // 对比(long)(Integer.MIN_VALUE - 1) 这个则毫无效果
-
-    /**
-     * 1. 先检查左子树，左子树不符合直接return false
-     * 2. 检查左子树最大(右)值 和 当前节点值大小，
-     */
-    public boolean isValidBST(TreeNode root) {
-        if(root == null) return true;
-        if(!isValidBST(root.left)) return false;
-        if(root.val <= preValue)
-            return false;
-        else
-            preValue = root.val;
-        return isValidBST(root.right);
-    }
-
-
-    public static void main(String[] args) {
-        long long1 = (long)Integer.MIN_VALUE - 1;
-        long long2 = (long)(Integer.MIN_VALUE - 1);
-        System.out.println(long1);
-        System.out.println(long2);
-    }
-
-
-
 
 
 }

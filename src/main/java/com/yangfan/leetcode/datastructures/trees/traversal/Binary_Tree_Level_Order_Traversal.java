@@ -39,7 +39,7 @@ public class Binary_Tree_Level_Order_Traversal {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) return result;
         Queue<TreeNode> helper = new LinkedList<>();
-        helper.add(root);
+        helper.offer(root);
         while (!helper.isEmpty()) {
             int levelSize = helper.size();
             List<Integer> currentLvData = new ArrayList<>();
@@ -47,8 +47,8 @@ public class Binary_Tree_Level_Order_Traversal {
                 TreeNode cur = helper.poll();
                 currentLvData.add(cur.val);
                 // 遍历只会弹出前levelSize个元素，新添加的left或者right不会在此轮被弹出
-                if (cur.left != null) helper.add(cur.left);
-                if (cur.right != null) helper.add(cur.right);
+                if (cur.left != null) helper.offer(cur.left);
+                if (cur.right != null) helper.offer(cur.right);
             }
             result.add(currentLvData);
         }

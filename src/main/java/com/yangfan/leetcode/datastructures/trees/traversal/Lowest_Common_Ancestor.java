@@ -43,17 +43,15 @@ public class Lowest_Common_Ancestor {
         dfs(parentMap, root);
         // 2. p和q分别通过这个map往上溯源，并用set记录
         Set<TreeNode> visited = new HashSet<>();
-        TreeNode cur = p;
-        while(cur != null) {
-            visited.add(cur);
-            cur = parentMap.get(cur);
+        while(p != null) {
+            visited.add(p);
+            p = parentMap.get(p);
         }
-        cur = q;
-        while(cur != null) {
-            if(visited.contains(cur)) {
-                return cur;
+        while(q != null) {
+            if(visited.contains(q)) {
+                return q;
             }
-            cur = parentMap.get(cur);
+            q = parentMap.get(q);
         }
         return null;
     }

@@ -5,7 +5,6 @@ import com.yangfan.playground.util.StringUtil;
 import java.util.Arrays;
 
 /************************************************
- * Description:
  * 88. Merge Sorted Array
  *
  * Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
@@ -14,9 +13,12 @@ import java.util.Arrays;
  * to hold additional elements from nums2.
  * The number of elements initialized in nums1 and nums2 are m and n respectively.
  *
- * @author    Vermouth.yf
- * @version  1.0
- * @date ：2017年3月7日 下午3:18:07
+ * 首先理解问题的本质， 给定nums1.length = m + n
+ * m仅仅是nums1的有效位数  这样就理解了
+ *
+ * 我感觉这个题目主要的还是学习一下较为常用的工具
+ * System.arraycopy(复制源, 源起始下标，目标数组，源终止下标，复制长度);
+ *
 **************************************************/
 public class Merge_Sorted_Array {
 	
@@ -32,16 +34,15 @@ public class Merge_Sorted_Array {
 	 * m仅仅是nums1的有效位数  这样就理解了
 	 */
 	public static void merge(int[] nums1, int m, int[] nums2, int n) {
-//	        for(int i=0;i<n;i++)
-//	        	  nums1[i+m]=nums2[i];
-//	        Arrays.sort(nums1);
 		int i = m - 1, j = n - 1, k = m + n - 1;
-		while (i > -1 && j > -1) nums1[k--] = (nums1[i] > nums2[j]) ? nums1[i--] : nums2[j--];
-		while (j > -1) nums1[k--] = nums2[j--];
+		while (i > -1 && j > -1)
+			nums1[k--] = (nums1[i] > nums2[j]) ? nums1[i--] : nums2[j--];
+		while (j > -1)
+			nums1[k--] = nums2[j--];
 	}
 
 	public static void merge1(int[] nums1, int m, int[] nums2, int n) {
-		System.arraycopy(nums2,0,nums1,m,n);
+		System.arraycopy(nums2, 0, nums1, m, n);
 		Arrays.sort(nums1);
 	}
 
