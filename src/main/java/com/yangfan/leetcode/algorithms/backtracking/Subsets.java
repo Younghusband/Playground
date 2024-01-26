@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.datastructures.arrays;
+package com.yangfan.leetcode.algorithms.backtracking;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,10 @@ import java.util.List;
 public class Subsets {
 
     public static void main(String[] args) {
-
+        Subsets subsets = new Subsets();
+        int[] nums = {1,2,3};
+        List<List<Integer>> data = subsets.subsets(nums);
+        System.out.println(data);
     }
 
     public List<List<Integer>> subsets(int[] nums) {

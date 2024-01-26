@@ -1,4 +1,4 @@
-package com.yangfan.playground.algorithm.sort;
+package com.yangfan.leetcode.algorithms.sorting.uncommon;
 
 import java.util.Random;
 

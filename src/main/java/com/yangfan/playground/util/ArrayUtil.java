@@ -93,7 +93,7 @@ public class ArrayUtil {
         //由于j和j+1不相等，这是两个元素 所以放心大胆使用异或交换
         arr[i] = arr[i] ^ arr[j];
         arr[j] = arr[i] ^ arr[j];
-        arr[i] = arr[j] ^ arr[i];
+        arr[i] = arr[i] ^ arr[j];
     }
 
 

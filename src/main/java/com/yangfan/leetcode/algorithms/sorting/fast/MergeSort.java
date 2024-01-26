@@ -1,4 +1,4 @@
-package com.yangfan.playground.algorithm.sort;
+package com.yangfan.leetcode.algorithms.sorting.fast;
 
 import com.yangfan.playground.util.ArrayUtil;
 
@@ -27,10 +27,9 @@ public class MergeSort {
 	/**
 	 * 递归方式
 	 */
-	public static void sortRecursive(int [] arr) {
+	public static void sort(int [] arr) {
 		process(arr, 0, arr.length - 1);
 	}
-
 
 
 	public static void process(int[] arr, int L, int R) {
@@ -45,10 +44,8 @@ public class MergeSort {
 		}
 	}
 
-
-
 	//总方法
-	public static void sort(int[] arr) {
+	public static void sortFromBottom(int[] arr) {
 		int arrLength = arr.length;
 		// 从最小粒度到最大粒度合并
 		for (int size = 1; size < arrLength; size = size * 2) {

@@ -1,4 +1,4 @@
-package com.yangfan.playground.algorithm.sort;
+package com.yangfan.leetcode.algorithms.sorting.fast;
 
 import com.yangfan.playground.util.ArrayUtil;
 
@@ -19,7 +19,7 @@ public class QuickSort {
 
 	public static void main(String[] args) {
 		int[] arr = {6, 1, 2, 7, 9, 3, 4, 5, 10, 8};
-		process(arr);
+		sort(arr);
 		System.out.println(">>>>>>>>>>>>>>>>>普通快排后的数组>>>>>>>>>>>>>>>>>");
 		ArrayUtil.printArray(arr);
 //		quickSort(arr);
@@ -27,16 +27,16 @@ public class QuickSort {
 //		ArrayUtil.printArray(arr);
 	}
 
-	public static void process(int[] arr) {
+	/**
+	 * 普通快排>>>>>>>>>>>>>>>>>>>
+	 */
+	public static void sort(int[] arr) {
 		if(arr == null || arr.length < 2) {
 			return;
 		}
 		process(arr, 0, arr.length - 1);
 	}
 
-	/**
-	 * 递归实体
-	 */
 	public static void process(int[] array, int left, int right) {
 		if (left < right) {
 			int pivot = partition(array, left, right);
@@ -61,20 +61,23 @@ public class QuickSort {
 		return right;
 	}
 
+	/**
+	 * 超级快排>>>>>>>>>>>>>>>>>>>
+	 */
 	public static void quickSort(int[] arr) {
 		if(arr == null || arr.length < 2) {
 			return;
 		}
-		quickSort(arr, 0, arr.length - 1);
+		quickProcess(arr, 0, arr.length - 1);
 	}
 
-	public static void quickSort(int[] arr, int L, int R) {
+	public static void quickProcess(int[] arr, int L, int R) {
 		if(L < R) {
 			// int强转相当于向下取整，[0, R-L+1) -> [0, R-L]
 			swap(arr, L + (int)(Math.random() * (R -L + 1)), R);  // 交换R和[L, R]范围内的随机位置
 			int[] p = partitionPro(arr, L, R);
-			quickSort(arr, L, p[0] - 1); // < 区
-			quickSort(arr, p[1] + 1, R); // > 区
+			quickProcess(arr, L, p[0] - 1); // < 区
+			quickProcess(arr, p[1] + 1, R); // > 区
 		}
 	}
 

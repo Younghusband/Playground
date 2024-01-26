@@ -1,5 +1,7 @@
-package com.yangfan.playground.algorithm.sort;
+package com.yangfan.leetcode.algorithms.sorting;
 
+import com.yangfan.leetcode.algorithms.sorting.fast.MergeSort;
+import com.yangfan.leetcode.algorithms.sorting.fast.QuickSort;
 import com.yangfan.playground.util.ArrayUtil;
 
 /**
@@ -16,7 +18,7 @@ public class SortTester {
 
 //        testWithSpecificAlgorithm(InsertionSort::insertSort);
 //        testWithSpecificAlgorithm(BubbleSort::bubble);
-        testWithSpecificAlgorithm(MergeSort::sortRecursive);
+        testWithSpecificAlgorithm(MergeSort::sort);
         testWithSpecificAlgorithm(QuickSort::quickSort);
     }
 

@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.miscellaneous.bitmanipulation;
+package com.yangfan.leetcode.daily;
 
 
 import java.util.List;
