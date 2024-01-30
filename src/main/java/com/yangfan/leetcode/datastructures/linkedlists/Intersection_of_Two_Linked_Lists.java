@@ -70,41 +70,32 @@ public class Intersection_of_Two_Linked_Lists {
      * 2. n通过加减的方式节省了变量
      */
     public ListNode normalSolution(ListNode headA, ListNode headB) {
-        if(headA == null || headB == null) {
-            return null;
+        int aLen = 0, bLen = 0;
+        ListNode nodeA = headA;
+        ListNode nodeB = headB;
+        while(nodeA != null) {
+            aLen++;
+            nodeA = nodeA.next;
         }
-        ListNode longHead = headA;
-        ListNode shortHead = headB;
-        int n = 0;
-        while(longHead.next != null) {
-            n++;
-            longHead = longHead.next;
-
+        while(nodeB != null) {
+            bLen++;
+            nodeB = nodeB.next;
         }
-        while(shortHead.next != null) {
-            n--;
-            shortHead = shortHead.next;
+        if (aLen > bLen) {
+            for(int i = 0; i < aLen - bLen; i++) {
+                headA = headA.next;
+            }
+        } else {
+            for(int i = 0; i < bLen - aLen; i++) {
+                headB = headB.next;
+            }
         }
-        if(longHead != shortHead) {
-            return null;
+        while(headA != headB) {
+            headA = headA.next;
+            headB = headB.next;
         }
-        // 根据n的值决定谁长谁短，长的先遍历
-        longHead = n > 0 ? headA : headB; // n > 0则说明headA长一些
-        shortHead = longHead == headA ? headB : headA; // cur2就选短的
-        n = Math.abs(n); // 这步别漏了
-        while(n != 0) {
-            n--;
-            longHead = longHead.next;
-        }
-        // 这里如果用 longHead!=null 来作为循环条件会出错，想想为什么
-        while(longHead != shortHead) {
-            longHead = longHead.next;
-            shortHead = shortHead.next;
-        }
-        return longHead;
+        return headA;
     }
-
-
 
     /**
      * 本人相对比较蠢的方法

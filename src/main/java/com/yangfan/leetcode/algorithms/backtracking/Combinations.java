@@ -50,5 +50,12 @@ public class Combinations {
         }
     }
 
+    /**
+     * 更快更高更强
+     */
+    void backTrackPro() {
+
+    }
+
 
 }

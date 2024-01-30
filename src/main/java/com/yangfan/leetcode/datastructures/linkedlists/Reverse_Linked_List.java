@@ -22,6 +22,8 @@ public class Reverse_Linked_List {
      * 非递归方法
      *
      * 需要注意的点是，最后返回pre节点
+     *
+     * 思考为什么一个循环内的反转，不需要把head.next串上已经反转完毕的链表呢？
      */
     public ListNode reverseList(ListNode head) {
         ListNode prev = null;
@@ -46,7 +48,7 @@ public class Reverse_Linked_List {
         if(head == null || head.next == null) { //空链表或者已经到链表末尾
             return head;
         }
-        ListNode prev = reverse(head.next);
+        ListNode prev = reverse(head.next); // 这一步必须放在这里，想想为什么
         head.next.next = head;  // 折返
         head.next = null;       // 剪断正向next
         return prev;
