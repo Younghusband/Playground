@@ -48,32 +48,32 @@ import java.util.Map;
  */
 
 public class LRUCache {
-    class DLinkedNode {
+    class LRUNode {
         int key; // 核心，用于反向映射map中的位置
         int value;
-        DLinkedNode prev;
-        DLinkedNode next;
-        public DLinkedNode() {}
-        public DLinkedNode(int _key, int _value) {key = _key; value = _value;}
+        LRUNode prev;
+        LRUNode next;
+        public LRUNode() {}
+        public LRUNode(int _key, int _value) {key = _key; value = _value;}
     }
 
-    private Map<Integer, DLinkedNode> cache = new HashMap<>();
+    private Map<Integer, LRUNode> cache = new HashMap<>();
     private int size;
     private int capacity;
-    private DLinkedNode head, tail;
+    private LRUNode head, tail;
 
     public LRUCache(int capacity) {
         this.size = 0;
         this.capacity = capacity;
         // 使用伪头部和伪尾部节点
-        head = new DLinkedNode();
-        tail = new DLinkedNode();
+        head = new LRUNode();
+        tail = new LRUNode();
         head.next = tail;
         tail.prev = head;
     }
 
     public int get(int key) {
-        DLinkedNode node = cache.get(key);
+        LRUNode node = cache.get(key);
         if (node == null) {
             return -1;
         }
@@ -83,10 +83,10 @@ public class LRUCache {
     }
 
     public void put(int key, int value) {
-        DLinkedNode node = cache.get(key);
+        LRUNode node = cache.get(key);
+        // 如果 key 不存在
         if (node == null) {
-            // 如果 key 不存在，创建一个新的节点
-            DLinkedNode newNode = new DLinkedNode(key, value);
+            LRUNode newNode = new LRUNode(key, value);
             // 添加进哈希表
             cache.put(key, newNode);
             // 添加至双向链表的头部
@@ -94,40 +94,34 @@ public class LRUCache {
             ++size;
             if (size > capacity) {
                 // 如果超出容量，删除双向链表的尾部节点
-                DLinkedNode tail = removeLast();
-                // 删除哈希表中对应的项
-                cache.remove(tail.key);
+                removeNode(tail.prev);
+                // 别忘了删掉cache里的key
+                cache.remove(tail.prev.key);
                 --size;
             }
         }
         else {
-            // 如果 key 存在，先通过哈希表定位，再修改 value，并移到头部
+            // 如果 key 存在，修改value并移到头部
             node.value = value;
             moveToHead(node);
         }
     }
 
-    private void addToHead(DLinkedNode node) {
+    private void addToHead(LRUNode node) {
         node.prev = head;
         node.next = head.next;
         head.next.prev = node;
         head.next = node;
     }
 
-    private void removeNode(DLinkedNode node) {
+    private void removeNode(LRUNode node) {
         node.prev.next = node.next;
         node.next.prev = node.prev;
     }
 
-    private void moveToHead(DLinkedNode node) {
+    private void moveToHead(LRUNode node) {
         removeNode(node);
         addToHead(node);
-    }
-
-    private DLinkedNode removeLast() {
-        DLinkedNode res = tail.prev;
-        removeNode(res);
-        return res;
     }
 
 }
