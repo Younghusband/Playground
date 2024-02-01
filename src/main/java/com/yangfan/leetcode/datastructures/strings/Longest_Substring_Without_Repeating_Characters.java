@@ -39,7 +39,7 @@ public class Longest_Substring_Without_Repeating_Characters {
         while (right < len) {
             char cur = s.charAt(right);
             if (helper.containsKey(cur)) {
-                // 直接跳过重复字符前出现的所有字符
+                // 如果重复字符在left身后就不管，如果
                 left = Math.max(left, helper.get(cur) + 1);
             }
             helper.put(cur, right);
