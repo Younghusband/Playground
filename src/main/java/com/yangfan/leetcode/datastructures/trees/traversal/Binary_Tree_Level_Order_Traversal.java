@@ -14,7 +14,7 @@ import java.util.*;
  * Input: root = [3,9,20,null,null,15,7]
  * Output: [[3],[9,20],[15,7]]
  *
- * 收获: 脑海中有了用队列逐层遍历二叉树的概念
+ * BFS好理解，看看DFS的实现
  */
 public class Binary_Tree_Level_Order_Traversal {
 
@@ -54,6 +54,34 @@ public class Binary_Tree_Level_Order_Traversal {
         }
         return result;
     }
+
+    /**
+     * 通过DFS的方式实现层序遍历结果的输出(但实际上执行过程就不是层序遍历)
+     */
+    public List<List<Integer>> levelOrderByDFS(TreeNode root) {
+        List<List<Integer>> levels = new ArrayList<>();
+        if (root == null) return levels;
+        dfs(root, 0, levels);
+        return levels;
+    }
+
+    private void dfs(TreeNode node, int level, List<List<Integer>> levels) {
+        // 开始当前层的遍历
+        if (levels.size() == level) {
+            levels.add(new ArrayList<>());
+        }
+        // 将当前节点的值加入到对应层的列表中
+        levels.get(level).add(node.val);
+        // 处理左子树
+        if (node.left != null) {
+            dfs(node.left, level + 1, levels);
+        }
+        // 处理右子树
+        if (node.right != null) {
+            dfs(node.right, level + 1, levels);
+        }
+    }
+
 
     /**
      * 我实现的方法
@@ -100,7 +128,6 @@ public class Binary_Tree_Level_Order_Traversal {
 
     /**
      * 只是逐个遍历还好说，不需要关心层数概念
-     *
      */
     public static void BFS(TreeNode root) {
         if(root == null) return;

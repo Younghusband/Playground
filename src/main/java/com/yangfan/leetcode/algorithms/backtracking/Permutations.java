@@ -14,6 +14,10 @@ import java.util.List;
  *
  * Input: nums = [1,2,3]
  * Output: [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+ *
+ * 思路:
+ * 1. 使用boolean [] used记录元素在递归上下层的使用情况
+ * 2. 排列数组，递归结束交换回去
  */
 public class Permutations {
 
@@ -56,19 +60,20 @@ public class Permutations {
 
 
     /**
-     * 不太好理解，但是没用额外空间
+     * 数组上直接进行交换
      */
-    private static void doPermute(int[] nums, int i, List<List<Integer>> result) {
+    private void doPermute(int[] nums, int i) {
         if (i == nums.length) {
-            LinkedList<Integer> permutation = new LinkedList<>();
+            List<Integer> permutation = new ArrayList<>();
             for (int num : nums) {
                 permutation.add(num);
             }
-            result.add(permutation);
+            ans.add(permutation);
         } else {
+            // core
             for (int j = i; j < nums.length; j++) {
                 swap(nums, i, j);
-                doPermute(nums, i + 1, result);
+                doPermute(nums, i + 1);
                 swap(nums, i, j);
             }
         }
