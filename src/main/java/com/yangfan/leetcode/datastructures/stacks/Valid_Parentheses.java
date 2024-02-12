@@ -1,6 +1,7 @@
 package com.yangfan.leetcode.datastructures.stacks;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * 20. Valid Parentheses
@@ -29,8 +30,10 @@ public class Valid_Parentheses {
 	
 	//方法一
 	public boolean isValid(String s) {
-  	    Stack<Character> stack = new Stack<>();
-  	    for(char c : s.toCharArray()){
+//  	    Stack<Character> stack = new Stack<>();
+//		Deque<Character> stack = new LinkedList<>();
+		Deque<Character> stack = new ArrayDeque<>();
+  	    for(char c : s.toCharArray()) {
   	    	if(c == '('){
   	    		stack.push(')');
   	    	} else if(c == '['){
@@ -53,7 +56,7 @@ public class Valid_Parentheses {
 		do{
 			length = s.length();
 			s = s.replace("()", "").replace("[]", "").replace("{}", "");  //s.replace("","")
-		}while(length != s.length());
+		} while (length != s.length());
 		return s.length()==0;
 	}
 	

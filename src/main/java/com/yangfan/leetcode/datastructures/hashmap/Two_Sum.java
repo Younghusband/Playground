@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.datastructures.arrays;
+package com.yangfan.leetcode.datastructures.hashmap;
 
 import java.util.HashMap;
 import java.util.Map;

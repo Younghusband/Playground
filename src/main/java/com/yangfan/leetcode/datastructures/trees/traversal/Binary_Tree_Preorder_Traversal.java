@@ -2,9 +2,10 @@ package com.yangfan.leetcode.datastructures.trees.traversal;
 
 import com.yangfan.dataobject.TreeNode;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
-import java.util.Stack;
 
 /**
  * 144. Given the root of a binary tree,
@@ -64,7 +65,7 @@ public class Binary_Tree_Preorder_Traversal {
         System.out.println("pre-order:");
         List<Integer> result = new ArrayList<>();
         if(root == null) return result;
-        Stack<TreeNode> stack = new Stack<>();
+        Deque<TreeNode> stack = new ArrayDeque<>();
         stack.push(root);
         while(!stack.isEmpty()) {
             TreeNode cur = stack.pop();

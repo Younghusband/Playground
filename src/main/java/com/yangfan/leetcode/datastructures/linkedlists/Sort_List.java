@@ -2,6 +2,9 @@ package com.yangfan.leetcode.datastructures.linkedlists;
 
 import com.yangfan.dataobject.ListNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 148. Sort List
  * 链表排序
@@ -15,6 +18,67 @@ import com.yangfan.dataobject.ListNode;
  * 链表操作的集大成者，名副其实的链表hard题
  */
 public class Sort_List {
+    public static void main(String[] args) {
+        List<Integer> data = new ArrayList<>();
+    }
+
+    public int[] insertSort(int [] nums) {
+        for(int i = 1; i < nums.length; i++) {
+            int j = i - 1;
+            int key = nums[i];
+            while(j >= 0 && nums[i] < nums[j]) {
+                nums[j + 1] = nums[j];
+                j--;
+            }
+            nums[j + 1] = key;
+        }
+        return nums;
+    }
+
+
+    /**
+     * 堆排序
+     */
+    public int[] heapSort(int[] nums) {
+        int n = nums.length;
+        // 建立最大堆
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heapify(nums, n, i);
+        }
+        // 一个个交换元素
+        for (int i = n - 1; i >= 0; i--) {
+            // 移动当前根到末尾
+            int temp = nums[0];
+            nums[0] = nums[i];
+            nums[i] = temp;
+            // 调整剩余堆
+            heapify(nums, i, 0);
+        }
+        return nums;
+    }
+
+    // 堆调整
+    void heapify(int[] nums, int heapSize, int i) {
+        int largest = i; // 初始化最大为根
+        int left = 2 * i + 1; // 左子节点
+        int right = 2 * i + 2; // 右子节点
+        // 如果左子节点大于根
+        if (left < heapSize && nums[left] > nums[largest]) {
+            largest = left;
+        }
+        // 如果右子节点大于目前最大节点
+        if (right < heapSize && nums[right] > nums[largest]) {
+            largest = right;
+        }
+        // 如果最大不是根
+        if (largest != i) {
+            int swap = nums[i];
+            nums[i] = nums[largest];
+            nums[largest] = swap;
+            // 递归地调整受影响的子堆
+            heapify(nums, heapSize, largest);
+        }
+    }
 
     /**
      * 计数排序
@@ -44,7 +108,7 @@ public class Sort_List {
         // 遍历计数数组，根据计数重建链表
         p = head;
         for(int i = 0; i < count.length; i++){
-            while(count[i] != 0){
+            while(count[i] != 0) {
                 p.val = i + min; // 设置节点值，计数数组的索引加上最小值
                 count[i]--; // 减少计数
                 p = p.next; // 移动到下一个节点

@@ -15,6 +15,7 @@ import com.yangfan.dataobject.ListNode;
  * head.next.next = head;
  * head.next = null;
  *
+ * 思考如何不改变原来的链表，反转出一个新的链表。
  */
 public class Reverse_Linked_List {
     
@@ -45,13 +46,17 @@ public class Reverse_Linked_List {
      *
      */
     public ListNode reverse(ListNode head){
-        if(head == null || head.next == null) { //空链表或者已经到链表末尾
-            return head;
-        }
-        ListNode prev = reverse(head.next); // 这一步必须放在这里，想想为什么
-        head.next.next = head;  // 折返
-        head.next = null;       // 剪断正向next
-        return prev;
+        // 基本情况：如果链表为空或只有一个节点，直接返回头节点
+        if(head == null || head.next == null) return head;
+
+        ListNode pre = reverse(head.next);
+        head.next.next = head;
+        head.next = null;
+
+        // 在每层递归中，返回最后一个节点，即反转后的新头节点
+        return pre;
     }
+
+    // deepCopy
 
 }

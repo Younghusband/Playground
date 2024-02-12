@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.miscellaneous.bitmanipulation;
+package com.yangfan.leetcode.trick.bitmanipulation;
 
 
 import java.util.List;
@@ -63,6 +63,5 @@ public class Sum_of_Values_at_Indices_With_K_Set_Bits {
         x = (x >> 8) + ((x >> 4) & 0b1111) + (x & 0b1111);
         return x;
     }
-
 
 }
