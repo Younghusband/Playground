@@ -20,11 +20,45 @@ public class HeapSort {
 //        int [] arr = {-4,0,7,4,9,-5,-1,0,-7,-1};
         sort(arr);
         ArrayUtil.printArray(arr);
+        System.out.println(1/2 - 1);
     }
 
     public static void sort(int[] arr) {
+        int n = arr.length;
+        // 构建最大堆
+        for(int i = n/2 - 1; i >= 0; i--) {
+            heapify(arr, i, n);
+        }
+
+        // 将堆顶元素弹出
+        for(int i = n - 1; i > 0; i--) {
+            int temp = arr[i];
+            arr[i] = arr[0];
+            arr[0] = temp;
+
+            heapify(arr, 0, i);
+        }
+    }
 
 
+    static void heapify(int [] nums, int i, int heapSize) {
+        int largest = i;
+        int left = i * 2 + 1;
+        int right = i * 2 + 2;
+
+        if(left < heapSize && nums[left] > nums[largest]) {
+            largest = left;
+        }
+        if(right < heapSize && nums[right] > nums[largest]) {
+            largest = right;
+        }
+        // 如果最大值不是根节点，递归
+        if(largest != i) {
+            int swap = nums[i];
+            nums[i] = nums[largest];
+            nums[largest] = swap;
+            heapify(nums, largest, heapSize);
+        }
     }
 
 

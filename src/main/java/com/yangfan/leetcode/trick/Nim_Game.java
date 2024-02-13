@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.problems.code.easy;
+package com.yangfan.leetcode.trick;
 
 /**
  * @author mr_yo
