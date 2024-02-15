@@ -1,5 +1,7 @@
 package com.yangfan.leetcode.datastructures.trees.heap;
 
+import java.util.PriorityQueue;
+
 /**
  * 215. Kth Largest Element in an Array
  * Given an integer array nums and an integer k,
@@ -11,6 +13,7 @@ package com.yangfan.leetcode.datastructures.trees.heap;
  * 1. 堆排序 标准解法
  * 2. 快速排序
  * 3. 计数排序 适用于数据范围有限的情况，也就是此题的情况
+ * 4. 使用优先队列，小根堆/大根堆
  *
  */
 public class Kth_Largest_Element_in_an_Array {
@@ -50,6 +53,38 @@ public class Kth_Largest_Element_in_an_Array {
             swap(nums, i, largest);
             heapify(nums, largest, heapSize);
         }
+    }
+
+    public int littleRootHeap(int [] nums, int k) {
+        // 小根堆
+        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o1 - o2);
+        for(int num: nums) {
+            if(queue.size() == k) {
+                // 小根堆堆顶小于新元素
+                if(queue.peek() < num) {
+                    queue.poll();
+                    queue.offer(num);
+                }
+            } else {
+                queue.offer(num);
+            }
+        }
+        return queue.peek();
+    }
+
+    public int bigRootHeap(int [] nums, int k) {
+        // 大根堆
+        PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o2 - o1);
+        // 全部灌入大根堆
+        for(int num: nums) {
+            queue.offer(num);
+        }
+        // 取到第k个
+        for(int i = 1; i <= k; i++) {
+            Integer data = queue.poll();
+            if(i == k) return data;
+        }
+        return 0;
     }
 
     /**

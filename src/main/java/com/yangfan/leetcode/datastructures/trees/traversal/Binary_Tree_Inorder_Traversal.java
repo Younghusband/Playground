@@ -12,7 +12,6 @@ import java.util.Stack;
  *
  * Given the root of a binary tree,
  * return the inorder traversal of its nodes' values.
- *
  * 最为广泛应用的二叉树遍历，尤其是对于二叉搜索树而言
  *
  * 延伸: Morris遍历算法  空间复杂度O(1), 仅需要一个临时节点即可

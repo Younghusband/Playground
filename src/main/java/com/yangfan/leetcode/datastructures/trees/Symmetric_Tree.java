@@ -18,9 +18,6 @@ import java.util.Queue;
  */
 public class Symmetric_Tree {
 
-
-
-
     public boolean isSymmetric(TreeNode root) {
         return checkSymmetric(root, root);
     }
