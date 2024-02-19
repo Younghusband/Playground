@@ -2,6 +2,8 @@ package com.yangfan.leetcode.datastructures.trees;
 
 import com.yangfan.dataobject.TreeNode;
 
+import java.util.Random;
+
 /**
  * 108. Convert Sorted Array to Binary Search Tree
  * 将有序数组转换为二叉搜索树
@@ -14,22 +16,25 @@ import com.yangfan.dataobject.TreeNode;
  */
 public class Convert_Sorted_Array_to_Binary_Search_Tree {
 
+    Random rand = new Random();
+
     public TreeNode sortedArrayToBST(int[] nums) {
         return buildBST(nums, 0, nums.length - 1);
     }
 
-    private TreeNode buildBST(int[] nums, int start, int end) {
-        if (start > end) {
+    private TreeNode buildBST(int[] nums, int left, int right) {
+        if (left > right) {
             // 递归终止条件
             return null;
         }
         // 选择中间位置的元素作为根节点
-        int mid = start + (end - start) / 2;
+//        int mid = left + (right - left) / 2;
+        int mid = (left + right + rand.nextInt(2)) / 2;
         TreeNode node = new TreeNode(nums[mid]);
         // 递归构造左子树
-        node.left = buildBST(nums, start, mid - 1);
+        node.left = buildBST(nums, left, mid - 1);
         // 递归构造右子树
-        node.right = buildBST(nums, mid + 1, end);
+        node.right = buildBST(nums, mid + 1, right);
         return node;
     }
 

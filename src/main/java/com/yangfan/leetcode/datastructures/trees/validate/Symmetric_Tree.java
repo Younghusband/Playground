@@ -1,9 +1,9 @@
-package com.yangfan.leetcode.datastructures.trees;
+package com.yangfan.leetcode.datastructures.trees.validate;
 
 import com.yangfan.dataobject.TreeNode;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * 101. Symmetric Tree
@@ -39,7 +39,7 @@ public class Symmetric_Tree {
      * 非递归检查方法
      */
     public boolean check(TreeNode u, TreeNode v) {
-        Queue<TreeNode> q = new LinkedList<>();
+        Deque<TreeNode> q = new ArrayDeque<>();
         q.offer(u);
         q.offer(v);
         while (!q.isEmpty()) {

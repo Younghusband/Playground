@@ -16,6 +16,9 @@ import java.util.concurrent.TimeUnit;
  * 举个例子，如下代码，十个线程竞争三个资源，一开始有三个线程可以直接运行，剩下的七个线程只能阻塞等到其它线程使用资源完毕才能执行
  * 
  * 这里的例子:  厕所一共3个坑位，10个人上厕所
+ *
+ * 有点像锁, acquire()像lock()  release()像unlock()
+ *
  */
 
 public class SemaphoreTest {
@@ -25,10 +28,23 @@ public class SemaphoreTest {
 	public static void main(String[] args) {
 		ExecutorService pool = Executors.newFixedThreadPool(THREAD_NUM);  //10个线程
 		Semaphore s = new Semaphore(3);   //3个坑位
-
-
+		Random rand = new Random();
 		for (int i = 1; i <= THREAD_NUM; i++) {
-			pool.execute(new SourceThread(s));
+			pool.execute(
+				() -> {
+					print(" 排队蹲坑。。。");
+					try {
+						s.acquire();
+						//下面3行为实际你要处理的业务，这里用蹲坑模拟
+						print(" 占领坑位！！！！");
+						TimeUnit.SECONDS.sleep(rand.nextInt(10));
+						print(" 拉完屎出坑。");
+						s.release();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			);
 		}
 		
 		try {
@@ -39,48 +55,18 @@ public class SemaphoreTest {
 			pool.shutdown();
 		}
 		
-		while (true) { 
+		while (true) {
 			if (pool.isTerminated()) { //线程池shutdown之后
 				System.out.println("---END---\n");
 				System.out.println("所有的子线程都结束了！");
 				break;
 			}
 		}
-	}
-	
-	
 
-
-}
-
-class SourceThread implements Runnable{
-    
-	private Semaphore s;
-	Random r = new Random();
-	
-	public SourceThread(Semaphore s){
-		this.s = s;
-	}
-	
-	@Override
-	public void run() {
-		print(" 排队蹲坑。。。");
-	    try {
-			s.acquire();
-			//下面3行为实际你要处理的业务，这里用蹲坑模拟
-			print(" 占领坑位！！！！");
-			TimeUnit.SECONDS.sleep(r.nextInt(10));
-			print(" 拉完屎出坑。");
-			s.release();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 
-	private void print(String xxx) {
+	private static void print(String xxx) {
 		StringUtil.printTimeAndThreadInfo(xxx);
 	}
-	
-	
-	
+
 }

@@ -34,7 +34,7 @@ public class Diameter_of_Binary_Tree {
         // 更新最大直径
         diameter = Math.max(diameter, leftDepth + rightDepth);
         // 返回节点的最大深度
-        return Math.max(leftDepth, rightDepth) + 1;
+        return Math.max(leftDepth, rightDepth) + 1;  // core
     }
 
 }

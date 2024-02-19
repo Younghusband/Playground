@@ -25,7 +25,8 @@ public class HeapSort {
 
     public static void sort(int[] arr) {
         int n = arr.length;
-        // 构建最大堆
+        // 构建最大堆 i初始值[n/2 - 1, n - 1] 都是可以的
+        // n/2 - 1是最后一个非叶子节点
         for(int i = n/2 - 1; i >= 0; i--) {
             heapify(arr, i, n);
         }

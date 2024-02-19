@@ -33,30 +33,15 @@ public class MergeSort {
 
 
 	public static void process(int[] arr, int L, int R) {
-		int M = (L + R) >>> 1;
+
 		if (L < R) {
+			int M = (L + R) >>> 1;
 			// 左边
 			process(arr, L, M);
 			// 右边
 			process(arr, M + 1, R);  //先排左侧还是先排右侧并无影响
 			// 左右归并
 			MergeSort.merge(arr, L, M, R);
-		}
-	}
-
-	//总方法
-	public static void sortFromBottom(int[] arr) {
-		int arrLength = arr.length;
-		// 从最小粒度到最大粒度合并
-		for (int size = 1; size < arrLength; size = size * 2) {
-			int left;
-			for (left = 0; left + 2 * size - 1 < arrLength; left += 2 * size) {
-				merge(arr, left, left + size - 1, left + 2 * size - 1);   //把相邻两段长度均为size的排序好的数组合并
-			}
-			//如果剩下一个数组不够gap
-			if (left + size - 1 < arrLength) {
-				merge(arr, left, left + size - 1, arrLength - 1);
-			}
 		}
 	}
 
@@ -84,4 +69,21 @@ public class MergeSort {
 			arr[L + i] = help[i];
 		}
 	}
+
+	//总方法
+	public static void sortFromBottom(int[] arr) {
+		int arrLength = arr.length;
+		// 从最小粒度到最大粒度合并
+		for (int size = 1; size < arrLength; size = size * 2) {
+			int left;
+			for (left = 0; left + 2 * size - 1 < arrLength; left += 2 * size) {
+				merge(arr, left, left + size - 1, left + 2 * size - 1);   //把相邻两段长度均为size的排序好的数组合并
+			}
+			//如果剩下一个数组不够gap
+			if (left + size - 1 < arrLength) {
+				merge(arr, left, left + size - 1, arrLength - 1);
+			}
+		}
+	}
+
 }

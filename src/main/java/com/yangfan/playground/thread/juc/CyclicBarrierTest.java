@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
    所有线程必须同时到达栅栏位置后，才能继续执行；
    
    CyclicBarrier自身构造中有runnable 里面可以放所有线程等待完毕后想执行的业务代码
+   相比较CountDownLatch，CyclicBarrier可以重复使用，使用reset()方法就可以重置
    
  */
 
@@ -28,12 +29,24 @@ public class CyclicBarrierTest {
 		ExecutorService pool = Executors.newFixedThreadPool(THREAD_NUM);
         // params -> 线程数, Runnable()
         CyclicBarrier barrier = new CyclicBarrier(THREAD_NUM, () -> System.out.println("-------*----------$# BOOM  BOOM  BIUBIUBIU-------*----------$#"));
-
 		for (int i = 1; i <= THREAD_NUM; i++) {
-			pool.execute(new PrepareTask(barrier));
+			pool.execute(
+				() ->{
+					print(" 正在前往支援！！");
+					try {
+						TimeUnit.SECONDS.sleep(new Random().nextInt(10));
+						print(" 赶到战场，草丛埋伏~");
+						barrier.await();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					System.out.println("团战结束，各自发育。。。");
+				}
+			);
+
 		}
-		
 		try {
+//			barrier.reset();
 			TimeUnit.SECONDS.sleep(100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
@@ -48,34 +61,8 @@ public class CyclicBarrierTest {
 				break;
 			}
 		}
-		
 	}
-
-}
-
-class PrepareTask implements Runnable {
-	private CyclicBarrier c;
-	Random r;
-
-	public PrepareTask(CyclicBarrier c) {
-		this.c = c;
-		r = new Random();
-	}
-
-	@Override
-	public void run() {
-		try {
-			print(" 正在前往支援！！");
-			TimeUnit.SECONDS.sleep(r.nextInt(10));
-			print(" 赶到战场，草丛埋伏~");
-			c.await();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		System.out.println("团战结束，各自发育。。。");
-	}
-
-	private void print(String xxx) {
+	private static void print(String xxx) {
 		StringUtil.printTimeAndThreadInfo(xxx);
 	}
 

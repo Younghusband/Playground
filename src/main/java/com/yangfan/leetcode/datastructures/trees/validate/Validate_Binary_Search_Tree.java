@@ -39,8 +39,7 @@ public class Validate_Binary_Search_Tree {
         if(!isValidBST(root.left)) return false;
         if(root.val <= preValue)
             return false;
-        else
-            preValue = root.val;
+        preValue = root.val;
         return isValidBST(root.right);
     }
 

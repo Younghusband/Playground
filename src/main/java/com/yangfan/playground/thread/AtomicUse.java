@@ -35,22 +35,35 @@ public class AtomicUse {
 		return count.get();
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		AtomicUse au = new AtomicUse();
 		List<Thread> threadlist = new ArrayList<>();
 
 		// 亲测10以上会出现不是10的整数倍的情况
-		for(int i = 0; i < 20; i++){
+		for(int i = 0; i < 30; i++) {
 			Thread t = new Thread(() -> {
                 int v = au.multiAdd();
                 System.out.println("第"+ ++countOfCount+"次累加后的值为" + v);
             });
-
 			threadlist.add(t);
 		}
 		for(Thread t:threadlist){
 			t.start();
 		}
+
+		for(Thread t : threadlist) {
+			t.join();
+		}
+
+		System.out.println("!!!!!!!!!!!!");
+
+		AtomicInteger a1 = new AtomicInteger(0);
+		AtomicInteger a2 = new AtomicInteger(0);
+
+		System.out.println(a1.incrementAndGet()); // ++i
+		System.out.println(a2.getAndIncrement()); // i++
+
+
 		
 	}
 	

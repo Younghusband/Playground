@@ -31,17 +31,15 @@ public class QuickSort {
 	 * 普通快排>>>>>>>>>>>>>>>>>>>
 	 */
 	public static void sort(int[] arr) {
-		if(arr == null || arr.length < 2) {
-			return;
-		}
 		process(arr, 0, arr.length - 1);
 	}
 
-	public static void process(int[] array, int left, int right) {
+	public static void process(int[] arr, int left, int right) {
 		if (left < right) {
-			int pivot = partition(array, left, right);
-			process(array, left, pivot - 1); // 子流程不包含基准值的处理
-			process(array, pivot + 1, right);
+			swap(arr, left + (int)(Math.random() * (right -left + 1)), right);
+			int pivot = partition(arr, left, right);
+			process(arr, left, pivot - 1); // 子流程不包含基准值的处理
+			process(arr, pivot + 1, right);
 		}
 	}
 
