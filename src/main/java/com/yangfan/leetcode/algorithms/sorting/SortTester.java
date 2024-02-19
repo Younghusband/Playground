@@ -2,6 +2,8 @@ package com.yangfan.leetcode.algorithms.sorting;
 
 import com.yangfan.leetcode.algorithms.sorting.fast.MergeSort;
 import com.yangfan.leetcode.algorithms.sorting.fast.QuickSort;
+import com.yangfan.leetcode.algorithms.sorting.slow.BubbleSort;
+import com.yangfan.leetcode.algorithms.sorting.slow.InsertionSort;
 import com.yangfan.playground.util.ArrayUtil;
 
 /**
@@ -16,10 +18,10 @@ public class SortTester {
 
     public static void main(String[] args) {
 
-//        testWithSpecificAlgorithm(InsertionSort::insertSort);
-//        testWithSpecificAlgorithm(BubbleSort::bubble);
-        testWithSpecificAlgorithm(MergeSort::sort);
-        testWithSpecificAlgorithm(QuickSort::quickSort);
+        testWithSpecificAlgorithm(InsertionSort::insertSort);
+        testWithSpecificAlgorithm(BubbleSort::bubble);
+        testWithSpecificAlgorithm(arr -> new MergeSort().sort(arr));
+        testWithSpecificAlgorithm(arr -> new QuickSort().sort(arr));
     }
 
     public static void testWithSpecificAlgorithm(SortAlgorithm sortAlgorithm) {

@@ -15,10 +15,11 @@ import com.yangfan.playground.util.ArrayUtil;
 public class MergeSort {
 	
 	public static void main(String[] args) {
+		MergeSort service = new MergeSort();
 		int[] array = ArrayUtil.createRandomArray(10, 50, 0.01);
 		System.out.print("排序前:\t");
 		ArrayUtil.printArray(array);
-		sort(array);
+		service.sort(array);
 //		sortRecursive(array);
 		System.out.print("排序后:\t");
 		ArrayUtil.printArray(array);
@@ -27,13 +28,12 @@ public class MergeSort {
 	/**
 	 * 递归方式
 	 */
-	public static void sort(int [] arr) {
+	public void sort(int [] arr) {
 		process(arr, 0, arr.length - 1);
 	}
 
 
-	public static void process(int[] arr, int L, int R) {
-
+	public void process(int[] arr, int L, int R) {
 		if (L < R) {
 			int M = (L + R) >>> 1;
 			// 左边
@@ -71,7 +71,7 @@ public class MergeSort {
 	}
 
 	//总方法
-	public static void sortFromBottom(int[] arr) {
+	public void sortFromBottom(int[] arr) {
 		int arrLength = arr.length;
 		// 从最小粒度到最大粒度合并
 		for (int size = 1; size < arrLength; size = size * 2) {

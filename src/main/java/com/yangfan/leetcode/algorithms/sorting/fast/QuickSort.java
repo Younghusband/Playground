@@ -18,8 +18,9 @@ import com.yangfan.playground.util.ArrayUtil;
 public class QuickSort {
 
 	public static void main(String[] args) {
+		QuickSort service = new QuickSort();
 		int[] arr = {6, 1, 2, 7, 9, 3, 4, 5, 10, 8};
-		sort(arr);
+		service.sort(arr);
 		System.out.println(">>>>>>>>>>>>>>>>>普通快排后的数组>>>>>>>>>>>>>>>>>");
 		ArrayUtil.printArray(arr);
 //		quickSort(arr);
@@ -30,46 +31,74 @@ public class QuickSort {
 	/**
 	 * 普通快排>>>>>>>>>>>>>>>>>>>
 	 */
-	public static void sort(int[] arr) {
+	public void sort(int[] arr) {
 		process(arr, 0, arr.length - 1);
 	}
 
-	public static void process(int[] arr, int left, int right) {
+	public void process(int[] arr, int left, int right) {
 		if (left < right) {
-			swap(arr, left + (int)(Math.random() * (right -left + 1)), right);
+			swap(arr, left + (int)(Math.random() * (right -left + 1)), left);
 			int pivot = partition(arr, left, right);
 			process(arr, left, pivot - 1); // 子流程不包含基准值的处理
 			process(arr, pivot + 1, right);
 		}
 	}
 
-	public static int partition(int[] array, int left, int right) {
-		int p = array[left]; // 把基准值保存下来，以免交换过程中丢失
-		while (right > left) {
-			while (array[right] >= p && right > left) {// 从后半部分向前扫描 直到找到右侧小于基准数停止
+	/**
+	 * 传统的Hoare划分, LeetCode上速度更快
+	 */
+	public int partition(int[] arr, int left, int right) {
+		int p = arr[left]; // 把基准值保存下来，以免交换过程中丢失
+		while (left < right) {
+			while (left < right && arr[right] >= p) {// 从后半部分向前扫描 直到找到右侧小于基准数停止
 				right--;
 			}
-			array[left] = array[right]; // 交换right的值给left
-			while (array[left] <= p && right > left) {// 从前半部分向后扫描
+			arr[left] = arr[right]; // 小于基准值的数通过覆盖的方式放在左边
+			while (left < right && arr[left] <= p) {// 从前半部分向后扫描
 				left++;
 			}
-			array[right] = array[left]; // 交换left的值给right
+			arr[right] = arr[left]; // 大于基准值的数通过覆盖的方式放在右边
 		}
-		array[right] = p;
+		arr[right] = p;  // 此时left和right是相等的，返回谁都可以
 		return right;
 	}
 
 	/**
+	 * 相比较传统的Hoare划分方式，这种方式更加简洁
+	 * 不需要每一次移动指针的时候都赋值
+	 * 每轮结束后，left和right相遇，交换基准值和相遇位置的值
+	 */
+	public int partition1(int[] arr, int left, int right) {
+		int initialLeft = left;
+		int pivot = arr[left];
+		while (right > left) {
+			while (left < right && arr[right] >= pivot) {
+				right--;
+			}
+			while (left < right && arr[left] <= pivot) {
+				left++;
+			}
+			// 如果还未相遇，则交换这两个元素
+			if (left < right) {
+				swap(arr, left, right);
+			}
+		}
+		swap(arr, initialLeft, left);
+		return left; // right也可以
+	}
+
+
+	/**
 	 * 超级快排>>>>>>>>>>>>>>>>>>>
 	 */
-	public static void quickSort(int[] arr) {
+	public void quickSort(int[] arr) {
 		if(arr == null || arr.length < 2) {
 			return;
 		}
 		quickProcess(arr, 0, arr.length - 1);
 	}
 
-	public static void quickProcess(int[] arr, int L, int R) {
+	public void quickProcess(int[] arr, int L, int R) {
 		if(L < R) {
 			// int强转相当于向下取整，[0, R-L+1) -> [0, R-L]
 			swap(arr, L + (int)(Math.random() * (R -L + 1)), R);  // 交换R和[L, R]范围内的随机位置
@@ -88,7 +117,7 @@ public class QuickSort {
 	 * 2. 小于等于基准值的时候，指针L+1
 	 * 3. 大于基准值的时候，指针不会动，右边界-1
 	 */
-	public static int[] partitionPro(int[] arr, int L, int R) {
+	public int[] partitionPro(int[] arr, int L, int R) {
 		int less = L - 1; // <区右边界
 		int more = R; // >区左边界
 		// L表示当前数的位置 arr(R)为基准值
@@ -107,7 +136,7 @@ public class QuickSort {
 		return new int[] {less + 1, more}; // 此刻的more对应的是基准值，也就是交换后的==段的最后一个值
 	}
 
-	public static void swap(int[] arr, int L, int R) {
+	public void swap(int[] arr, int L, int R) {
 		ArrayUtil.swap(arr, L, R);
 	}
 
