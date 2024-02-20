@@ -25,9 +25,9 @@ public class InsertionSort {
         for (int i = 1; i < arr.length; i++) {
             int key = arr[i]; // 关键，因为下面的循环可能会更新arr[i]
             int j = i - 1;
-            // 找到 key 应该插入的位置
+            // 将比key大的元素向右移动, 会覆盖掉原arr[i]的值
             while (j >= 0 && key < arr[j]) {
-                arr[j + 1] = arr[j]; // 将比 key 大的元素向右移动
+                arr[j + 1] = arr[j];
                 j--;
             }
             // 原来j的位置插入key

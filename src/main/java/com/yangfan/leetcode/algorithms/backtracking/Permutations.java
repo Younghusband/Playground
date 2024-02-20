@@ -1,7 +1,6 @@
 package com.yangfan.leetcode.algorithms.backtracking;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -29,19 +28,19 @@ public class Permutations {
     }
 
 
+
+
     List<List<Integer>> ans = new ArrayList<>();
     List<Integer> path = new ArrayList<>();
 
     public List<List<Integer>> permute(int[] nums) {
-        LinkedList<List<Integer>> result = new LinkedList<>();
-//        doPermute(nums, 0, ans);
         boolean [] used = new boolean[nums.length];
-        backTrack(nums, used);
+        bt(used, nums);
         return ans;
     }
 
 
-    void backTrack(int [] nums, boolean [] used) {
+    void bt(boolean [] used, int [] nums) {
         if(path.size() == nums.length) {
             ans.add(new ArrayList<>(path));
             return;
@@ -52,18 +51,17 @@ public class Permutations {
             }
             path.add(nums[i]);
             used[i] = true;
-            backTrack(nums, used);
+            bt(used, nums);
             path.remove(path.size() - 1);
             used[i] = false;
         }
     }
 
-
     /**
      * 数组上直接进行交换
      */
-    private void doPermute(int[] nums, int i) {
-        if (i == nums.length) {
+    private void doPermute(int cur, int[] nums) {
+        if (cur == nums.length) {
             List<Integer> permutation = new ArrayList<>();
             for (int num : nums) {
                 permutation.add(num);
@@ -71,10 +69,10 @@ public class Permutations {
             ans.add(permutation);
         } else {
             // core
-            for (int j = i; j < nums.length; j++) {
-                swap(nums, i, j);
-                doPermute(nums, i + 1);
-                swap(nums, i, j);
+            for (int j = cur; j < nums.length; j++) {
+                swap(nums, cur, j);
+                doPermute(cur + 1, nums);
+                swap(nums, cur, j);
             }
         }
     }
@@ -84,6 +82,5 @@ public class Permutations {
         nums[i] = nums[j];
         nums[j] = tmp;
     }
-
 
 }

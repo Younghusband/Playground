@@ -34,18 +34,18 @@ public class Combinations {
      * 选择k个数进行组合
      */
     public List<List<Integer>> combine(int n, int k) {
-        backTrack(1, n, k);
+        bt(1, n, k);
         return ans;
     }
 
-    void backTrack(int start, int n, int limit) {
+    void bt(int start, int n, int limit) {
         if(path.size() == limit) {
             ans.add(new ArrayList<>(path));
             return;
         }
         for(int i = start; i <= n; i++) {
             path.add(i);
-            backTrack(i + 1, n, limit);
+            bt(i + 1, n, limit);
             path.remove(path.size() - 1);
         }
     }
