@@ -163,9 +163,4 @@ public class BitwiseCalculator {
 
 
 
-
-
-
-
-
 }

@@ -23,9 +23,9 @@ public class QuickSort {
 		service.sort(arr);
 		System.out.println(">>>>>>>>>>>>>>>>>普通快排后的数组>>>>>>>>>>>>>>>>>");
 		ArrayUtil.printArray(arr);
-//		quickSort(arr);
-//		System.out.println(">>>>>>>>>>>>>>>>>超级快排后的数组>>>>>>>>>>>>>>>>>");
-//		ArrayUtil.printArray(arr);
+		service.quickSort(arr);
+		System.out.println(">>>>>>>>>>>>>>>>>超级快排后的数组>>>>>>>>>>>>>>>>>");
+		ArrayUtil.printArray(arr);
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class QuickSort {
 	public void quickProcess(int[] arr, int L, int R) {
 		if(L < R) {
 			// int强转相当于向下取整，[0, R-L+1) -> [0, R-L]
-			swap(arr, L + (int)(Math.random() * (R -L + 1)), R);  // 交换R和[L, R]范围内的随机位置
+			swap(arr, L + (int)(Math.random() * (R -L + 1)), L);  // 交换L和[L, R]范围内的随机位置
 			int[] p = partitionPro(arr, L, R);
 			quickProcess(arr, L, p[0] - 1); // < 区
 			quickProcess(arr, p[1] + 1, R); // > 区
@@ -113,27 +113,25 @@ public class QuickSort {
 	 * 返回数组等于区域的[左边界，右边界]
 	 *
 	 * 关于less，L，more 三个指针的变化
-	 * 1. 小于基准值的时候，左边界less+1
-	 * 2. 小于等于基准值的时候，指针L+1
-	 * 3. 大于基准值的时候，指针不会动，右边界-1
+	 * 直接参考 @see com.yangfan.leetcode.algorithms.sorting.Sort_Colors
+	 * 三色国旗算法
 	 */
 	public int[] partitionPro(int[] arr, int L, int R) {
 		int less = L - 1; // <区右边界
-		int more = R; // >区左边界
-		// L表示当前数的位置 arr(R)为基准值
-		while(L < more) { // 当遍历指针撞上>区边界，结束遍历
-			if(arr[L] < arr[R]) { // 当前数 < 基准值p
-				swap(arr, ++less, L++); // 左边界向右推进1，并且交换当前数和左边界值，当前数指针+1
-			} else if(arr[L] > arr[R]) { // 当前数 > 基准值p
-				// 右边界向左推进1，并且交换当前数与右边界值
-				swap(arr, --more, L); // 由于当前值现在是新的未审查过，留到下一轮，L保持不变
+		int more = R + 1; // >区左边界
+		int p = arr[L];
+		int cur = L;
+		// L表示当前数的位置
+		while(cur < more) {
+			if(arr[cur] < p) {
+				swap(arr, ++less, cur++);
+			} else if(arr[cur] > p) {
+				swap(arr, --more, cur);
 			} else {
-				// 当前值等于基准值，指针+1
-				L++;
+				cur++;
 			}
 		}
-		swap(arr, more, R); // 把一开始在最右侧的基准值放在 ==p段的最右侧
-		return new int[] {less + 1, more}; // 此刻的more对应的是基准值，也就是交换后的==段的最后一个值
+		return new int[] {less + 1, more - 1};
 	}
 
 	public void swap(int[] arr, int L, int R) {

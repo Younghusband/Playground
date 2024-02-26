@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.algorithms.sorting.uncommon;
+package com.yangfan.leetcode.algorithms.sorting.fast;
 
 import java.util.Random;
 

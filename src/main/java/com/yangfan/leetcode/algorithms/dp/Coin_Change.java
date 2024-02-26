@@ -13,27 +13,39 @@ import java.util.Arrays;
  */
 public class Coin_Change {
 
+    // memo数组用于存储每个amount的最优解（最少硬币数量）
     int [] memo;
 
     public int coinChange(int[] coins, int amount) {
-        memo = new int[amount + 1]; // 0 ~ amount
-        Arrays.fill(memo, -666);
+        // 初始化memo数组，长度为amount + 1，因为要包括从0到amount每个值的解
+        memo = new int[amount + 1];
+        Arrays.fill(memo, -666); // 使用特殊值-666标记未计算过的状态
         return dp(coins, amount);
     }
 
+    /**
+     * 自顶向下
+     */
     int dp(int [] coins, int amount) {
+        // 基准情况：当amount为0时，不需要硬币，返回0
         if(amount == 0) return 0;
+        // 如果amount小于0，表示当前组合不可行，返回-1
         if(amount < 0) return -1;
+        // 如果当前amount的解已经被计算过，直接返回存储的解
         if(memo[amount] != -666) {
             return memo[amount];
         }
-
+        // 初始化最少硬币数量为Integer.MAX_VALUE，便于后续寻找最小值
         int res = Integer.MAX_VALUE;
         for(int coin : coins) {
+            // 计算减去当前硬币值后的剩余金额的最优解
             int sub = dp(coins, amount - coin);
-            if(sub == -1) continue;
+            // 如果子问题无解，则跳过
+            if(sub == -1) continue; // 核心
+            // 更新最少硬币数量
             res = Math.min(res, sub + 1);
         }
+        // 如果res未被更新，说明没有可行解，将memo[amount]标记为-1；否则，存储并返回最少硬币数量
         memo[amount] = (res == Integer.MAX_VALUE) ? -1 : res;
         return memo[amount];
     }
@@ -49,7 +61,7 @@ public class Coin_Change {
     public int brute(int[] coins, int amount) {
         int[] dp = new int[amount + 1];
         Arrays.fill(dp, amount + 1);
-        dp[0] = 0;
+        dp[0] = 0;  // 注意这俩顺序
         for (int i = 1; i <= amount; i++) {
             for (int coin : coins) {
                 if (coin <= i) {
