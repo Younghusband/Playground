@@ -8,6 +8,7 @@ import java.util.Set;
 
 /**
  * 160. Intersection of Two Linked Lists
+ * 相交链表
  *
  * 题目数据保证整个链式结构中无环。有环的另开题讨论
  * 相交链表，返回相交的节点，如果没有返回null
