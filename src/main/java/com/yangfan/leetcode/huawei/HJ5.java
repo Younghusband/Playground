@@ -7,7 +7,8 @@ public class HJ5 {
         Scanner in = new Scanner(System.in);
         while(in.hasNext()) {
             String hexStr = in.nextLine();
-            long result = Long.parseLong(hexStr.substring(2), 16);
+//            int result = Integer.parseInt(hexStr.substring(2), 16);
+            int result = Integer.decode(hexStr);
             System.out.println(result);
         }
         in.close();

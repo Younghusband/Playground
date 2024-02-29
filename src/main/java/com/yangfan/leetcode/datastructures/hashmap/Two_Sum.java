@@ -25,7 +25,7 @@ public class Two_Sum {
         Map<Integer, Integer> helper = new HashMap<>();
         for(int i = 0; i < nums.length; i++) {
             if(helper.containsKey(target - nums[i])) {
-                return new int[] {i, helper.get(target - nums[i])};
+                return new int[] {helper.get(target - nums[i]), i}; // 保证升序
             }
             helper.put(nums[i], i);
         }
