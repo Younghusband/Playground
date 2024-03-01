@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.datastructures.strings;
+package com.yangfan.leetcode.algorithms.window;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.yangfan.playground.problems;
+package com.yangfan.leetcode;
 
 /**
  * @program: LeetCode

@@ -1,12 +1,13 @@
-package com.yangfan.playground;
+package com.yangfan.exam;
 
 /**
- * 临时区，不存储任何代码
- *
+ * 用于考试
  */
 public class Main {
+
     public static void main(String[] args) {
 
     }
+
 
 }

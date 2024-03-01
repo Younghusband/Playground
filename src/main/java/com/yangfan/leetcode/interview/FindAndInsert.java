@@ -1,4 +1,4 @@
-package com.yangfan.playground.problems;
+package com.yangfan.leetcode.interview;
 /**
  * @description 
  * @author vermouth.Mac
@@ -16,8 +16,7 @@ package com.yangfan.playground.problems;
 	[1,3,5,6]，0→0
 	
 	// 输入: 一维数组 输出: 目标元素的位置
-     
-	
+
  * 
  */
 
