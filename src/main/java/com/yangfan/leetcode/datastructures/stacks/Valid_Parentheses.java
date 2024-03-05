@@ -30,11 +30,9 @@ public class Valid_Parentheses {
 	
 	//方法一
 	public boolean isValid(String s) {
-//  	    Stack<Character> stack = new Stack<>();
-//		Deque<Character> stack = new LinkedList<>();
 		Deque<Character> stack = new ArrayDeque<>();
   	    for(char c : s.toCharArray()) {
-  	    	if(c == '('){
+  	    	if(c == '(') {
   	    		stack.push(')');
   	    	} else if(c == '['){
   	    		stack.push(']');
@@ -52,12 +50,13 @@ public class Valid_Parentheses {
 	 * 看看即可
 	 */
 	public boolean isValid1(String s){
-		int length = 0;
-		do{
-			length = s.length();
-			s = s.replace("()", "").replace("[]", "").replace("{}", "");  //s.replace("","")
-		} while (length != s.length());
-		return s.length()==0;
+		if(s.length() % 2 != 0) return false;
+		int len = 0;
+		while(len != s.length()) {
+			len = s.length();
+			s = s.replace("()", "").replace("[]","").replace("{}","");
+		}
+		return s.length() == 0;
 	}
 	
 	
