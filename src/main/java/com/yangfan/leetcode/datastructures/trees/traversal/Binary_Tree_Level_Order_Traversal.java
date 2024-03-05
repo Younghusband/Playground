@@ -66,9 +66,8 @@ public class Binary_Tree_Level_Order_Traversal {
     }
 
     private void dfs(TreeNode node, int level, List<List<Integer>> levels) {
-        // 开始当前层的遍历
         if (levels.size() == level) {
-            levels.add(new ArrayList<>());
+            levels.add(new ArrayList<>()); // 如果当前层级的列表还不存在，创建一个新的列表
         }
         // 将当前节点的值加入到对应层的列表中
         levels.get(level).add(node.val);

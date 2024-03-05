@@ -23,7 +23,7 @@ public class HJ33 {
 
     public static long ipToLong(String ip) {
         String[] segments = ip.split("\\."); // 按"."分割IP地址
-        long result = 0; // 初始化结果为0
+        long result = 0; // 32位都为0
         for (int i = 0; i < segments.length; i++) {
             int segment = Integer.parseInt(segments[i]); // 将每段转换为整数
             result |= (segment & 0xFF) << ((3 - i) * 8); // 将每段左移相应的位数并累加到结果中

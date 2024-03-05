@@ -22,7 +22,7 @@ public class HJ20 {
                 System.out.println("NG");
                 continue;
             }
-            if (getMatch(str)) {
+            if (!getMatch(str)) {
                 System.out.println("NG");
                 continue;
             }
@@ -32,19 +32,20 @@ public class HJ20 {
             }
             System.out.println("OK");
         }
+        sc.close();
     }
     // 校验是否有重复子串
-    private static boolean getString(String str, int l, int r) {
-        if (r >= str.length()) {
+    private static boolean getString(String str, int l, int step) {
+        if (l + step > str.length()) {
             return false;
         }
-        if (str.substring(r).contains(str.substring(l, r))) {
+        String cur = str.substring(l, l + step);
+        if (str.substring(l + step).contains(cur))
             return true;
-        } else {
-            return getString(str, l + 1, r + 1);
-        }
+        return getString(str, l + 1, step);
     }
-    // 检查是否满足正则
+
+    // 检查是否包括大小写字母.数字.其它符号,以上四种至少三种
     private static boolean getMatch(String str) {
         int count = 0;
         Pattern p1 = Pattern.compile("[A-Z]");
@@ -59,14 +60,10 @@ public class HJ20 {
         if (p3.matcher(str).find()) {
             count++;
         }
-        Pattern p4 = Pattern.compile("[^a-zA-Z0-9]");
+        Pattern p4 = Pattern.compile("[^a-zA-Z0-9]"); // 这个正则内容容易遗漏
         if (p4.matcher(str).find()) {
             count++;
         }
-        if (count >= 3) {
-            return false;
-        } else {
-            return true;
-        }
+        return count >= 3;
     }
 }
