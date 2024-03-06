@@ -1,4 +1,4 @@
-package com.yangfan.playground.thread;
+package com.yangfan.playground.thread.threadlocal;
 /**
  * 
  * 不使用ThreadLocal的话，各线程仍能获取到同一个对象的变量
