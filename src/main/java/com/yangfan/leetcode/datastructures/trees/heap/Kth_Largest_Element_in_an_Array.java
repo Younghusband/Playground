@@ -55,6 +55,26 @@ public class Kth_Largest_Element_in_an_Array {
         }
     }
 
+    /**
+     * 基于计数排序的选择k方法
+     */
+    public int countingSelectK(int[] nums, int k) {
+        int[] buckets = new int[20001];
+        for (int i = 0; i < nums.length; i++) {
+            buckets[nums[i] + 10000]++;
+        }
+        for (int i = 20000; i >= 0; i--) {
+            k = k - buckets[i];
+            if (k <= 0) {
+                return i - 10000;
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * 使用小根堆
+     */
     public int littleRootHeap(int [] nums, int k) {
         // 小根堆
         PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o1 - o2);
@@ -72,6 +92,9 @@ public class Kth_Largest_Element_in_an_Array {
         return queue.peek();
     }
 
+    /**
+     * 使用大根堆
+     */
     public int bigRootHeap(int [] nums, int k) {
         // 大根堆
         PriorityQueue<Integer> queue = new PriorityQueue<>((o1, o2) -> o2 - o1);
@@ -88,7 +111,7 @@ public class Kth_Largest_Element_in_an_Array {
     }
 
     /**
-     * 基于快速排序的选择k方法
+     * 基于快速排序的选择k方法 暂时读不太懂
      */
     public int fast(int[] _nums, int k) {
         int n = _nums.length;
@@ -109,22 +132,7 @@ public class Kth_Largest_Element_in_an_Array {
         else return quickSelect(nums, j + 1, r, k);
     }
 
-    /**
-     * 基于计数排序的选择k方法
-     */
-    public int countingSelectK(int[] nums, int k) {
-        int[] buckets = new int[20001];
-        for (int i = 0; i < nums.length; i++) {
-            buckets[nums[i] + 10000]++;
-        }
-        for (int i = 20000; i >= 0; i--) {
-            k = k - buckets[i];
-            if (k <= 0) {
-                return i - 10000;
-            }
-        }
-        return 0;
-    }
+
 
     void swap(int[] nums, int i, int j) {
         int tmp = nums[i];

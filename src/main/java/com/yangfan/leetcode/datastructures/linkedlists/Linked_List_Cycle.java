@@ -1,9 +1,9 @@
 package com.yangfan.leetcode.datastructures.linkedlists;
 
+import com.yangfan.dataobject.ListNode;
+
 import java.util.HashSet;
 import java.util.Set;
-
-import com.yangfan.dataobject.ListNode;
 
 /**
  * 141. Linked List Cycle
@@ -22,7 +22,7 @@ public class Linked_List_Cycle {
      * 经典思路
      * 快但内存占用大
      */
-    public boolean hasCycle1(ListNode head) {
+    public boolean hasCycle(ListNode head) {
         ListNode slow = head;
         ListNode fast = head;
         // 只需要关心快指针的边界问题
@@ -39,7 +39,7 @@ public class Linked_List_Cycle {
     /**
      * 内存小但耗时长
      */
-    public boolean hasCycle2(ListNode head) {
+    public boolean useSet(ListNode head) {
         Set<ListNode> set = new HashSet<>();
         while (head != null) {
             if (set.contains(head)) {
