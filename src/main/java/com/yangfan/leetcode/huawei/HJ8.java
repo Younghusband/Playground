@@ -33,7 +33,6 @@ public class HJ8 {
 
         public static void my(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int n = Integer.valueOf(scanner.nextLine());
         Map<Integer, Integer> dataMap = new HashMap();
         while(scanner.hasNextLine()) {
             String source = scanner.nextLine();

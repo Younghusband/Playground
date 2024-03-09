@@ -13,47 +13,44 @@ package com.yangfan.leetcode.algorithms.searching;
 public class Search_Insert_Position {
 
     /**
-     * 我的蠢逼边界判断
-     */
-    public int my(int[] nums, int target) {
-        if(nums.length == 1)
-            return nums[0] == target ? 0 : (target < nums[0] ? 0 : 1);
-        int startIndex = 0;
-        int endIndex = nums.length - 1;
-        int mid = -1;
-        while(startIndex < endIndex) {
-            mid = (startIndex + endIndex) >>> 1;
-            if(nums[mid] == target) {
-                return mid;
-            } else if(nums[mid] > target) {
-                endIndex = mid - 1;
-            } else {
-                startIndex = mid + 1;
-            }
-        }
-        // 处理最后一次二分跳出未找到情况
-        return target <= nums[startIndex]  ? startIndex : startIndex + 1;
-    }
-
-    /**
      * 优美的边界包含
      */
     public int searchInsert(int[] nums, int target) {
-        int startIndex = 0;
-        int endIndex = nums.length - 1;
-        int mid;
-        while (startIndex <= endIndex) {
-            mid = (startIndex + endIndex) >>> 1;
+        int left = 0;
+        int right = nums.length - 1;
+        while (left <= right) {
+            int mid = (left + right) >>> 1;
             if (nums[mid] == target) {
                 return mid;
             } else if (nums[mid] > target) {
-                endIndex = mid - 1;
+                right = mid - 1;
             } else {
-                startIndex = mid + 1;
+                left = mid + 1;
             }
         }
-        return startIndex;
+        return left;
     }
+
+    /**
+     * 搜索条件精简版
+     * 要不死记硬背吧
+     */
+    public int searchInsert1(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while(left <= right) { // 为什么包含等于
+            int mid = (left + right) >>> 1;
+            if(nums[mid] < target) {
+                left = mid + 1;
+            } else { // 为什么 >= 的情况right都为mid - 1
+                right = mid - 1;
+            }
+        }
+        return left; // 为什么返回left
+    }
+
+
+
 
     /**
      * 聪明，但不合规的暴力
