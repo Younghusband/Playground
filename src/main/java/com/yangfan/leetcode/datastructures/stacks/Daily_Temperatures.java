@@ -24,7 +24,6 @@ public class Daily_Temperatures {
         int length = temperatures.length;
         int[] ans = new int[length];
         Deque<Integer> stack = new ArrayDeque<>();
-
         for (int i = 0; i < length; i++) {
             int temperature = temperatures[i];
             // 当栈不为空且当前温度高于栈顶温度时，循环处理栈顶元素，直至栈内只剩比当前温度高的下标
@@ -41,7 +40,6 @@ public class Daily_Temperatures {
 
     /**
      * O(m+n)  n为原本数据集、m为辅助数组
-     *
      */
     public int[] cleverBrute(int[] temperatures) {
         int length = temperatures.length;
