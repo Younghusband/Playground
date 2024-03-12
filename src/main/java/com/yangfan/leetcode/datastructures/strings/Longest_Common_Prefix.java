@@ -21,9 +21,24 @@ public class Longest_Common_Prefix {
 
     /**
      * 横向扫描实现
+     * 轮数为单词数，每轮比较后得到一个新单词，如果单词长度大于0，继续比较，否则结束循环直接返回空字符串
      */
-
-
+    public String horizontalScan(String [] strs) {
+        String preStr = strs[0];
+        for(int i = 1; i < strs.length; i++) {
+            int j = 0;
+            int minLen = Math.min(preStr.length(), strs[i].length());
+            while(j < minLen) {
+                if(preStr.charAt(j) != strs[i].charAt(j)) {
+                    break;
+                }
+                j++; // 相等的情况下才递进
+            }
+            if(j == 0) return ""; // 提前退出逻辑: 没有公共前缀
+            preStr = preStr.substring(0, j);
+        }
+        return preStr;
+    }
 
     /**
      * 我这属于纵向扫描
