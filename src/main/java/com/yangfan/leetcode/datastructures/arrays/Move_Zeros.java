@@ -2,6 +2,7 @@ package com.yangfan.leetcode.datastructures.arrays;
 
 /**
  * 283. Move Zeroes
+ * 移动零
  * Given an integer array nums,
  * move all 0's to the end of it while maintaining the relative order of the non-zero elements.
  * Note that you must do this in-place without making a copy of the array.
@@ -33,14 +34,13 @@ public class Move_Zeros {
     public void moveZeroe1(int[] nums) {
         int noZeroEnd = 0; // 非0的右边界
         for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != 0){
+            if (nums[i] != 0) {
                 int temp = nums[i];
                 nums[i] = nums[noZeroEnd];
                 nums[noZeroEnd++] = temp;
             }
         }
     }
-
 
 
 }

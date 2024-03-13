@@ -30,10 +30,8 @@ public class Group_Anagrams {
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
         for(String str: strs) {
-            char [] arr = str.toCharArray();
-            Arrays.sort(arr);
-            String sortedStr = new String(arr);
-
+//            String sortedStr = reSort(str);
+            String sortedStr = countSort(str);
             List<String> strList = map.getOrDefault(sortedStr, new ArrayList<>());
             strList.add(str);
             map.put(sortedStr, strList); // getOrDefault方式创建的value，需要重新put回去
@@ -45,10 +43,11 @@ public class Group_Anagrams {
      * 我的垃圾解法
      * 1. 遍历得到 orderedStr -> 下标数组
      * 2. 遍历map 根据下标数组 获得各list
+     *
+     * 3.12自己再做一遍的时候，发现我当时的解法还行。。
      */
     public List<List<String>> my(String[] strs) {
         List<List<String>> result = new ArrayList();
-
         Map<String, List<Integer>> strIndexArrMap = new HashMap();
         for(int i = 0; i < strs.length; i++) {
             String reOrderedStr = reSort(strs[i]);
@@ -73,6 +72,23 @@ public class Group_Anagrams {
         char [] charArray = origin.toCharArray();
         Arrays.sort(charArray);
         return String.valueOf(charArray);
+    }
+
+    String countSort(String str) {
+        int[] counts = new int[26];
+        int length = str.length();
+        for (int i = 0; i < length; i++) {
+            counts[str.charAt(i) - 'a']++;
+        }
+        // 将每个出现次数大于 0 的字母和出现次数按顺序拼接成字符串，作为哈希表的键
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < 26; i++) {
+            if (counts[i] != 0) {
+                sb.append((char) ('a' + i));
+                sb.append(counts[i]); // 有创意的
+            }
+        }
+        return sb.toString();
     }
 
 }
