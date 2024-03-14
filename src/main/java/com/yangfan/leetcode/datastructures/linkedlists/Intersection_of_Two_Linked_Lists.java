@@ -101,7 +101,7 @@ public class Intersection_of_Two_Linked_Lists {
     /**
      * 本人相对比较蠢的方法
      */
-    public ListNode getIntersectionNode1(ListNode headA, ListNode headB) {
+    public ListNode useSet(ListNode headA, ListNode headB) {
         Set<ListNode> helper = new HashSet<>();
         ListNode cur = headA;
         while(cur != null) {

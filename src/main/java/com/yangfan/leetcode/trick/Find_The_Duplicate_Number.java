@@ -48,25 +48,5 @@ public class Find_The_Duplicate_Number {
         return 0;
     }
 
-    public boolean isValidInput(int[] nums, int n) {
-        boolean[] seen = new boolean[n + 1]; // Index from 1 to n
-        for (int num : nums) {
-            if (num <= 0 || num > n || seen[num]) {
-                return false; // Invalid input: number out of range or duplicate non-positive number
-            }
-            seen[num] = true; // Mark the number as seen
-        }
-        // Check if there is exactly one duplicate
-        int count = 0;
-        for (boolean seenNum : seen) {
-            if (seenNum) {
-                count++;
-                if (count > 1) {
-                    return false; // Invalid input: more than one duplicate
-                }
-            }
-        }
-        return count == 1; // Valid input with exactly one duplicate
-    }
 
 }

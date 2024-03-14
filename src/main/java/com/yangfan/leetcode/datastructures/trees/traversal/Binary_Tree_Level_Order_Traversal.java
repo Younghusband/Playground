@@ -18,10 +18,6 @@ import java.util.*;
  */
 public class Binary_Tree_Level_Order_Traversal {
 
-    public static void main(String[] args) {
-
-    }
-
     /**
      * gpt4给出的改进
      *
@@ -53,6 +49,26 @@ public class Binary_Tree_Level_Order_Traversal {
             result.add(currentLvData);
         }
         return result;
+    }
+
+    /**
+     * 只是逐个遍历还好说，不需要关心层数概念
+     */
+    public static void BFS(TreeNode root) {
+        if(root == null) return;
+        Queue<TreeNode> queue = new LinkedList<>(); // 所以linkedList是个queue
+        queue.add(root);
+        while(!queue.isEmpty()) {
+            TreeNode cur = queue.poll();
+            System.out.print(cur.val +" ");
+            if(cur.left != null) {
+                queue.add(cur.left);
+            }
+            if(cur.right != null) {
+                queue.add(cur.right);
+            }
+        }
+        System.out.println();
     }
 
     /**
@@ -125,25 +141,7 @@ public class Binary_Tree_Level_Order_Traversal {
         return result;
     }
 
-    /**
-     * 只是逐个遍历还好说，不需要关心层数概念
-     */
-    public static void BFS(TreeNode root) {
-        if(root == null) return;
-        Queue<TreeNode> queue = new LinkedList<>(); // 所以linkedList是个queue
-        queue.add(root);
-        while(!queue.isEmpty()) {
-            TreeNode cur = queue.poll();
-            System.out.print(cur.val +" ");
-            if(cur.left != null) {
-                queue.add(cur.left);
-            }
-            if(cur.right != null) {
-                queue.add(cur.right);
-            }
-        }
-        System.out.println();
-    }
+
 
 
 

@@ -1,9 +1,8 @@
 package com.yangfan.leetcode.datastructures.trees.traversal;
 
 import com.yangfan.dataobject.TreeNode;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+
+import java.util.*;
 
 /**
  * 145. Binary Tree Postorder Traversal
@@ -27,25 +26,18 @@ public class Binary_Tree_Postorder_Traversal {
      * 观察后序遍历与前序遍历的联系
      *
      */
-    public List<Integer> postorder(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
+    public List<Integer> postorderIterative(TreeNode root) {
+        LinkedList<Integer> result = new LinkedList();
         if(root == null) return result;
-        Stack<TreeNode> loadStack = new Stack<>();
-        Stack<TreeNode> printStack = new Stack<>();
-        loadStack.push(root);
-        while(!loadStack.isEmpty()) {
-            TreeNode cur = loadStack.pop();
-            printStack.push(cur);
-            if(cur.left != null) {
-                loadStack.push(cur.left);
-            }
-            if(cur.right != null) {
-                loadStack.push(cur.right);
-            }
-        }
+        Deque<TreeNode> stack = new ArrayDeque();
+        stack.push(root);
 
-        while(!printStack.isEmpty()) {
-            result.add(printStack.pop().val);
+        while(!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            result.addFirst(node.val); // 根会被挤到最后
+
+            if(node.left != null) stack.push(node.left);
+            if(node.right != null) stack.push(node.right);
         }
         return result;
     }
