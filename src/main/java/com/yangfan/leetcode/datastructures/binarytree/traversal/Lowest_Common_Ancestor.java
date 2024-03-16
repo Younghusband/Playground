@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.datastructures.trees.traversal;
+package com.yangfan.leetcode.datastructures.binarytree.traversal;
 
 
 import com.yangfan.dataobject.TreeNode;
@@ -69,7 +69,6 @@ public class Lowest_Common_Ancestor {
             parentMap.put(root.right, root);
         }
     }
-
 
 
 }

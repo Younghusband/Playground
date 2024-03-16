@@ -59,7 +59,7 @@ class MinStack {
         return node != null ? node.min : -1;
     }
 
-    public class ListNode {
+    class ListNode {
 
         int val;
         int min;

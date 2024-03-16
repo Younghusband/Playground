@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.datastructures.trees.validate;
+package com.yangfan.leetcode.datastructures.binarytree.validate;
 
 import com.yangfan.dataobject.TreeNode;
 

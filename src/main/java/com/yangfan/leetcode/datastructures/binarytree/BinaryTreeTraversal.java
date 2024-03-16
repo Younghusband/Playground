@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.datastructures.trees;
+package com.yangfan.leetcode.datastructures.binarytree;
 
 import com.yangfan.dataobject.TreeNode;
 

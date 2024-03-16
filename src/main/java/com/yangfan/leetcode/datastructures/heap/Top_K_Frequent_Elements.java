@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.datastructures.trees.heap;
+package com.yangfan.leetcode.datastructures.heap;
 
 import java.util.*;
 

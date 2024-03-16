@@ -35,13 +35,12 @@ public class Intersection_of_Two_Linked_Lists {
     }
 
     /**
-     * 这思路打死我也想不到。。
+     * 链表A，B，各每走一步，走完了走别人的，直到相遇
+     * 为什么这样就能找到交叉点呢？
      * 假设链表1的长度为a，链表2的长度为b，两个链表的交叉部分长度为c，那么有：
      * a + b - c = b + a - c
      *
-     * 为什么这样就能找到交叉点呢？
      * 因为两个指针走的长度相等，所以两个指针一定会同时到达交叉点。
-     *
      * 如果两个链表没有交叉点，那么两个指针会同时到达链表的尾部，此时两个指针都为null，也能满足条件。
      */
     public static ListNode proSolution(ListNode headA, ListNode headB) {

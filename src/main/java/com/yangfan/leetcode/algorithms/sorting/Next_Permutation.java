@@ -46,6 +46,7 @@ public class Next_Permutation {
             }
             swap(nums, i, j);
         }
+        // 3. 收缩
         reverse(nums, i + 1);
     }
 

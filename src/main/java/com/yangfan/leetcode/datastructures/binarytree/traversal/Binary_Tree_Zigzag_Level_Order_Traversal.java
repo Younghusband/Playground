@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.datastructures.trees.traversal;
+package com.yangfan.leetcode.datastructures.binarytree.traversal;
 
 import com.yangfan.dataobject.TreeNode;
 

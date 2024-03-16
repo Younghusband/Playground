@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.datastructures.trees.traversal;
+package com.yangfan.leetcode.datastructures.binarytree.traversal;
 
 import com.yangfan.dataobject.TreeNode;
 
@@ -31,7 +31,6 @@ public class Binary_Tree_Postorder_Traversal {
         if(root == null) return result;
         Deque<TreeNode> stack = new ArrayDeque();
         stack.push(root);
-
         while(!stack.isEmpty()) {
             TreeNode node = stack.pop();
             result.addFirst(node.val); // 根会被挤到最后
