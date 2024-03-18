@@ -1,4 +1,4 @@
-package com.problems;
+package com.yangfan.leetcode.interview;
 
 
 /**

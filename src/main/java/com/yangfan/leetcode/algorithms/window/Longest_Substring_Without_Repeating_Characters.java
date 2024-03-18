@@ -10,25 +10,16 @@ import java.util.Map;
 
  * Examples:
  * Given "abcabcbb", the answer is "abc", which the length is 3.
-
  * Given "bbbbb", the answer is "b", with the length of 1.
-
  * Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
  *
  */
 
 public class Longest_Substring_Without_Repeating_Characters {
 
-    public static void main(String[] args) {
-        Longest_Substring_Without_Repeating_Characters x = new Longest_Substring_Without_Repeating_Characters();
-        String s = "tmmzuxt";
-        System.out.println(x.lengthOfLongestSubstring(s));
-
-    }
-
     /**
      * 利用hashMap 瞬间定位子串中重复字符出现的位置，
-     * 并将i = location+1
+     * 并将i = location + 1
      *
      * 其中 "a...a" 这种类型是个陷阱，需要 判断重复元素的下标是否大于当前left
      * 如果left大，则取left ...

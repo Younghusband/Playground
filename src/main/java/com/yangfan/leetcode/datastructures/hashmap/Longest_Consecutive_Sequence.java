@@ -4,7 +4,6 @@ package com.yangfan.leetcode.datastructures.hashmap;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * 128. Longest Consecutive Sequence
@@ -18,7 +17,6 @@ import java.util.TreeSet;
  */
 public class Longest_Consecutive_Sequence {
 
-
     public static void main(String[] args) {
         int [] arr = {100,4,200,1,3,2};
         Arrays.sort(arr);
@@ -29,6 +27,30 @@ public class Longest_Consecutive_Sequence {
         service.longestConsecutive(arr);
     }
 
+
+    /**
+     * O(nlogn)
+     * 我的运行会更快一些
+     */
+    public int my(int[] nums) {
+        if(nums.length <= 1) return nums.length;
+        Arrays.sort(nums);
+        int count = 1;
+        int max = Integer.MIN_VALUE;
+        Integer pre = nums[0];
+        for(int num : nums) {
+            int sub = num - pre;
+            if(sub == 1) {
+                count++;
+            } else if (sub > 1){
+                // 数字跳跃
+                count = 1;
+            }
+            pre = num;
+            max = Math.max(max, count);
+        }
+        return max != Integer.MIN_VALUE ? max : 0;
+    }
 
     /**
      * O(n)
@@ -43,15 +65,12 @@ public class Longest_Consecutive_Sequence {
         for (int num : nums) {
             // 只有当 num-1 不在集合中时，才以 num 为起点
             if (!set.contains(num - 1)) {
-                int currentNum = num;
                 int currentLen = 1;
-
                 // 向后寻找连续的数字
-                while (set.contains(currentNum + 1)) {
-                    currentNum++;
+                while (set.contains(num + 1)) {
+                    num++;
                     currentLen++;
                 }
-
                 maxLen = Math.max(maxLen, currentLen);
             }
         }
@@ -59,33 +78,7 @@ public class Longest_Consecutive_Sequence {
     }
 
 
-    /**
-     * O(nlogn)
-     */
-    public int my(int[] nums) {
-        if(nums.length == 0) return 0;
-        Set<Integer> set = new TreeSet<>();
-        for(int i = 0; i < nums.length; i++) {
-            set.add(nums[i]);
-        }
-        int count = 0;
-        int max = Integer.MIN_VALUE;
-        Integer pre = null;
-        for(Integer num : set) {
-            if(pre == null) {
-                count++;
-            } else {
-                if(num - pre == 1) {
-                    count++;
-                } else {
-                    count = 1;
-                }
-            }
-            pre = num;
-            max = Math.max(max, count);
-        }
-        return max != Integer.MIN_VALUE ? max : 0;
-    }
+
 
 
 }

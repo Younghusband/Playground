@@ -27,12 +27,12 @@ public class BitwiseCalculator {
      * @Description:  递归加法
      * @Date: 2019/6/9 16:21
      */
-    public int addByRecursive(int num1, int num2) {
-        if(num2 == 0) {
-            return num1;
+    public int addByRecursive(int a, int b) {
+        if(b == 0) {
+            return a;
         }
-        int sum = num1 ^ num2;  // 仅仅加各位，不考虑进位
-        int carry = (num1 & num2) << 1; // 仅仅只考虑进位后的值，不考虑相加的值
+        int sum = a ^ b;  // 仅仅加各位，不考虑进位
+        int carry = (a & b) << 1; // 仅仅只考虑进位后的值，不考虑相加的值
         return addByRecursive(sum, carry);
     }
 
@@ -40,15 +40,13 @@ public class BitwiseCalculator {
      * @Description:  迭代加法
      * @Date: 2019/6/9 16:21
      */
-    public int addByIteration(int num1, int num2) {
-        int sum = num1 ^ num2;
-        int carry = (num1 & num2) << 1;
-        for( ;carry != 0; ){
-            int tmp = sum;
-            sum = sum ^ carry;
-            carry = (tmp & carry) << 1;
+    public int addByIteration(int a, int b) {
+        while (b != 0) {
+            int carry = (a & b) << 1; // 计算进位
+            a = a ^ b; // 计算无进位和
+            b = carry; // 将进位赋值给b，用于下一轮计算
         }
-        return sum;
+        return a;
     }
 
     /**
