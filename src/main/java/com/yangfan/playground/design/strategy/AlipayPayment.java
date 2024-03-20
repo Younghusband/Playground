@@ -1,6 +1,6 @@
 package com.yangfan.playground.design.strategy;
 
-public class AlipayPayment implements PaymentStrategy{
+public class AlipayPayment implements PaymentStrategy {
 
     @Override
     public void pay(int amount) {

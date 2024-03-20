@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.algorithms.window;
+package com.yangfan.leetcode.datastructures.strings;
 
 import java.util.ArrayList;
 import java.util.Arrays;

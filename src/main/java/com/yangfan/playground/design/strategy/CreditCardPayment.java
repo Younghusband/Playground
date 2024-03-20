@@ -1,6 +1,6 @@
 package com.yangfan.playground.design.strategy;
 
-public class CreditCardPayment implements PaymentStrategy{
+public class CreditCardPayment implements PaymentStrategy {
 
     @Override
     public void pay(int amount) {
