@@ -65,8 +65,8 @@ public class MergeSort {
 			help[i++] = arr[p2++];
 		}
 		// !!!!! 最后要把这个临时数组的值复制到数组中
-		for(i = 0; i < help.length; i++) {
-			arr[L + i] = help[i];
+		for(int num: help) {
+			arr[L++] = num;
 		}
 	}
 

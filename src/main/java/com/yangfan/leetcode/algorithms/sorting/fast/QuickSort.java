@@ -23,9 +23,6 @@ public class QuickSort {
 		service.sort(arr);
 		System.out.println(">>>>>>>>>>>>>>>>>普通快排后的数组>>>>>>>>>>>>>>>>>");
 		ArrayUtil.printArray(arr);
-		service.quickSort(arr);
-		System.out.println(">>>>>>>>>>>>>>>>>超级快排后的数组>>>>>>>>>>>>>>>>>");
-		ArrayUtil.printArray(arr);
 	}
 
 	/**
@@ -63,78 +60,7 @@ public class QuickSort {
 		return right;
 	}
 
-	/**
-	 * 相比较传统的Hoare划分方式，这种方式更加简洁
-	 * 不需要每一次移动指针的时候都赋值
-	 * 每轮结束后，left和right相遇，交换基准值和相遇位置的值
-	 */
-	public int partition1(int[] arr, int left, int right) {
-		int initialLeft = left;
-		int pivot = arr[left];
-		while (right > left) {
-			while (left < right && arr[right] >= pivot) {
-				right--;
-			}
-			while (left < right && arr[left] <= pivot) {
-				left++;
-			}
-			// 如果还未相遇，则交换这两个元素
-			if (left < right) {
-				swap(arr, left, right);
-			}
-		}
-		swap(arr, initialLeft, left);
-		return left; // right也可以
-	}
-
-
-	/**
-	 * 超级快排>>>>>>>>>>>>>>>>>>>
-	 */
-	public void quickSort(int[] arr) {
-		if(arr == null || arr.length < 2) {
-			return;
-		}
-		quickProcess(arr, 0, arr.length - 1);
-	}
-
-	public void quickProcess(int[] arr, int L, int R) {
-		if(L < R) {
-			// int强转相当于向下取整，[0, R-L+1) -> [0, R-L]
-			swap(arr, L + (int)(Math.random() * (R -L + 1)), L);  // 交换L和[L, R]范围内的随机位置
-			int[] p = partitionPro(arr, L, R);
-			quickProcess(arr, L, p[0] - 1); // < 区
-			quickProcess(arr, p[1] + 1, R); // > 区
-		}
-	}
-
-	/**
-	 * 默认以arr[r]做划分，p = arr[r]。数组按 <p ==p >p 三段划分
-	 * 返回数组等于区域的[左边界，右边界]
-	 *
-	 * 关于less，L，more 三个指针的变化
-	 * 直接参考 @see com.yangfan.leetcode.algorithms.sorting.Sort_Colors
-	 * 三色国旗算法
-	 */
-	public int[] partitionPro(int[] arr, int L, int R) {
-		int less = L - 1; // <区右边界
-		int more = R + 1; // >区左边界
-		int p = arr[L];
-		int cur = L;
-		// L表示当前数的位置
-		while(cur < more) {
-			if(arr[cur] < p) {
-				swap(arr, ++less, cur++);
-			} else if(arr[cur] > p) {
-				swap(arr, --more, cur);
-			} else {
-				cur++;
-			}
-		}
-		return new int[] {less + 1, more - 1};
-	}
-
-	public void swap(int[] arr, int L, int R) {
+	private void swap(int[] arr, int L, int R) {
 		ArrayUtil.swap(arr, L, R);
 	}
 
