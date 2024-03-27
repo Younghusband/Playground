@@ -32,7 +32,6 @@ import java.util.Queue;
  */
 public class Perfect_Squares {
 
-
     /**
      * 传统动态规划
      * 状态转移方程: dp[i] = min(dp[i - j * j]) + 1, 1 <= j * j <= i
@@ -51,7 +50,6 @@ public class Perfect_Squares {
 
     /**
      * BFS
-     *
      * 多叉树，能想到也挺不容易的
      */
     public int bfs(int n) {
@@ -59,7 +57,6 @@ public class Perfect_Squares {
         boolean[] visited = new boolean[n + 1];
         queue.offer(0);
         visited[0] = true;
-
         int depth = 0;
         while (!queue.isEmpty()) {
             int size = queue.size();
