@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.algorithms;
+package com.yangfan.leetcode.algorithms.nsum;
 
 import java.util.ArrayList;
 import java.util.Arrays;

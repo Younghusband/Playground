@@ -1,7 +1,7 @@
 package com.yangfan.leetcode.trick;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 287. Find The Duplicate Number
@@ -15,7 +15,8 @@ import java.util.Map;
  * 不要和“数组中只有一个数出现了奇数次，其他都出现了偶数次，找到那个出现奇数次的数”混淆
  * 这道题比那个复杂得多。
  *
- * 1. 构造环形链表
+ * 1. 用set
+ * 2. 构造环形链表
  *
  */
 public class Find_The_Duplicate_Number {
@@ -35,17 +36,17 @@ public class Find_The_Duplicate_Number {
         return slow;
     }
 
-    public int useMap(int[] nums) {
+    public int useSet(int[] nums) {
         if(nums == null || nums.length == 1)
             throw new RuntimeException("Caonima!");
-        Map<Integer, Integer> cMap = new HashMap();
+        Set<Integer> set = new HashSet<>();
         for(int num: nums) {
-            cMap.put(num, cMap.getOrDefault(num, 0) + 1);
-            int current = cMap.get(num);
-            if(current > 1)
+            if(set.contains(num)) {
                 return num;
+            }
+            set.add(num);
         }
-        return 0;
+        throw null;
     }
 
 
