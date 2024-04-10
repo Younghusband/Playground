@@ -35,20 +35,17 @@ public class Sort_Colors {
             if(nums[i] == 1) {
                 i++;
             } else if(nums[i] == 0) {
-                swap(nums, less + 1, i);
-                less++;
-                i++;
+                swap(nums, ++less, i++); // 交换0的右边界，并且游标+1
             } else {
-                swap(nums, more - 1, i);
-                more--;
+                swap(nums, --more, i); // 交换2的左边界，游标不动，等下一轮继续比较交换过来的值
             }
         }
     }
 
-    void swap(int [] arr, int p1, int p2) {
-        int temp = arr[p1];
-        arr[p1] = arr[p2];
-        arr[p2] = temp;
+    void swap(int [] nums, int p1, int p2) {
+        int temp = nums[p1];
+        nums[p1] = nums[p2];
+        nums[p2] = temp;
     }
 
 

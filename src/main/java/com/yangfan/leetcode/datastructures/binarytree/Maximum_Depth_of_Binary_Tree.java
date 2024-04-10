@@ -16,6 +16,4 @@ public class Maximum_Depth_of_Binary_Tree {
         return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
 
-    // 也可以层序遍历，每一层depth++
-
 }

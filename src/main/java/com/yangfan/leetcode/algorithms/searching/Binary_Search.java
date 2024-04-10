@@ -11,7 +11,7 @@ package com.yangfan.leetcode.algorithms.searching;
  * 
  */
 
-public class BinarySearch {
+public class Binary_Search {
 
 	/**
 	 * 临界值是核心点

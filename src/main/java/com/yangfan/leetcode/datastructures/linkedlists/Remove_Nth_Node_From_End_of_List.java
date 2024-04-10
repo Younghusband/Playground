@@ -20,7 +20,7 @@ public class Remove_Nth_Node_From_End_of_List {
 
     /**
      * 标准快慢指针解法
-     *
+     * 核心是快指针先走n+1步
      */
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(0);
