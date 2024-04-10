@@ -14,143 +14,58 @@ import java.util.List;
  */
 public class N_Sum {
 
-    class Solution {
-
-        // 主方法，求解3Sum问题
-        public List<List<Integer>> threeSum(int[] nums) {
-            // 调用通用的nSum方法，其中k=3，target=0
-            return nSum(nums, 3, 0);
-        }
-
-        // 通用的nSum方法
-        public List<List<Integer>> nSum(int[] nums, int k, int target) {
-            // 使用匿名内部类来定义返回值的类型
-            return new java.util.AbstractList<List<Integer>>() {
-                final List<List<Integer>> res = new ArrayList<>(); // 存储最终结果
-                final List<Integer> path = new ArrayList<>(); // 存储当前路径
-                long min; // 存储数组中的最小值
-
-                public List<Integer> get(int index) {
-                    // 获取结果集中的某个解
-                    init();
-                    return res.get(index);
-                }
-
-                public int size() {
-                    // 获取结果集的大小
-                    init();
-                    return res.size();
-                }
-
-                public void init() {
-                    // 初始化函数，用于计算结果集
-                    if (res.isEmpty()) {
-                        int n = nums.length;
-                        long[] Arr = new long[n];
-                        Arrays.sort(nums); // 对数组进行排序
-                        min = nums[0];
-                        for (int i = 0; i < n; i++) {
-                            Arr[i] = nums[i] - min;
-                        }
-                        long NewTarget = (long) target - (long) k * min;
-                        C(false, Arr, n, k, NewTarget);
-                    }
-                }
-
-                // 主要的递归函数，用于计算nSum问题
-                public void C(boolean T, long[] a, int n, int k, long target) {
-                    if (n == 0 || k == 0) {
-                        // 递归终止条件
-                        if (target == 0 && k == 0) {
-                            res.add(new ArrayList<>(path));
-                        }
-                        return;
-                    }
-                    if (k == 2) {
-                        // 当问题降解为2Sum时，使用双指针法求解
-                        twoSum(a, 0, n - 1, target);
-                        return;
-                    }
-                    if (n == k) {
-                        // 当数组中的元素个数等于k时，直接判断是否满足条件
-                        sumArr(a, n, target);
-                        return;
-                    }
-                    if (check(a, n, k, target)) {
-                        // 检查是否有解
-                        return;
-                    }
-                    // 递归计算(n-1)Sum问题
-                    C(false, a, n - 1, k, target);
-                    if (!T && n != a.length && a[n] == a[n - 1]) {
-                        return;
-                    }
-                    if (target - a[n - 1] >= 0) {
-                        path.add((int) (a[n - 1] + min));
-                        C(true, a, n - 1, k - 1, target - a[n - 1]);
-                        path.remove(path.size() - 1);
-                    }
-                }
-
-                // 用于求解2Sum问题的函数
-                void twoSum(long[] a, int l, int r, long target) {
-                    while (r > l) {
-                        long sum = a[l] + a[r];
-                        if (sum < target) {
-                            l++;
-                        } else if (sum > target) {
-                            r--;
-                        } else {
-                            path.add((int) (a[l] + min));
-                            path.add((int) (a[r] + min));
-                            res.add(new ArrayList<>(path));
-                            path.remove(path.size() - 1);
-                            path.remove(path.size() - 1);
-                            while (r > l && a[l] == a[l + 1]) {
-                                l++;
-                            }
-                            while (r > l && a[r] == a[r - 1]) {
-                                r--;
-                            }
-                            l++;
-                            r--;
-                        }
-                    }
-                }
-
-                // 用于求解nSum问题的函数
-                void sumArr(long[] a, int n, long target) {
-                    for (int i = n - 1; i > -1; i--) {
-                        target -= a[i];
-                        path.add((int) (a[i] + min));
-                    }
-                    if (target == 0) {
-                        res.add(new ArrayList<>(path));
-                    }
-                    for (int i = n - 1; i > -1; i--) {
-                        target += a[i];
-                        path.remove(path.size() - 1);
-                    }
-                }
-
-                // 检查是否有解的函数
-                boolean check(long[] a, int n, int k, long target) {
-                    if (n - k < 0) {
-                        return true;
-                    }
-                    long max = 0;
-                    long min = 0;
-                    for (int i = 0; i < k; i++) {
-                        min += a[i];
-                        max += a[n - i - 1];
-                    }
-                    if (target < min || target > max) {
-                        return true;
-                    }
-                    return false;
-                }
-            };
-        }
+    /**
+     * 三数之和
+     */
+    public List<List<Integer>> threeSum(int[] nums) {
+        return nSum(nums, 3, 0);
     }
+
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        return nSum(nums, 4, target);
+    }
+
+    /**
+     * nSum通解
+     */
+    public List<List<Integer>> nSum(int[] nums, int n, int target) {
+        int len = nums.length;
+        List<List<Integer>> res = new ArrayList<>();
+        if (n < 2 || len < n) return res;
+        Arrays.sort(nums); // O(nlogn)
+        if (n == 2) {
+            // 双指针解决 Two Sum 问题
+            int left = 0, right = len - 1;
+            while (left < right) {
+                int sum = nums[left] + nums[right];
+                if (sum == target) {
+                    List<Integer> subRes = new ArrayList<>();
+                    subRes.add(nums[left]);
+                    subRes.add(nums[right]);
+//                    res.add(Arrays.asList(nums[left], nums[right])); // 思考为什么不能用这种方式添加
+                    while (left < right && nums[left] == nums[left + 1]) left++;
+                    while (left < right && nums[right] == nums[right - 1]) right--;
+                    left++;
+                    right--;
+                } else if (sum < target) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        } else {
+            // 递归解决 n-1 sum 问题
+            for (int i = 0; i < len - n + 1; i++) {
+                if (i > 0 && nums[i] == nums[i - 1]) continue; // 跳过重复元素
+                List<List<Integer>> subRes = nSum(Arrays.copyOfRange(nums, i + 1, len), n - 1, target - nums[i]);
+                for (List<Integer> list : subRes) {
+                    list.add(0, nums[i]); // 在每个结果的开头添加当前元素
+                    res.add(list);
+                }
+            }
+        }
+        return res;
+    }
+
 
 }

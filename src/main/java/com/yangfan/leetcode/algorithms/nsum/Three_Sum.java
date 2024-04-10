@@ -36,8 +36,8 @@ public class Three_Sum {
             int left = i + 1, right = len - 1;
             if(i > 0 && nums[i] == nums[i - 1])
                 continue;
-            // 最大和小于0，说明当前值不需要做判断，直接跳到下一个
-            if(cur + nums[len - 2] + nums[len - 1] < target) {
+            // 最大和小于目标值，说明当前值不需要做判断，直接跳到下一个
+            if(cur + nums[len - 1] + nums[len - 2] < target) {
                 continue;
             }
             // 当前最小和大于0，后续无解，跳出
