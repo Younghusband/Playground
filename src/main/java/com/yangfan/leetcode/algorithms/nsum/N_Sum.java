@@ -37,11 +37,13 @@ public class N_Sum {
             // 双指针解决 Two Sum 问题
             int left = 0, right = len - 1;
             while (left < right) {
+                if(nums[left] > target) break;  // 适当剪枝
                 int sum = nums[left] + nums[right];
                 if (sum == target) {
                     List<Integer> subRes = new ArrayList<>();
                     subRes.add(nums[left]);
                     subRes.add(nums[right]);
+                    res.add(subRes);
 //                    res.add(Arrays.asList(nums[left], nums[right])); // 思考为什么不能用这种方式添加
                     while (left < right && nums[left] == nums[left + 1]) left++;
                     while (left < right && nums[right] == nums[right - 1]) right--;

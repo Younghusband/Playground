@@ -110,30 +110,6 @@ public class Kth_Largest_Element_in_an_Array {
         return 0;
     }
 
-    /**
-     * 基于快速排序的选择k方法 暂时读不太懂
-     */
-    public int fast(int[] _nums, int k) {
-        int n = _nums.length;
-        return quickSelect(_nums, 0, n - 1, n - k);
-    }
-
-    int quickSelect(int[] nums, int l, int r, int k) {
-        if (l == r) return nums[k];
-        int x = nums[l], i = l - 1, j = r + 1;
-        while (i < j) {
-            do i++; while (nums[i] < x);
-            do j--; while (nums[j] > x);
-            if (i < j) {
-                swap(nums, i, j);
-            }
-        }
-        if (k <= j) return quickSelect(nums, l, j, k);
-        else return quickSelect(nums, j + 1, r, k);
-    }
-
-
-
     void swap(int[] nums, int i, int j) {
         int tmp = nums[i];
         nums[i] = nums[j];

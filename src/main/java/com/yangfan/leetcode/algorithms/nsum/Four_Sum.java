@@ -19,11 +19,11 @@ public class Four_Sum {
 
     public List<List<Integer>> fourSum(int[] nums, int target) {
         List<List<Integer>> res = new ArrayList();
-        if(nums == null || nums.length < 4) {
+        int len = nums.length;
+        if(len < 4) {
             return res;
         }
         Arrays.sort(nums);
-        int len = nums.length;
         for(int i = 0; i < len - 3; i++) {
             int one = nums[i];
             // 剪枝1.1 当前值被处理过

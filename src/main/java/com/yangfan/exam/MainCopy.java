@@ -1,6 +1,5 @@
 package com.yangfan.exam;
 
-import java.io.BufferedInputStream;
 import java.util.Scanner;
 
 /**
@@ -25,31 +24,32 @@ import java.util.Scanner;
  * 0 3 4
  *
  */
-public class Main {
+public class MainCopy {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(new BufferedInputStream(System.in));
+        Scanner sc = new Scanner(System.in);
+
         int m = sc.nextInt(); // 行
         int n = sc.nextInt(); // 列
 
-        // 标记一个数字在矩阵是否存在
-        int [] exists = new int[501]; // 0 ~ 500
-
+        // 初始化辅助数据结构
+        int [] exist = new int[501]; // 存储0 - 500
         int [] minRow = new int[501];
-        int [] minCol = new int[501];
         int [] maxRow = new int[501];
+        int [] minCol = new int[501];
         int [] maxCol = new int[501];
-        for(int i = 0; i < minRow.length; i++) {
+        for(int i = 0; i < 500; i++) {
             minRow[i] = 666;
-            minCol[i] = 777; // 初始化
+            minCol[i] = 777;
+            maxRow[i] = -666;
+            maxCol[i] = -777;
         }
 
-        // 输入矩阵
+        // 矩阵输入
         for(int i = 0; i < m; i++) {
             for(int j = 0; j < n; j++) {
                 int cur = sc.nextInt();
-                exists[cur] = 1;
-                // 更新每个存在的数字对应的最大最小行列信息
+                exist[cur] = 1;
                 maxRow[cur] = Math.max(i, maxRow[cur]);
                 minRow[cur] = Math.min(i, minRow[cur]);
                 maxCol[cur] = Math.max(j, maxCol[cur]);
@@ -57,11 +57,10 @@ public class Main {
             }
         }
 
-        // 求面积
+        // 面积计算
         int result = 0;
-        // 数字从1到500进行查找
-        for(int i = 1; i < 501; i++) {
-            int num = exists[i];
+        for(int i = 0; i < exist.length; i++) {
+            int num = exist[i];
             if(num == 1) {
                 int len = maxRow[i] - minRow[i] + 1;
                 int width = maxCol[i] - minCol[i] + 1;
