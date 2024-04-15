@@ -17,6 +17,10 @@ import java.util.*;
  */
 public class Merge_k_Sorted_Lists {
 
+    /**
+     * 利用最小堆堆顶始终是最小值的特性
+     * 核心是注意指针的移动以及别把空节点放进去
+     */
     public ListNode mergeKLists(ListNode[] lists) {
         PriorityQueue<ListNode> heap = new PriorityQueue<>(Comparator.comparingInt(a -> a.val));
         for(ListNode node : lists) {
@@ -32,7 +36,7 @@ public class Merge_k_Sorted_Lists {
             cur.next = minNode;
             cur = cur.next; // 记得移动针
             // 某根链表移动完毕
-            if(minNode.next != null) {
+            if(minNode.next != null) { // key
                 heap.offer(minNode.next);
             }
         }

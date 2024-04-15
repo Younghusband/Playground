@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * 39. Combination Sum
+ * 组合总和
  *
  * 给你一个无重复元素的整数数组candidates和一个目标整数target,
  * 找出candidates中可以使数字和为目标数target的所有不同组合,
@@ -33,7 +34,7 @@ public class Combination_Sum {
         Combination_Sum service = new Combination_Sum();
         int [] arr = {2, 5, 3};
         int target = 7;
-        List<List<Integer>> ans = service.combinationSum(arr, 7);
+        List<List<Integer>> ans = service.combinationSum(arr, target);
         System.out.println(ans);
     }
 
@@ -46,12 +47,10 @@ public class Combination_Sum {
     }
 
     public void dfs(int start, int[] candidates, int target) {
-        if(target < 0) {
-            return;
-        } else if(target == 0) {
+        if(target == 0) {
             ans.add(new ArrayList<>(combo));
             return;
-        } else {
+        } else if(target > 0){
             for(int i = start; i < candidates.length; i++) {
                 combo.add(candidates[i]);
                 dfs(i, candidates, target - candidates[i]);

@@ -45,9 +45,16 @@ public class Longest_Common_Prefix {
      */
     public String verticalScan(String[] strs) {
         if (strs == null || strs.length == 0) return "";
-        int maxPossiblePrefixLen = getMinLen(strs);
+        if (strs.length == 1) return strs[0];  // 如果数组只有一个字符串，直接返回
+
+        int minLen = Integer.MAX_VALUE;
+        for (String item : strs) {
+            if (item == null || item.isEmpty()) return "";  // 处理空字符串或null元素
+            minLen = Math.min(minLen, item.length());
+        }
+
         StringBuilder longestPrefix = new StringBuilder();
-        for (int p = 0; p < maxPossiblePrefixLen; p++) {
+        for (int p = 0; p < minLen; p++) {
             char temp = strs[0].charAt(p);
             for (int j = 1; j < strs.length; j++) {
                 if (strs[j].charAt(p) != temp) {
@@ -58,15 +65,6 @@ public class Longest_Common_Prefix {
         }
         return longestPrefix.toString();
     }
-
-    int getMinLen(String[] strs) {
-        int minLen = Integer.MAX_VALUE;
-        for (String item : strs) {
-            minLen = Math.min(minLen, item.length());
-        }
-        return minLen;
-    }
-
 
 
 }

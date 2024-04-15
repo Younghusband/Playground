@@ -26,10 +26,6 @@ public class Permutations {
         List<List<Integer>> data = permutations.permute(arr);
         System.out.println(data);
     }
-
-
-
-
     List<List<Integer>> ans = new ArrayList<>();
     List<Integer> path = new ArrayList<>();
 

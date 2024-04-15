@@ -44,7 +44,6 @@ public class Palindrome_Linked_List {
 
         // 反转后半部分链表
         ListNode reverseHead = reverse(slow.next);
-
         // 比较前半部分和反转后的后半部分链表
         ListNode p1 = head, p2 = reverseHead;
         while(p2 != null) { // 只需要遍历反转的后半部分
@@ -75,8 +74,6 @@ public class Palindrome_Linked_List {
      * 思路比较简单，但是效率低
      */
     public boolean useStack(ListNode head) {
-//        Stack<Integer> stack = new Stack<>();
-//        Deque<Integer> stack = new LinkedList<>(); // 相比stack性能好很多
         Deque<Integer> stack = new ArrayDeque(); // 比上面又快了一点
         ListNode cur = head;
         while(cur != null) {
