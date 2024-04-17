@@ -35,7 +35,8 @@ public class Maximum_Subarray {
     }
 
 	/**
-	 * 贪心的思路
+	 * 贪心的思路:
+	 * 如果之前的和小于0，放弃
 	 */
 	public int greedy(int[] nums) {
 		int maxValue = nums[0];  // 记录历史最大值

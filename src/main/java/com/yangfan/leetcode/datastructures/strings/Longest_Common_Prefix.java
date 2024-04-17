@@ -43,7 +43,7 @@ public class Longest_Common_Prefix {
     /**
      * 我这属于纵向扫描
      */
-    public String verticalScan(String[] strs) {
+    public String verticalScan(String [] strs) {
         if (strs == null || strs.length == 0) return "";
         if (strs.length == 1) return strs[0];  // 如果数组只有一个字符串，直接返回
 

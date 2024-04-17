@@ -28,11 +28,11 @@ public class ArrayUtil {
     }
 
     public static int[] generateRandomArray(int maxSize, int maxValue) {
-        // Math.random() -> [0,1) 所有的小树，等概率返回一个
+        // Math.random() -> [0,1) 所有的小数，等概率返回一个
         // (int)(Math.random() * N) -> [0, N-1] 所有的整数，等概率返回一个
-        int [] arr = new int[randomInt(maxSize)];
+        int [] arr = new int[maxSize];
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = randomInt(maxSize + 1) - randomInt(maxSize);
+            arr[i] = randomInt(maxValue + 1) - randomInt(maxValue);
         }
         return arr;
     }

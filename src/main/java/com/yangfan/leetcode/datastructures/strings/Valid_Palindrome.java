@@ -22,9 +22,37 @@ package com.yangfan.leetcode.datastructures.strings;
 public class Valid_Palindrome {
 
     /**
-     * 用api的话，就全他妈是细节
+     * 标准双指针法求解
      */
     public boolean isPalindrome(String s) {
+        int left = 0;
+        int right = s.length() - 1;
+        while(left < right) {
+            char leftC = s.charAt(left);
+            char rightC = s.charAt(right);
+            // 快速跳过无效字符
+            while(left < right && !Character.isLetterOrDigit(leftC)) {
+                left++;
+                leftC = s.charAt(left);
+            }
+            while(left < right && !Character.isLetterOrDigit(rightC)) {
+                right--;
+                rightC = s.charAt(right);
+            }
+            // 如果不等于，说明不是回文
+            if(Character.toLowerCase(leftC) != Character.toLowerCase(rightC)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    /**
+     * 用api的话，就全他妈是细节
+     */
+    public boolean isPalindrome1(String s) {
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);

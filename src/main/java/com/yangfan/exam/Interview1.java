@@ -22,7 +22,7 @@ import java.util.Map;
  * 输入: "pwwkew"
  * 输出: 3
  */
-public class XXX {
+public class Interview1 {
 
     public static void main(String[] args) {
         String xxx = "abcabcbb";

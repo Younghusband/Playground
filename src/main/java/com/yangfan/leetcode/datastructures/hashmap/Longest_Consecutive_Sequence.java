@@ -62,7 +62,8 @@ public class Longest_Consecutive_Sequence {
             set.add(num);
         }
         int maxLen = 0;
-        for (int num : nums) {
+        // 这里是个小细节，直接遍历set，防止num中大量重复
+        for (int num : set) {
             // 只有当 num-1 不在集合中时，才以 num 为起点
             if (!set.contains(num - 1)) {
                 int currentLen = 1;

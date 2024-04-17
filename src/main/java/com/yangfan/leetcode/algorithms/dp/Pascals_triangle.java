@@ -26,6 +26,7 @@ public class Pascals_triangle {
         for (int i = 0; i < numRows; i++) {
             List<Integer> row = new ArrayList<>();
             for (int j = 0; j <= i; j++) {
+                // 每行首尾
                 if (j == 0 || j == i) {
                     row.add(1);
                 } else {

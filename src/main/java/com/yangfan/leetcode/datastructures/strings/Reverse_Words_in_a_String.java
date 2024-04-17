@@ -10,7 +10,7 @@ package com.yangfan.leetcode.datastructures.strings;
  * 解释：反转后的字符串中不能存在前导空格和尾随空格。
  *
  * 核心: 空格处理
- *
+ * 这题和medium有什么关系？
  */
 public class Reverse_Words_in_a_String {
 

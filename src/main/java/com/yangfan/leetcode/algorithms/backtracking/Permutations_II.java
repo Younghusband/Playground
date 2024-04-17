@@ -12,6 +12,10 @@ import java.util.List;
  *
  * 和全排列的区别就在于，取值的数组有重复值，但是结果不能有重复值
  *
+ * 1. 数组要排序
+ * 2. 要判断上一个相同的值是否被加入
+ *
+ * 该代码可以用于普通全排列的AC。
  */
 public class Permutations_II {
 
@@ -20,7 +24,7 @@ public class Permutations_II {
 
     public List<List<Integer>> permuteUnique(int[] nums) {
         boolean [] visited = new boolean[nums.length];
-        Arrays.sort(nums);
+        Arrays.sort(nums); // 这步很关键
         bt(visited, nums);
         return ans;
     }

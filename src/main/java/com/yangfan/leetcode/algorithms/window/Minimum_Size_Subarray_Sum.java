@@ -17,6 +17,11 @@ package com.yangfan.leetcode.algorithms.window;
  */
 public class Minimum_Size_Subarray_Sum {
 
+    /**
+     * 滑动窗口动态维护数组和
+     * 1. 大于则左侧收缩
+     * 2. 小于则右侧扩张
+     */
     public int minSubArrayLen(int target, int[] nums) {
         int sum = 0;
         int left = 0, right = 0;
@@ -33,5 +38,14 @@ public class Minimum_Size_Subarray_Sum {
         }
         return len == Integer.MAX_VALUE ? 0 : len;
     }
+
+//    public int prefixSum(int target, int[] nums) {
+//
+//
+//    }
+
+
+
+
 
 }
