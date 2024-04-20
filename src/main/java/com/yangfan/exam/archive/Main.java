@@ -1,4 +1,4 @@
-package com.yangfan.exam;
+package com.yangfan.exam.archive;
 
 import java.io.BufferedInputStream;
 import java.util.Scanner;
