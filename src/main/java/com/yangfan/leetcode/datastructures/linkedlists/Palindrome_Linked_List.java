@@ -22,6 +22,8 @@ import java.util.Deque;
  * 知识点:
  * 1. 翻转链表(1次 or 2次)
  * 2. 找链表中点
+ *
+ * updated 4.21 对链表反转的理解更深刻了
  */
 public class Palindrome_Linked_List {
 
@@ -31,17 +33,22 @@ public class Palindrome_Linked_List {
      * 2. 翻转中点后面的链表
      * 3. 比较前后半段链表
      * 4. 翻转后半段，恢复链表
+     *
+     * 举个例子:
+     * 原链表: 1 > 2 > 2 > 1   slow停留在第一个2，反转slow.next
+     * 反转后: 1 > 2 > 1 > 2  保留slow.next 用于之后的还原
+     *
      */
     public boolean isPalindrome(ListNode head) {
         if(head == null || head.next == null) return true;
 
-        // 找到链表中点
         ListNode slow = head, fast = head;
-        while(fast.next != null && fast.next.next != null) {
+        // 这里和找链表中点有一点区别:
+        // 链表中点的题目里，偶数节点取后者，这里是取前者
+        while(fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
         }
-
         // 反转后半部分链表
         ListNode reverseHead = reverse(slow.next);
         // 比较前半部分和反转后的后半部分链表
@@ -88,47 +95,6 @@ public class Palindrome_Linked_List {
         }
         return true;
     }
-
-    /**
-     * 我的解法
-     * 搓在 翻转整个链表，慢
-     */
-    public boolean my(ListNode head) {
-        if(head == null || head.next == null) return true;
-        ListNode reverseHead = copyAndReverse(head);
-        ListNode cur = head;
-        while(cur != null) {
-            if(cur.val != reverseHead.val)
-                return false;
-            cur = cur.next;
-            reverseHead = reverseHead.next;
-        }
-        return true;
-    }
-
-    ListNode copyAndReverse(ListNode head) {
-        return reverse(copy(head));
-    }
-
-    ListNode copy(ListNode head) {
-        ListNode dummy = new ListNode(-1);
-        ListNode cur = dummy;
-        while(head != null){
-            cur.next = new ListNode(head.val);
-            cur = cur.next;
-            head = head.next;
-        }
-        return dummy.next;
-    }
-
-//    ListNode reverse(ListNode head) {
-//        if(head == null || head.next == null) return head;
-//        ListNode pre = reverse(head.next);
-//        head.next.next = head;
-//        head.next = null;
-//        return pre;
-//    }
-
 
     /**
      * 递归
