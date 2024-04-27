@@ -8,8 +8,8 @@ package com.yangfan.playground.thread;
 
 public class VolatileDemo {
 	
-//	private static boolean isRunning = true;  // 不会跳出死循环
-	private static volatile boolean isRunning = true;
+	private static boolean isRunning = true;  // 不会跳出死循环
+//	private static volatile boolean isRunning = true;
 	private void setRunning(boolean flag){
 		this.isRunning = flag;
 	}
@@ -19,12 +19,11 @@ public class VolatileDemo {
 	
 	public static void main(String[] args) throws Exception{
 		VolatileDemo rt = new VolatileDemo();
-
 		new Thread(
 			() -> {
 				System.out.println(Thread.currentThread().getName()+"进入run方法..");
 				while(isRunning==true){
-//					System.out.println("----"+isRunning);    // 这个会刷新工作内存到主内存，导致不加volatile的情况下也会跳出循环
+					System.out.println("----"+isRunning);    // 这个会刷新工作内存到主内存，导致不加volatile的情况下也会跳出循环
 				}
 				System.out.println(Thread.currentThread().getName()+"线程停止");
 			}, "t1"

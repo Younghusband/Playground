@@ -30,33 +30,42 @@ import java.util.List;
  */
 public class Combination_Sum {
 
-    public static void main(String[] args) {
-        Combination_Sum service = new Combination_Sum();
-        int [] arr = {2, 5, 3};
-        int target = 7;
-        List<List<Integer>> ans = service.combinationSum(arr, target);
-        System.out.println(ans);
-    }
-
-    List<Integer> combo = new ArrayList<>();
-    List<List<Integer>> ans = new ArrayList<>();
+    List<Integer> combo = new ArrayList<>();  // 用来存储当前的组合
+    List<List<Integer>> ans = new ArrayList<>();  // 用来存储所有符合条件的组合
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         dfs(0, candidates, target);
         return ans;
     }
 
-    public void dfs(int start, int[] candidates, int target) {
-        if(target == 0) {
+    public void dfs(int start, int[] candidates, int remain) {
+        // 如果剩余值为0，说明当前组合的和已经等于目标值，将其添加到答案列表中
+        if(remain == 0) {
             ans.add(new ArrayList<>(combo));
             return;
-        } else if(target > 0){
+        }
+        // 如果剩余值大于0，继续寻找符合条件的数字
+        if(remain > 0){
             for(int i = start; i < candidates.length; i++) {
-                combo.add(candidates[i]);
-                dfs(i, candidates, target - candidates[i]);
-                combo.remove(combo.size() - 1);
+                // 只有当剩余值不小于当前数字时，才能选择这个数字
+                if(remain >= candidates[i]) {
+                    combo.add(candidates[i]);  // 选择当前数字
+                    // 这里传递i而不是i+1，允许数字被重复选取
+                    dfs(i, candidates, remain - candidates[i]);
+                    // 回溯，撤销选择当前数字
+                    combo.remove(combo.size() - 1);
+                }
             }
         }
+    }
+
+
+    public static void main(String[] args) {
+        Combination_Sum service = new Combination_Sum();
+        int [] arr = {2, 5, 3};
+        int target = 7;
+        List<List<Integer>> ans = service.combinationSum(arr, target);
+        System.out.println(ans);
     }
 
 

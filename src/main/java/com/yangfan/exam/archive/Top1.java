@@ -1,4 +1,4 @@
-package com.yangfan.exam;
+package com.yangfan.exam.archive;
 
 import com.yangfan.playground.util.ArrayUtil;
 

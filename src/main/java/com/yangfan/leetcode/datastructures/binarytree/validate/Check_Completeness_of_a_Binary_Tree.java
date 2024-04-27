@@ -10,52 +10,38 @@ import java.util.Queue;
  *
  * Given the root of a binary tree, determine if it is a complete binary tree.
  *
- * 需要注意的是
- * 1. 有右无左必不是
- * 2. 如果当前节点的左右子树不全(有左无右 || 左右皆无)，必然该层节点是叶子节点
+ * 如果遇到了空节点，后面不能再有非空节点
  */
 public class Check_Completeness_of_a_Binary_Tree {
 
+    /**
+     * 核心是，不判断左右节点是否为空都放到队列中
+     *
+     * 注意先判断节点非空，再判断是否遇到过空，这样代码结构好一些。
+     */
     public boolean isCompleteTree(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        boolean notComplete = false;
-        TreeNode l;
-        TreeNode r;
-        while(!queue.isEmpty()) {
-            TreeNode cur = queue.poll();
-            l = cur.left;
-            r = cur.right;
+        queue.offer(root);
 
-            // 上一层最右侧不完整，但是这一层依旧还有子节点
-            if(notComplete && (l != null || r != null)) {
-                return false;
+        // 标记是否遇到了空节点。
+        // 两种情况，1. 遇到上层的空节点，2. 本层的空节点
+        boolean reachedEnd = false;
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            // 如果遇到了空节点
+            if (node == null) {
+                reachedEnd = true;
+            } else {
+                // 如果之前已经遇到了空节点，再遇到非空节点，就不是完全二叉树
+                if (reachedEnd) {
+                    return false;
+                }
+                queue.offer(node.left);
+                queue.offer(node.right);
             }
-
-            // 左子节点为空， 右子节点不为空
-            if(l == null && r != null) {
-                return false;
-            }
-
-            // 简化为下面的
-            // if((l == null && r == null) || (l != null && r == null)) {
-            //     notComplete = true;
-            // }
-
-            if(r == null) {
-                notComplete = true;
-            }
-
-            if(l != null) queue.add(l);
-            if(r != null) queue.add(r);
         }
         return true;
     }
-
-
-    /**
-     * 递归方式
-     */
 
 
 }
