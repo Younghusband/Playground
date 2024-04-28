@@ -11,23 +11,25 @@ package com.yangfan.leetcode.algorithms.greedy;
 public class Jump_Game_II {
 
     public int jump(int[] nums) {
-        int n = nums.length;
-        int end = 0; // 当前跳跃能够到达的最远位置
-        int maxPosition = 0; // 下一次跳跃能够到达的最远位置
-        int steps = 0;
+        int jumps = 0;
+        int targetPos = 0; // 当前跳跃能到达的最远距离
+        int farthest = 0; // 遍历过程中能到达的最远位置
 
-        // 不需要遍历最后一个元素，因为到达最后一个元素时不需要再跳跃
-        for (int i = 0; i < n - 1; ++i) {
-            // 更新下一次跳跃能够到达的最远位置
-            maxPosition = Math.max(maxPosition, i + nums[i]);
-            // 如果当前位置到达了当前跳跃能够到达的最远位置
-            if (i == end) {
-                // 更新当前跳跃能够到达的最远位置为下一次跳跃能够到达的最远位置
-                end = maxPosition;
-                steps++;
+        // 不包括最后一个元素，因为到达最后一个元素后无需再跳跃
+        for (int i = 0; i < nums.length - 1; i++) {
+            farthest = Math.max(farthest, i + nums[i]);
+
+            // 走到之前设定的最远目标
+            if (i == targetPos) {
+                jumps++;
+                targetPos = farthest; // 更新目标
+                // 如果当前的最远距离已经可以到达数组的最后一个位置，则直接结束循环
+                if (targetPos >= nums.length - 1) {
+                    break;
+                }
             }
         }
-        return steps;
+        return jumps; // 返回跳跃次数
     }
 
 

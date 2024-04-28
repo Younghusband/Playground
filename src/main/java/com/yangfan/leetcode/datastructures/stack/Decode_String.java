@@ -1,21 +1,23 @@
-package com.yangfan.leetcode.datastructures.strings;
+package com.yangfan.leetcode.datastructures.stack;
 
 import java.util.Stack;
+
 
 /**
  * 394. Decode String
  * 字符串解码
  *
+ * 给定一个经过编码的字符串，返回它解码后的字符串。
+ * 编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复 k 次。注意 k 保证为正整数。
+ *
  * 示例 1：
- * 输入：s = "3[a2[c]]"
- * 输出："accaccacc"
+ * 输入：s = "3[a]2[bc]"
+ * 输出："aaabcbc"
+ *
+ * 感觉栈的意思就是，先存起来，再处理。
  */
 public class Decode_String {
 
-    /**
-     * 标准解法: 双栈 数字栈，字母栈
-     *
-     */
     public String decodeString(String s) {
         Stack<Integer> countStack = new Stack<>(); // 数字栈，用于存放重复的次数
         Stack<StringBuilder> stringStack = new Stack<>(); // 字符串栈，用于存放当前的字符串序列

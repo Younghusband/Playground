@@ -29,7 +29,6 @@ public class Interview1 {
         System.out.println(maxLen(xxx));
     }
 
-
     public static int maxLen(String s) {
         if(s == null) return 0;
         int len = s.length();

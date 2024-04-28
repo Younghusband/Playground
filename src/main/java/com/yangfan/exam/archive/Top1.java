@@ -34,9 +34,7 @@ public class Top1 {
                 maxNum = num;
             }
         }
-
         System.out.println("出现次数最多的数是: " + maxNum);
-
     }
 
 

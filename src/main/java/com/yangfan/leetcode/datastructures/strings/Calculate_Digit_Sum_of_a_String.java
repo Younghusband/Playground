@@ -45,29 +45,18 @@ public class Calculate_Digit_Sum_of_a_String {
      * 我的递归方法
      */
     public String my(String s, int k) {
-        if(s.length() <= k)
-            return s;
-        int i = 0;
+        if (s.length() <= k) return s;
         StringBuilder sb = new StringBuilder();
-        while(i < s.length()) {
-            int innerSum = 0;
-            // 防止越界
-            int end = Math.min(i + k, s.length());
-            String part = s.substring(i, end);
-            for(int j = 0; j < part.length(); j++) {
-                innerSum += part.charAt(j) - '0';  // core
+        int sum = 0;
+        for (int i = 0; i < s.length(); i++) {
+            sum += s.charAt(i) - '0';  // 累加当前字符代表的数字
+            // 凑满了，或者到末尾了
+            if ((i % k == k - 1) || i == s.length() - 1) {
+                sb.append(sum);  // 添加累计的和到StringBuilder
+                sum = 0;  // 重置sum
             }
-            i += k;
-            sb.append(innerSum);
         }
-        return my(sb.toString(), k);
+        return digitSum(sb.toString(), k);  // 递归处理下一层
     }
-
-
-
-
-
-
-
 
 }

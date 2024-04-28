@@ -1,5 +1,7 @@
 package com.yangfan.leetcode.algorithms.window;
 
+import java.util.Arrays;
+
 /**
  * 209. Minimum Size Subarray Sum
  * 长度最小的子数组
@@ -39,12 +41,31 @@ public class Minimum_Size_Subarray_Sum {
         return len == Integer.MAX_VALUE ? 0 : len;
     }
 
-//    public int prefixSum(int target, int[] nums) {
-//
-//
-//    }
 
-
+    /**
+     * 了解
+     * 效率不如滑动窗口
+     */
+    public int prefixArray(int target, int[] nums) {
+        int n = nums.length;
+        if (n == 0)
+            return 0; // 如果数组为空，直接返回0
+        int ans = Integer.MAX_VALUE; // 最小长度初始化为最大整数
+        int[] sums = new int[n + 1]; // 创建前缀和数组，长度为n+1，sums[0]为0
+        for (int i = 1; i <= n; i++) {
+            sums[i] = sums[i - 1] + nums[i - 1]; // 计算前缀和
+        }
+        for (int i = 1; i <= n; i++) {
+            int key = target + sums[i - 1]; // 确定当前位置所需的目标前缀和
+            int bound = Arrays.binarySearch(sums, key); // 二分查找目标前缀和的位置
+            if (bound < 0)
+                bound = -bound - 1; // 如果未找到，bound为应插入位置的负数
+            if (bound <= n) {
+                ans = Math.min(ans, bound - (i - 1)); // 更新最小长度
+            }
+        }
+        return ans == Integer.MAX_VALUE ? 0 : ans; // 如果未找到有效的子数组，返回0
+    }
 
 
 

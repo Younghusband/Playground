@@ -25,7 +25,7 @@ import java.util.Scanner;
  * 0 3 4
  *
  */
-public class Main {
+public class Q1 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(new BufferedInputStream(System.in));

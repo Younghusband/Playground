@@ -26,7 +26,6 @@ import java.util.Scanner;
  *
  */
 public class Interview2 {
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String one = sc.nextLine();
@@ -72,6 +71,25 @@ public class Interview2 {
             bt(i + 1, nums);
             path.remove(path.size() - 1);
         }
+    }
+    /**
+     * ----------------------------- 以上为面试时写的垃圾解法
+     */
+
+
+    /**
+     * 标准答案
+     */
+    static boolean checkByDp(int [] goods, int target) {
+        // 含义: dp[amount] = true 为 amount金额是否能被凑出来
+        boolean [] dp = new boolean[target + 1];
+        dp[0] = true;
+        for(int good: goods) {
+            for(int i = good; i <= target; i++) {
+                dp[i] = dp[i] || dp[i - good];
+            }
+        }
+        return dp[target];
     }
 
 

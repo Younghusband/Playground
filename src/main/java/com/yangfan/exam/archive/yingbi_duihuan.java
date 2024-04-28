@@ -1,5 +1,7 @@
 package com.yangfan.exam.archive;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -14,8 +16,16 @@ public class yingbi_duihuan {
         int N = sc.nextInt();
         int cnt = calculate(coins, N);
         System.out.println(cnt);
+
+        // 打印ans
+        yingbi_duihuan y = new yingbi_duihuan();
+        y.permutation(0, coins, N);
+        System.out.println(y.ans);
     }
 
+    /**
+     * 计算组合数
+     */
     static int calculate(int [] coins, int N) {
         int [] dp = new int[N + 1];
         dp[0] = 1;
@@ -26,6 +36,29 @@ public class yingbi_duihuan {
         }
         return dp[N];
     }
+
+    /**
+     * 列出所有组合
+     */
+    List<Integer> path = new ArrayList<>();
+    List<List<Integer>> ans = new ArrayList<>();
+
+    void permutation(int start, int [] coins, int remain) {
+        if(remain == 0) {
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+
+        if(remain > 0) {
+            for(int i = start; i < coins.length; i++) {
+                path.add(coins[i]);
+                permutation(i, coins, remain - coins[i]);
+                path.remove(path.size() - 1);
+            }
+        }
+    }
+
+
 
 
 

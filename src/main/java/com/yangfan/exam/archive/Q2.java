@@ -31,7 +31,7 @@ import java.util.Scanner;
  * 说明: 3,5组成一队，1,7组成一队，9自己一个队，故输出3
  */
 
-public class Main2 {
+public class Q2 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);

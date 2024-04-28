@@ -17,10 +17,7 @@ package com.yangfan.leetcode.algorithms.dp;
  */
 public class Word_Break {
 
-    public static void main(String[] args) {
-        String s = "SSSSx";
-        System.out.println(s.startsWith("Sx", 3));
-    }
+
 
 
 

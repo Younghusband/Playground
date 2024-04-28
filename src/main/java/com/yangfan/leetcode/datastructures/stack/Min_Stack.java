@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.datastructures.stacks;
+package com.yangfan.leetcode.datastructures.stack;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -30,18 +30,14 @@ import java.util.Deque;
  */
 class MinStack {
 
-    private ListNode node;
-
-    public MinStack() {
-
-    }
-
+    private MinNode node;
+    public MinStack() {}
     public void push(int x) {
         if (node == null) {
-            node = new ListNode(x, x, null);
+            node = new MinNode(x, x, null);
         } else {
             int min = node.min <= x ? node.min : x;
-            node = new ListNode(x, min, node);  // 没一定功力写不出这句 node = ...(node);
+            node = new MinNode(x, min, node);
         }
     }
 
@@ -59,19 +55,21 @@ class MinStack {
         return node != null ? node.min : -1;
     }
 
-    class ListNode {
+    class MinNode {
 
         int val;
         int min;
-        ListNode next;
+        MinNode next;
 
-        ListNode(int val, int min, ListNode next) {
+        MinNode(int val, int min, MinNode next) {
             this.val = val;
             this.min = min;
             this.next = next;
         }
     }
 }
+
+
 
 /**
  * 标准解法
@@ -88,6 +86,7 @@ public class Min_Stack {
     }
 
     public void push(int val) {
+        // 核心是: 等于也要push
         if(minHelper.isEmpty() || val <= minHelper.peek()) {
             minHelper.push(val);
         } else {

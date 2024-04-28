@@ -1,4 +1,4 @@
-package com.yangfan.leetcode.datastructures.stacks;
+package com.yangfan.leetcode.datastructures.stack;
 
 import java.util.ArrayDeque;
 import java.util.Arrays;
@@ -13,28 +13,49 @@ import java.util.Deque;
  *
  * 递增问题，单调递增栈，这里面的递增指的是栈顶 -> 栈底 是递增的。
  *
+ * updated. 2024.04.28
+ * 不管能不能写出标准解法，暴力解肯定要能写出来，正向的反向的...
+ *
  */
 public class Daily_Temperatures {
 
-
     /**
      * 标准单调栈
+     *
+     * 利用栈的性质保存遍历过的数据，回头来处理
      */
     public int[] dailyTemperatures(int[] temperatures) {
         int length = temperatures.length;
         int[] ans = new int[length];
         Deque<Integer> stack = new ArrayDeque<>();
         for (int i = 0; i < length; i++) {
-            int temperature = temperatures[i];
+            int cur = temperatures[i];
             // 当栈不为空且当前温度高于栈顶温度时，循环处理栈顶元素，直至栈内只剩比当前温度高的下标
-            while (!stack.isEmpty() && temperature > temperatures[stack.peek()]) {
+            while (!stack.isEmpty() && cur > temperatures[stack.peek()]) {
                 int prevIndex = stack.pop(); // 逐一弹出栈顶比当前温度低的数组之前的元素的索引
-                ans[prevIndex] = i - prevIndex; // 计算等待天数，并赋值给答案数组
+                ans[prevIndex] = i - prevIndex;
             }
             // 将当前温度的索引压入栈中
             stack.push(i);
         }
         return ans;
+    }
+
+    /**
+     * 正向暴力解
+     */
+    public int[] frontBrute(int[] temperatures) {
+        int [] result = new int[temperatures.length];
+        for(int i = 0; i < temperatures.length - 1; i++) {
+            int cur = temperatures[i];
+            for(int j = i + 1; j < temperatures.length; j++) {
+                if(temperatures[j] > cur) {
+                    result[i] = j - i;
+                    break;
+                }
+            }
+        }
+        return result;
     }
 
 
@@ -67,23 +88,5 @@ public class Daily_Temperatures {
         }
         return ans;
     }
-
-
-    public int[] mybrute(int[] temperatures) {
-        int [] result = new int[temperatures.length];
-        result[temperatures.length - 1] = 0;
-        for(int i = 0; i < temperatures.length - 1; i++) {
-            int cur = temperatures[i];
-            for(int j = i + 1; j < temperatures.length; j++) {
-                if(temperatures[j] > cur) {
-                    result[i] = j - i;
-                    break;
-                }
-            }
-        }
-        return result;
-    }
-
-
 
 }

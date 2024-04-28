@@ -21,6 +21,10 @@ import java.util.Set;
  */
 public class Find_The_Duplicate_Number {
 
+    /**
+     * 逻辑模拟
+     * 注意起始条件
+     */
     public int findDuplicate(int[] nums) {
         int slow = nums[0]; // 注意，这里nums[0] 相当于head.next
         int fast = nums[nums[0]];
@@ -37,8 +41,8 @@ public class Find_The_Duplicate_Number {
     }
 
     public int useSet(int[] nums) {
-        if(nums == null || nums.length == 1)
-            throw new RuntimeException("Caonima!");
+        int len = nums.length;
+        if(len < 2) return nums[0];
         Set<Integer> set = new HashSet<>();
         for(int num: nums) {
             if(set.contains(num)) {
@@ -46,7 +50,7 @@ public class Find_The_Duplicate_Number {
             }
             set.add(num);
         }
-        throw null;
+        return nums[0];
     }
 
 

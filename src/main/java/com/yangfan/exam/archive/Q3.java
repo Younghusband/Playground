@@ -12,7 +12,7 @@ import java.util.Set;
  * 地图中有两个山脉位置分别为 1,2,3,4,5和8,9,10,11,12,13，最高峰高度分别为4,3。最高峰位置分别为3,10。
  * 一个山脉可能有多座山峰(高度大于两边，或者在地图边界)。
  */
-public class Main3 {
+public class Q3 {
 
     public static void main(String[] args) {
         int [] nums = {0,1,4,3,1,0,0,1,2,3,1,2,1,0};
