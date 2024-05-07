@@ -15,11 +15,16 @@ import java.util.PriorityQueue;
  * 3. 计数排序 适用于数据范围有限的情况，也就是此题的情况
  * 4. 使用优先队列，小根堆/大根堆
  *
+ * updated. 2024.04.29 华为面试遇到
+ * 当初做这个题目的时候没注意到O(n)时间复杂度的要求，堆不满足，计数排序满足
+ *
  */
 public class Kth_Largest_Element_in_an_Array {
 
     /**
      * 基于堆排序的选择k方法
+     *
+     * 但是时间复杂度不符合要求
      */
     public int findKthLargest(int[] nums, int k) {
         int n = nums.length;
@@ -40,15 +45,12 @@ public class Kth_Largest_Element_in_an_Array {
         int largest = i;
         int left = 2 * i + 1;
         int right = 2 * i + 2;
-
         if(left < heapSize && nums[left] > nums[largest]) {
             largest = left;
         }
-
         if(right < heapSize && nums[right] > nums[largest]) {
             largest = right;
         }
-
         if(largest != i) {
             swap(nums, i, largest);
             heapify(nums, largest, heapSize);
@@ -115,6 +117,5 @@ public class Kth_Largest_Element_in_an_Array {
         nums[i] = nums[j];
         nums[j] = tmp;
     }
-
 
 }

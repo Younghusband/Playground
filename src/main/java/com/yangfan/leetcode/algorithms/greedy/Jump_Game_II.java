@@ -18,7 +18,6 @@ public class Jump_Game_II {
         // 不包括最后一个元素，因为到达最后一个元素后无需再跳跃
         for (int i = 0; i < nums.length - 1; i++) {
             farthest = Math.max(farthest, i + nums[i]);
-
             // 走到之前设定的最远目标
             if (i == targetPos) {
                 jumps++;

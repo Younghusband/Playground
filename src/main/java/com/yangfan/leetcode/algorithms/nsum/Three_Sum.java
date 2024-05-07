@@ -14,6 +14,7 @@ import java.util.List;
  * 难点在于剪枝
  * 剪枝可以优化执行效率，也可以让你原本可以对的代码变错。。。
  *
+ * updated. 2024.05.06 剪枝并非硬性要求，至少对于力扣提速没用
  *
  */
 public class Three_Sum {
@@ -25,6 +26,9 @@ public class Three_Sum {
         int len = nums.length;
         for(int i = 0; i < len - 2; i++) {
             int cur = nums[i];
+            // 已经在上一轮判断过了
+            if(i > 0 && nums[i] == nums[i - 1])
+                continue;
             int left = i + 1, right = len - 1;
             // 当前值已大于目标值，退出
             if(cur > target) break; // 仅适用于这道题， 不适用于4数之和
@@ -32,9 +36,6 @@ public class Three_Sum {
             if(cur + nums[left] + nums[left + 1] > target) {
                 break;
             }
-            // 已经在上一轮判断过了
-            if(i > 0 && nums[i] == nums[i - 1])
-                continue;
             // 最大和小于目标值，说明当前值不需要做判断，直接跳到下一个
             if(cur + nums[len - 1] + nums[len - 2] < target) {
                 continue;

@@ -22,6 +22,7 @@ public class Merge_Intervals {
             return intervals;
         }
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
+//        Arrays.sort(intervals, (o1, o2) -> o1[0] - o2[0]);
         List<int[]> merged = new ArrayList<>();
         int[] currentInterval = intervals[0];
         merged.add(currentInterval);

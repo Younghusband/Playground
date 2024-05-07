@@ -27,15 +27,15 @@ public class Max_Consecutive_Ones_II {
      *
      */
     public int findMaxConsecutiveOnes(int[] nums) {
-        int maxCount = 0, count = 0, left = 0;
+        int maxCount = 0, zeroCount = 0, left = 0;
         for (int right = 0; right < nums.length; right++) {
             if (nums[right] == 0) {
-                count++;
+                zeroCount++;
             }
             // 当窗口中0的个数超过1，左指针向右移动，缩小窗口
-            while (count > 1) {
+            while (zeroCount > 1) {
                 if (nums[left] == 0) {
-                    count--;
+                    zeroCount--;
                 }
                 left++;
             }

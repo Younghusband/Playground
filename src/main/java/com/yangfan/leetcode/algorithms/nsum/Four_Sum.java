@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * 18. 4Sum
+ * 四数之和
  *
  * 不管是3 sum 几sum
  * 都有个前提就是
@@ -13,7 +14,6 @@ import java.util.List;
  * 所以，这也是为什么要跳过重复值去处理
  *
  * 4 sum相比3 sum，无非是剪枝重复一次，循环多一层
- *
  */
 public class Four_Sum {
 
