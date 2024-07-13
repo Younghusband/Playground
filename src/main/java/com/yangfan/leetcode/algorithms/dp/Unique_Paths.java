@@ -15,7 +15,7 @@ import java.util.Arrays;
  * 不能走回头路这个也可以用来奠定动态规划的初始值
  *
  * 1. 二维数组法
- * 2. 一维数组法，一维的比较难想，不要求
+ * 2. 一维数组法，一维的比较难想
  *
  */
 public class Unique_Paths {
@@ -48,7 +48,10 @@ public class Unique_Paths {
      * dp数组代表具体列的行径数
      * 然后在每一行都更新一遍，更新到最后一行后返回该列值即可
      *
-     * 比较难想的点也包括 dp[j] += dp[j - 1]; 这个动态转移方程
+     * dp[j] += dp[j - 1] 包含两层意思
+     * 1. dp[j - 1]表示着左侧一格的方案数
+     * 2. 原先的dp[j]表示着正上方一个的方案数
+     * 故其可以表示为该点方案数总和
      */
     public int uniquePathsPro(int m, int n) {
         int[] dp = new int[n];

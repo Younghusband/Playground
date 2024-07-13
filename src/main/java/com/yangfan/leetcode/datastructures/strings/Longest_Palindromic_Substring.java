@@ -83,6 +83,8 @@ public class Longest_Palindromic_Substring {
      *
      * 时间复杂度O(n^2)
      * 空间复杂度O(n^2)
+     *
+     * updated. 2024.05.18 发现
      */
     public String dp(String s) {
         int n = s.length();
@@ -103,15 +105,16 @@ public class Longest_Palindromic_Substring {
                 maxLen = 2;
             }
         }
+
         // 长度大于等于3的子串
-        for(int len = 3; len <= n; len++) {
-            for(int i = 0; i < n - len + 1; i++) {
-                int j = i + len - 1;
+        for(int sub = 3; sub <= n; sub++) {
+            for(int left = 0; left < n - sub + 1; left++) {
+                int right = left + sub - 1;
                 // 状态转移方程
-                if(s.charAt(i) == s.charAt(j) && dp[i + 1][j - 1]) {
-                    dp[i][j] = true;
-                    start = i;
-                    maxLen = len;
+                if(s.charAt(left) == s.charAt(right) && dp[left + 1][right - 1]) {
+                    dp[left][right] = true;
+                    start = left;
+                    maxLen = sub;
                 }
             }
         }
